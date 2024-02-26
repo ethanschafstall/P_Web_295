@@ -20,7 +20,9 @@ app.listen(port, () => {
 })
 
 // Finding all books 
-import { productsRouter } from "./routes/findAllBooks.mjs"
-app.use("/api/books", productsRouter)
+import { allBooksRouter } from "./routes/findAllBooks.mjs"
+app.use("/api/books", allBooksRouter)
 
 // Finding books by ID
+import { bookByIdRouter } from "./routes/findAllBooks.mjs"
+app.use("/api/books/:id", bookByIdRouter)

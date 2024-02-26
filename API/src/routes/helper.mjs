@@ -5,4 +5,11 @@ const success = (message, data) => {
     }
 }
 
-export { success }
+const failure = (message, error) => {
+    return {
+        message: message,
+        error: error
+    }
+}
+
+export { success, failure }
