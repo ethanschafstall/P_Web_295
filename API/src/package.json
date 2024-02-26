@@ -1,0 +1,14 @@
+{
+  "name": "p_web_295",
+  "version": "1.0.0",
+  "description": "API REST - Project WEB 295",
+  "main": "src/app.mjs",
+  "scripts": {
+    "start": "nodemon src/app.mjs"
+  },
+  "author": "Ethan Schafstall, Lucas Simões Pólvora",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
