@@ -22,15 +22,15 @@ CREATE TABLE t_users(
    usePseudo VARCHAR(50)  NOT NULL,
    usePassword VARCHAR(50)  NOT NULL,
    useJoinDate DATE NOT NULL,
-   useBooksAdded INT,
-   useNumReviews INT,
+   useBookCount INT,
+   useReviewCount INT,
    PRIMARY KEY(id_user)
 );
 
 CREATE TABLE t_books(
    id_book INT AUTO_INCREMENT,
    booTitle VARCHAR(100)  NOT NULL,
-   booNumPages INT NOT NULL,
+   booPageCount INT NOT NULL,
    booExtract VARCHAR(300) ,
    booSummary VARCHAR(100) ,
    booAvgRating DECIMAL(3,2)  ,
