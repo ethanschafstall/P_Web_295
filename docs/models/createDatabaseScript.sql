@@ -31,16 +31,18 @@ CREATE TABLE t_books(
    id_book INT AUTO_INCREMENT,
    booTitle VARCHAR(100)  NOT NULL,
    booPageCount INT NOT NULL,
-   booExtract VARCHAR(300) ,
+   booExcerpt_ VARCHAR(300) ,
    booSummary VARCHAR(100) ,
    booAvgRating DECIMAL(3,2)  ,
    booCoverImage VARCHAR(300) ,
    booPublishDate DATE NOT NULL,
    fk_user INT NOT NULL,
    fk_publisher INT NOT NULL,
+   fk_category INT NOT NULL,
    PRIMARY KEY(id_book),
    FOREIGN KEY(fk_user) REFERENCES t_users(id_user),
-   FOREIGN KEY(fk_publisher) REFERENCES t_publishers(id_publisher)
+   FOREIGN KEY(fk_publisher) REFERENCES t_publishers(id_publisher),
+   FOREIGN KEY(fk_category) REFERENCES t_categories(id_category)
 );
 
 CREATE TABLE t_wrote(
@@ -49,14 +51,6 @@ CREATE TABLE t_wrote(
    PRIMARY KEY(fk_book, fk_author),
    FOREIGN KEY(fk_book) REFERENCES t_books(id_book),
    FOREIGN KEY(fk_author) REFERENCES t_authors(id_author)
-);
-
-CREATE TABLE t_apart(
-   fk_book INT,
-   fk_category INT,
-   PRIMARY KEY(fk_book, fk_category),
-   FOREIGN KEY(fk_book) REFERENCES t_books(id_book),
-   FOREIGN KEY(fk_category) REFERENCES t_categories(id_category)
 );
 
 CREATE TABLE t_review(
