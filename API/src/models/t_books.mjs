@@ -52,9 +52,6 @@ const bookModel = (sequelize, DataTypes) => {
                 allowNull: true,
                 validate: {
                     notUrl: true,
-                    notNull: {
-                        msg: "The title is a required property",
-                    },
                 },
             },
             booSummary: {
@@ -245,4 +242,4 @@ const categoryModel = (sequelize, DataTypes) => {
 // A faire pour Lucas
 };
 
-export { bookModel, reviewModel, userModel, wroteModel, publisherModel, apartModel, categoryModel };
+export { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel };
