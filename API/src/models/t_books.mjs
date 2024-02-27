@@ -245,4 +245,4 @@ const categoryModel = (sequelize, DataTypes) => {
 // A faire pour Lucas
 };
 
-export { bookModel, reviewModel, userModel, wroteModel, publisherModel, apartModel, categoryModel };
+export { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel };
