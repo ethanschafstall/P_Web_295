@@ -1,10 +1,12 @@
 import express from "express";
-
 import { books } from "./db/mock-books.mjs";
-
 import { success } from "./routes/helper.mjs";
+import { initDb } from "./db/sequelize.mjs";
+
 const app = express();
 const port = 3000;
+
+initDb();
 
 app.get("/", (req,res) => {
     
