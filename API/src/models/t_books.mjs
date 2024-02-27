@@ -82,7 +82,18 @@ const bookModel = (sequelize, DataTypes) => {
                 validate: {
                     }, 
             },
-
+            fk_user: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            fk_publisher: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            fk_category: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
         },
         {
             timestamps: true,
@@ -118,7 +129,7 @@ const reviewModel = (sequelize, DataTypes) => {
                 },
             },
             revRating: {
-                type: DECIMAL(3, 2),
+                type: DataTypes.DECIMAL(3, 2),
                 allowNull: false,
                 validate: {
                     isInt: {
@@ -140,7 +151,6 @@ const reviewModel = (sequelize, DataTypes) => {
                     },
                 },
             },
-
         },
         {
             timestamps: true,
@@ -167,13 +177,17 @@ const userModel = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(50),
                 allowNull: false,
             },
+            useJoinDate: {
+                type: DataTypes.DATE,
+                allowNull: false,
+            },
             useBookCount: {
                 type: DataTypes.INTEGER,
-                allowNull: true,
+                allowNull: false,
             },
             useReviewCount: {
                 type: DataTypes.INTEGER,
-                allowNull: true,
+                allowNull: false,
             },
         },
         {
@@ -196,7 +210,6 @@ const wroteModel = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-
         },
         {
             timestamps: true,
@@ -219,7 +232,6 @@ const publisherModel = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(50),
                 allowNull: false,
             },
-
         },
         {
             timestamps: true,
@@ -227,10 +239,6 @@ const publisherModel = (sequelize, DataTypes) => {
             updatedAt: false,
         }
     );
-};
-
-const apartModel = (sequelize, DataTypes) => {
-// A faire pour Lucas
 };
 
 const categoryModel = (sequelize, DataTypes) => {
