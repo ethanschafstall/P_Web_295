@@ -1,7 +1,13 @@
 import express from "express";
 import { books } from "./db/mock-books.mjs";
 import { success } from "./routes/helper.mjs";
+
 import { initDb } from "./db/sequelize.mjs";
+
+
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger.mjs";
+
 
 const app = express();
 const port = 3000;
@@ -19,7 +25,13 @@ app.get("/api/", (req,res) => {
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
-})
+});
+
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, { explorer: true })
+);
 
 // Finding all books 
 import { allBooksRouter } from "./routes/getAllBooks.mjs"
