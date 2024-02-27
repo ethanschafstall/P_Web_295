@@ -22,8 +22,8 @@ CREATE TABLE t_users(
    usePseudo VARCHAR(50)  NOT NULL,
    usePassword VARCHAR(50)  NOT NULL,
    useJoinDate DATE NOT NULL,
-   useBookCount INT,
-   useReviewCount INT,
+   useBookCount INT NOT NULL,
+   useReviewCount INT NOT NULL,
    PRIMARY KEY(id_user)
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE t_books(
    id_book INT AUTO_INCREMENT,
    booTitle VARCHAR(100)  NOT NULL,
    booPageCount INT NOT NULL,
-   booExcerpt_ VARCHAR(300) ,
+   booExcerpt VARCHAR(300) ,
    booSummary VARCHAR(100) ,
    booAvgRating DECIMAL(3,2)  ,
    booCoverImage VARCHAR(300) ,
