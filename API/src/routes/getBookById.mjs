@@ -6,16 +6,16 @@ import { success,failure } from "./helper.mjs";
 
 const bookByIdRouter = express();
 
-bookByIdRouter.get("/products/", (req, res) => {
+bookByIdRouter.get("/:id", (req, res) => {
     const bookId = req.params.id;
-    if (bookId == null){
+    if (bookId === undefined ||bookId === null){
         const message = `Le produit n'a pas pu être récupéré`;
         const error = `Aucun produit avec l'id ${req.params.id} a été trouvé`;
         res.status(404).json(failure(message, error))
     }
-    const book = books.find((book) => books.id == bookId)
+    const bookFind = books.find((book) => book.id == bookId)
     const message = `Le produit dont l'id vaut ${bookId} a bien été récupéré`;
-    res.json(success(message, books))
+    res.json(success(message, bookFind))
 })
 
 export { bookByIdRouter }
