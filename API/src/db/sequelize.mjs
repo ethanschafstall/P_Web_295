@@ -10,11 +10,15 @@ const User = userModel(sequelize, DataTypes);
 const Wrote = wroteModel(sequelize, DataTypes);
 
 /**
- * Sequelize instance used for coverting data formats, and general CRUD fuctions
- * @param { string } database - The database name to use with instance
- * @param { string } username - Username to connect to database
- * @param { string } password - Password to connect to database
- * @param { Options } options - Additional options (host info, type of sql dialect, logging)
+ * Establishes a connection to the MySQL database using Sequelize.
+ * @param {string} "db_books" - The name of the database to connect to.
+ * @param {string} "root" - The username for database authentication.
+ * @param {string} "root" - The password for database authentication.
+ * @param {object} options - Additional options for configuring the connection.
+ * @param {string} options.host - The hostname of the database server.
+ * @param {number} options.port - The port number of the database server.
+ * @param {string} options.dialect - The dialect of the database (e.g., "mysql").
+ * @param {boolean} options.logging - Whether to log SQL queries and errors.
  */
 const sequelize = new Sequelize(
     "db_books",
@@ -29,8 +33,10 @@ const sequelize = new Sequelize(
 );
 
 /**
- * Initializes the database by connecting to it. Dropping all existing tables (force: true) which resets the database schema. Imports all the data
- * @returns { Sequelize } The result of the database synchronization
+ * Initializes the database by synchronizing Sequelize models with the database schema.
+ * This function forces the synchronization by dropping existing tables.
+ * After synchronization, it imports initial data into the tables.
+ * @returns {Promise} A promise that resolves when the synchronization and data import are complete.
  */
 let initDb = () => {
     return sequelize
@@ -47,7 +53,9 @@ let initDb = () => {
 };
 
 /**
- * Imports book data by converting from json into mysql format and inserting them into the database
+ * Imports books from a predefined array into the database.
+ * Maps over each book in the array and creates a new record in the Book table.
+ * @returns {void}
  */
 const importBooks = () => {
     books.map((book) => {
@@ -65,7 +73,9 @@ const importBooks = () => {
 };
 
 /**
- * Imports reviews data by converting from json into mysql format and inserting them into the database
+ * Imports reviews from a predefined array into the database.
+ * Maps over each review in the array and creates a new record in the Review table.
+ * @returns {void}
  */
 const importReviews = () => {
     reviews.map((review) => {
@@ -80,7 +90,9 @@ const importReviews = () => {
 };
 
 /**
- * Imports publisher data by converting from json into mysql format and inserting them into the database
+ * Imports publishers from a predefined array into the database.
+ * Maps over each publisher in the array and creates a new record in the Publisher table.
+ * @returns {void}
  */
 const importPublishers = () => {
     publishers.map((publisher) => {
@@ -92,7 +104,9 @@ const importPublishers = () => {
 };
 
 /**
- * Imports category data by converting from json into mysql format and inserting them into the database
+ * Imports categories from a predefined array into the database.
+ * Maps over each category in the array and creates a new record in the Category table.
+ * @returns {void}
  */
 const importCategories = () => {
     categories.map((category) => {
@@ -104,14 +118,19 @@ const importCategories = () => {
 };
 
 /**
- * Imports user data by converting from json into mysql format and inserting them into the database
+ * Imports Users from a predefined array into the database.
+ * Maps over each user in the array and creates a new record in the User table.
+ * @returns {void}
  */
 const importUsers = () => {
     // TODO FOR LUCAS
 };
 
 /**
- * Imports wrote (intermediate table between users reviews & users) data by converting from json into mysql format and inserting them into the database
+ * Imports relationship data between users and reviews into the database.
+ * This function creates records in the "Wrote" table, which serves as an association table between users and reviews.
+ * It maps over each relationship data and creates a new record in the "Wrote" table.
+ * @returns {void}
  */
 const importWrote = () => {
     // TODO FOR LUCAS
