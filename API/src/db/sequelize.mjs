@@ -40,7 +40,7 @@ const sequelize = new Sequelize(
  */
 let initDb = () => {
     return sequelize
-    .sync({ force: true})
+    .sync({force: true})
     .then((_) => {
         importBooks();
         importReviews();

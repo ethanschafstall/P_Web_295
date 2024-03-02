@@ -56,8 +56,8 @@ const options = {
                         },
                         booPublishDate: {
                             type: "string",
-                            format: "date-time",
-                            description: "The date and time of the publish .",
+                            format: "date",
+                            description: "The date of the publish .",
                         },
                     },
                 },
