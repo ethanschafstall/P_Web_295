@@ -123,7 +123,16 @@ const importCategories = () => {
  * @returns {void}
  */
 const importUsers = () => {
-    // TODO FOR LUCAS
+    users.map((user) => {
+        User.create({
+            id: user.id_user,
+            pseudo: user.usePseudo,
+            password: user.usePassword,
+            joinDate: user.useJoinDate,
+            bookCount: user.useBookCount,
+            reviewCount: user.useReviewCount
+        }).then((user) => console.log(user.toJSON()));
+    });
 };
 
 /**
@@ -133,7 +142,12 @@ const importUsers = () => {
  * @returns {void}
  */
 const importWrote = () => {
-    // TODO FOR LUCAS
+    wrote.map((wrote) => {
+        Wrote.create({
+            fk_book: wrote.fk_book,
+            fk_author: wrote.fk_author
+        }).then((wrote) => console.log(wrote.toJSON()));
+    });
 };
 
 export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote};
