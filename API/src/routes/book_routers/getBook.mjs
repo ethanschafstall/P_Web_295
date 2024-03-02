@@ -1,12 +1,10 @@
 import express from "express";
+import { books } from "../../db/mock-books.mjs";
+import { success,failure } from "../helper.mjs";
 
-import { books } from "../db/mock-books.mjs";
+const getBookRouter = express();
 
-import { success,failure } from "./helper.mjs";
-
-const bookByIdRouter = express();
-
-bookByIdRouter.get("/:id", (req, res) => {
+getBookRouter.get("/:id", (req, res) => {
     const bookId = req.params.id;
     if (bookId === undefined ||bookId === null){
         const message = `Le produit n'a pas pu être récupéré`;
@@ -18,4 +16,4 @@ bookByIdRouter.get("/:id", (req, res) => {
     res.json(success(message, bookFind))
 })
 
-export { bookByIdRouter }
+export { getBookRouter }
