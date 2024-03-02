@@ -119,7 +119,7 @@ const options = {
                         },
                     },
                 },
-                wrote: {
+                Wrote: {
                     type: "object",
                     required: ["fk_book", "fk_author"],
                     properties: {
@@ -130,6 +130,48 @@ const options = {
                         fk_author: {
                             type: "integer",
                             description: "The title of the book.",
+                        },
+                    },
+                },
+                Publisher: {
+                    type: "object",
+                    required: ["id_publisher", "pubName"],
+                    properties: {
+                        id_publisher: {
+                            type: "integer",
+                            description: "Unique id for the publisher.",
+                        },
+                        pubName: {
+                            type: "string",
+                            description: "Name of the publisher.",
+                        },
+                    },
+                },
+                Author: { // TO DO
+                    type: "object",
+                    required: ["id_publisher", "pubName"],
+                    properties: {
+                        id_publisher: {
+                            type: "integer",
+                            description: "Unique id for the publisher.",
+                        },
+                        pubName: {
+                            type: "string",
+                            description: "Name of the publisher.",
+                        },
+                    },
+                },
+                Categories: { // TO DO
+                    type: "object",
+                    required: ["id_publisher", "pubName"],
+                    properties: {
+                        id_publisher: {
+                            type: "integer",
+                            description: "Unique id for the publisher.",
+                        },
+                        pubName: {
+                            type: "string",
+                            description: "Name of the publisher.",
                         },
                     },
                 },
