@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes} from "sequelize";
 import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel } from "../models/t_books.mjs";
-import { books, reviews, publishers, categories, users, wrote } from "../db/mock-books.mjs";
+import { books, reviews, publishers, categories, users, wrote } from "../db/mock-data.mjs";
 
 /**
  * Establishes a connection to the MySQL database using Sequelize.
