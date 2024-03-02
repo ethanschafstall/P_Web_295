@@ -8,8 +8,13 @@ import { initDb } from "./db/sequelize.mjs";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.mjs";
 
-import { allBooksRouter } from "./routes/getAllBooks.mjs"
-import { bookByIdRouter } from "./routes/getBookById.mjs"
+/**
+ * Importing the book routers
+ */
+import { getAllBooksRouter } from "./routes/book_routers/getAllBooks.mjs"
+import { getBookRouter } from "./routes/book_routers/getBook.mjs"
+import { deleteBookRouter } from "./routes/book_routers/deleteBook.mjs"
+import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
 
 const app = express();
 const port = 3000;
@@ -63,8 +68,10 @@ app.use(
 
 /**
  * Mounts routers for handling book-related API endpoints under the "/api/books" route.
- * Two different routers are mounted under the same route: `allBooksRouter` and `bookByIdRouter`.
+ * Two different routers are mounted under the same route: `getAllBooksRouter` and `getBookRouter`.
  * Requests to "/api/books" will be processed by these routers based on their defined routes.
  */
-app.use("/api/books", allBooksRouter)
-app.use("/api/books", bookByIdRouter)
+app.use("/api/books", getAllBooksRouter)
+app.use("/api/books", getBookRouter)
+app.use("/api/books", deleteBookRouter)
+app.use("/api/books", updateBookRouter)
