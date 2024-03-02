@@ -1,6 +1,21 @@
 import { Sequelize, DataTypes} from "sequelize";
 import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel } from "../models/t_books.mjs";
+import { books, reviews, publishers, categories, users, wrote } from "../db/mock-books.mjs";
 
+const Book = bookModel(sequelize, DataTypes);
+const Review = reviewModel(sequelize, DataTypes);
+const Publisher = publisherModel(sequelize, DataTypes);
+const Category = categoryModel(sequelize, DataTypes);
+const User = userModel(sequelize, DataTypes);
+const Wrote = wroteModel(sequelize, DataTypes);
+
+/**
+ * Sequelize instance used for coverting data formats, and general CRUD fuctions
+ * @param { string } database - The database name to use with instance
+ * @param { string } username - Username to connect to database
+ * @param { string } password - Password to connect to database
+ * @param { Options } options - Additional options (host info, type of sql dialect, logging)
+ */
 const sequelize = new Sequelize(
     "db_books",
     "root",
@@ -13,14 +28,10 @@ const sequelize = new Sequelize(
     }
 );
 
-const Book = bookModel(sequelize, DataTypes);
-const Review = reviewModel(sequelize, DataTypes);
-const Publisher = publisherModel(sequelize, DataTypes);
-const Category = categoryModel(sequelize, DataTypes);
-const User = userModel(sequelize, DataTypes);
-const Wrote = wroteModel(sequelize, DataTypes);
-
-
+/**
+ * Initializes the database by connecting to it. Dropping all existing tables (force: true) which resets the database schema. Imports all the data
+ * @returns { Sequelize } The result of the database synchronization
+ */
 let initDb = () => {
     return sequelize
     .sync({ force: true})
@@ -35,8 +46,11 @@ let initDb = () => {
     });
 };
 
+/**
+ * Imports book data by converting from json into mysql format and inserting them into the database
+ */
 const importBooks = () => {
-    t_books.map((book) => {
+    books.map((book) => {
         Book.create({
             id: book.id_book,
             title: book.booTitle,
@@ -50,6 +64,9 @@ const importBooks = () => {
     });
 };
 
+/**
+ * Imports reviews data by converting from json into mysql format and inserting them into the database
+ */
 const importReviews = () => {
     reviews.map((review) => {
         Review.create({
@@ -62,6 +79,9 @@ const importReviews = () => {
     });
 };
 
+/**
+ * Imports publisher data by converting from json into mysql format and inserting them into the database
+ */
 const importPublishers = () => {
     publishers.map((publisher) => {
         Publisher.create({
@@ -71,6 +91,9 @@ const importPublishers = () => {
     });
 };
 
+/**
+ * Imports category data by converting from json into mysql format and inserting them into the database
+ */
 const importCategories = () => {
     categories.map((category) => {
         Category.create({
@@ -80,10 +103,16 @@ const importCategories = () => {
     });
 };
 
+/**
+ * Imports user data by converting from json into mysql format and inserting them into the database
+ */
 const importUsers = () => {
     // TODO FOR LUCAS
 };
 
+/**
+ * Imports wrote (intermediate table between users reviews & users) data by converting from json into mysql format and inserting them into the database
+ */
 const importWrote = () => {
     // TODO FOR LUCAS
 };
