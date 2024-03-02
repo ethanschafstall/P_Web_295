@@ -2,13 +2,6 @@ import { Sequelize, DataTypes} from "sequelize";
 import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel } from "../models/t_books.mjs";
 import { books, reviews, publishers, categories, users, wrote } from "../db/mock-books.mjs";
 
-const Book = bookModel(sequelize, DataTypes);
-const Review = reviewModel(sequelize, DataTypes);
-const Publisher = publisherModel(sequelize, DataTypes);
-const Category = categoryModel(sequelize, DataTypes);
-const User = userModel(sequelize, DataTypes);
-const Wrote = wroteModel(sequelize, DataTypes);
-
 /**
  * Establishes a connection to the MySQL database using Sequelize.
  * @param {string} "db_books" - The name of the database to connect to.
@@ -31,6 +24,13 @@ const sequelize = new Sequelize(
         logging: false,
     }
 );
+
+const Book = bookModel(sequelize, DataTypes);
+const Review = reviewModel(sequelize, DataTypes);
+const Publisher = publisherModel(sequelize, DataTypes);
+const Category = categoryModel(sequelize, DataTypes);
+const User = userModel(sequelize, DataTypes);
+const Wrote = wroteModel(sequelize, DataTypes);
 
 /**
  * Initializes the database by synchronizing Sequelize models with the database schema.
