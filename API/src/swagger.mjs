@@ -147,31 +147,35 @@ const options = {
                         },
                     },
                 },
-                Author: { // TO DO
+                Author: { 
                     type: "object",
-                    required: ["id_publisher", "pubName"],
+                    required: ["id_author", "autFirstName", "autLastName"],
                     properties: {
-                        id_publisher: {
+                        id_author: {
                             type: "integer",
-                            description: "Unique id for the publisher.",
+                            description: "Unique id for the author.",
                         },
-                        pubName: {
+                        autFirstName: {
                             type: "string",
-                            description: "Name of the publisher.",
+                            description: "First name of the author.",
                         },
+                        autFirstName: {
+                            type: "string",
+                            description: "Last name of the author.",
+                        }
                     },
                 },
-                Categories: { // TO DO
+                Categories: { 
                     type: "object",
-                    required: ["id_publisher", "pubName"],
+                    required: ["id_category", "catName"],
                     properties: {
                         id_publisher: {
                             type: "integer",
-                            description: "Unique id for the publisher.",
+                            description: "Unique id for the category.",
                         },
-                        pubName: {
+                        catName: {
                             type: "string",
-                            description: "Name of the publisher.",
+                            description: "Name of the category.",
                         },
                     },
                 },
