@@ -266,4 +266,4 @@ const importWrote = () => {
 
 
 
-export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote };
+export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote, Author };
