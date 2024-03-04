@@ -1,6 +1,6 @@
 import express from "express";
 import { Book } from "../../db/sequelize.mjs";
-import { success,failure } from "../helper.mjs";
+import { success } from "../helper.mjs";
 // import { auth } from "../auth/auth.mjs";
 
 /**
@@ -34,7 +34,7 @@ deleteBookRouter.delete("/:id", /*auth, */(req, res) => {
     .catch((error) => {
         const message =
         "Le livre n'a pas pu être supprimé. Merci de réessayer dans quelques instants.";
-        res.status(500).json(failure(message, error))
+        res.status(500).json({ message, data: error})
     });
 });
     

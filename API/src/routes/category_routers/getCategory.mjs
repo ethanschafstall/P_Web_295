@@ -1,6 +1,6 @@
 import express from "express";
 import { Category } from "../../db/sequelize.mjs";
-import { success,failure } from "../helper.mjs";
+import { success } from "../helper.mjs";
 
 const getCategoryRouter = express();
 
