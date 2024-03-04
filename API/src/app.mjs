@@ -25,6 +25,7 @@ import { loginRouter } from "./routes/login_routers/login.mjs";
  * Importing the categories router
  */
 import { getAllCategoriesRouter } from "./routes/book_routers/getAllCategories.mjs";
+import { getCategoryRouter } from "./routes/book_routers/getCategory.mjs";
 
 const app = express();
 const port = 3000;
@@ -96,3 +97,4 @@ app.use("/api/login", loginRouter)
  * Mounts routers for the categories of the API 
  */
 app.use("/api/categories", getAllCategoriesRouter)
+app.use("/api/categories", getCategoryRouter)
