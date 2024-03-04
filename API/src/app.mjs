@@ -32,6 +32,12 @@ import { getCategoryRouter } from "./routes/category_routers/getCategory.mjs";
 import { getAllAuthorsRouter } from "./routes/author_routers/getAllAuthors.mjs";
 import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
 
+/**
+ * Importing the publishers routes
+ */
+import { getAllPublishersRouter } from "./routes/publisher_routes/getAllPublishers.mjs";
+import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
+
 const app = express();
 const port = 3000;
 
@@ -98,11 +104,16 @@ app.use("/api/categories", getAllCategoriesRouter)
 app.use("/api/categories", getCategoryRouter)
 
 /**
- * Mounts routers for the categories of the API 
+ * Mounts routers for the authors of the API 
  */
 app.use("/api/authors", getAllAuthorsRouter)
 app.use("/api/authors", getAuthorRouter)
 
+/**
+ *  Mounts routers for the publishers of the API
+ */
+app.use("/api/publishers", getAllPublishersRouter)
+app.use("/api/publishers", getPublisherRouter)
 /**
  * Mounts routers for the login of the API 
  */
