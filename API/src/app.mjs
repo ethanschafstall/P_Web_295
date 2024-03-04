@@ -21,6 +21,11 @@ import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
  */
 import { loginRouter } from "./routes/login_routers/login.mjs";
 
+/**
+ * Importing the categories router
+ */
+import { getAllCategoriesRouter } from "./routes/book_routers/getAllCategories.mjs";
+
 const app = express();
 const port = 3000;
 
@@ -86,3 +91,8 @@ app.use("/api/books", updateBookRouter)
  * Mounts routers for the login of the API 
  */
 app.use("/api/login", loginRouter)
+
+/**
+ * Mounts routers for the categories of the API 
+ */
+app.use("/api/categories", getAllCategoriesRouter)

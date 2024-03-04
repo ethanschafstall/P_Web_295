@@ -1,14 +1,14 @@
 import express from "express";
-import { Book } from "../../db/sequelize.mjs";
+import { Category } from "../../db/sequelize.mjs";
 import { success } from "../helper.mjs";
 
-const getAllBooksRouter = express();
+const getAllCategoriesRouter = express();
 
-getAllBooksRouter.get("/", (req, res) => {
-    Book.findAll({})
-        .then((book) => {
+getAllCategoriesRouter.get("/", (req, res) => {
+    Category.findAll({})
+        .then((category) => {
             const message = `La liste des produits a bien été récupéré`;
-            res.json(success(message, book))
+            res.json(success(message, category))
         })
         .catch((error) => {
             const message = `La liste de produits n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
@@ -16,4 +16,4 @@ getAllBooksRouter.get("/", (req, res) => {
         })
 })
 
-export { getAllBooksRouter }
+export { getAllCategoriesRouter }
