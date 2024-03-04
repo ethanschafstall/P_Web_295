@@ -122,7 +122,7 @@ const wroteModel = (sequelize, DataTypes) => {
             },
             fk_book: {
                 type: DataTypes.INTEGER,
-            },
+            }, 
         },
         {
             timestamps: true,
@@ -174,4 +174,32 @@ const categoryModel = (sequelize, DataTypes) => {
     );
 };
 
-export { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel };
+const authorModel = (sequelize, DataTypes) => {
+    return sequelize.define(
+        "t_authors",
+        {
+            id_author: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            autFirstName: {
+                type: DataTypes.STRING(50),
+            },
+            autLastName: {
+                type: DataTypes.STRING(50),
+            },
+        },
+        {
+            timestamps: true,
+            createdAt: "created",
+            updatedAt: false,
+        }
+    );
+};
+
+// TODO - TABLE ASSOCIATIONS
+// authorModel.hasOne(wroteModel);
+// wroteModel.belongsTo(authorModel);
+
+export { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel };
