@@ -10,7 +10,7 @@ let books = [
     booPublishDate: 1941,
     fk_user: 1,
     fk_publisher: 1,
-    fk_category: 1
+    fk_category: 1,
   },
   {
     id_book: 2,
@@ -40,6 +40,23 @@ let books = [
   }
 ];
 
+let authors = [
+  {
+    id_author: 1,
+    autFirstName: "Howard Phillips",
+    autLastName: "Lovecraft"
+  },
+  {
+    id_author: 2,
+    autFirstName: "Arthur Conan",
+    autLastName: "Doyle"
+  },
+  {
+    id_author: 3,
+    autFirstName: "Sun",
+    autLastName: "Tzu"
+  },
+]
 let writers = [
   {
     id_author: 1,
@@ -139,4 +156,4 @@ let reviews = [
 ]
 
 
-export { books, writers, publishers, categories, users, wrotes, reviews }
+export { books, writers, publishers, categories, users, wrotes, reviews, authors }
