@@ -4,7 +4,6 @@ import { success,failure } from "../helper.mjs";
 
 const getBookRouter = express();
 
-
 getBookRouter.get("/:id", (req, res) => {
     Book.findByPk(req.params.id)
         .then((book) => {
