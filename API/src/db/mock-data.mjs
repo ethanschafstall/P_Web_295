@@ -99,7 +99,7 @@ let users = [
   }
 ];
 
-let wrote = [
+let wrotes = [
   {
     fk_book: 1,
     fk_author: 1
@@ -139,4 +139,4 @@ let reviews = [
 ]
 
 
-export { books, writers, publishers, categories, users, wrote, reviews }
+export { books, writers, publishers, categories, users, wrotes, reviews }

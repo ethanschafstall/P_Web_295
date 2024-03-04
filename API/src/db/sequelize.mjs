@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
 import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel } from "../models/t_books.mjs";
-import { books, reviews, publishers, categories, users, wrote } from "../db/mock-data.mjs";
+import { books, reviews, publishers, categories, users, wrotes } from "../db/mock-data.mjs";
 import bcrypt from "bcrypt"
 
 /**
@@ -129,12 +129,12 @@ const importUsers = () => {
             .hash(user.usePassword, 10)
             .then((hash) => 
                 User.create({
-                    id: user.id_user,
-                    pseudo: user.usePseudo,
-                    password: hash,
-                    joinDate: user.useJoinDate,
-                    bookCount: user.useBookCount,
-                    reviewCount: user.useReviewCount
+                    id_user: user.id_user,
+                    usePseudo: user.usePseudo,
+                    usePassword: hash,
+                    useJoinDate: user.useJoinDate,
+                    useBookCount: user.useBookCount,
+                    useReviewCount: user.useReviewCount
                 })
             )
             .then((user) => console.log(user.toJSON()))
@@ -148,7 +148,7 @@ const importUsers = () => {
  * @returns {void}
  */
 const importWrote = () => {
-    wrote.map((wrote) => {
+    wrotes.map((wrote) => {
         Wrote.create({
             fk_book: wrote.fk_book,
             fk_author: wrote.fk_author
