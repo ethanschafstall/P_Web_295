@@ -1,5 +1,4 @@
 import express from "express";
-import { books } from "./db/mock-data.mjs";
 import { success } from "./routes/helper.mjs";
 
 import { initDb } from "./db/sequelize.mjs";
@@ -14,7 +13,7 @@ import { swaggerSpec } from "./swagger.mjs";
 import { getAllBooksRouter } from "./routes/book_routers/getAllBooks.mjs"
 import { getBookRouter } from "./routes/book_routers/getBook.mjs"
 import { deleteBookRouter } from "./routes/book_routers/deleteBook.mjs"
-import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
+import { createBookRouter } from "./routes/book_routers/createBook.mjs"
 
 /**
  * Importing the login router
@@ -24,7 +23,7 @@ import { loginRouter } from "./routes/login_routers/login.mjs";
 /**
  * Importing the categories router
  */
-import { getAllCategoriesRouter } from "./routes/book_routers/getAllCategories.mjs";
+import { getAllCategoriesRouter } from "./routes/category_routers/getAllCategories.mjs";
 
 const app = express();
 const port = 3000;
@@ -84,7 +83,7 @@ app.use(
 app.use("/api/books", getAllBooksRouter)
 app.use("/api/books", getBookRouter)
 app.use("/api/books", deleteBookRouter)
-app.use("/api/books", updateBookRouter)
+app.use("/api/books", createBookRouter)
 
 
 /**
