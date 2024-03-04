@@ -60,14 +60,14 @@ let initDb = () => {
 const importBooks = () => {
     books.map((book) => {
         Book.create({
-            id: book.id_book,
-            title: book.booTitle,
-            pageCount: book.booPageCount,
-            extract: book.booExtract,
-            summary: book.booSummary,
-            avgRating: book.booAvgRating,
-            coverImage: book.booCoverImage,
-            pushlishDate: book.booPushlishDate
+            id_book: book.id_book,
+            booTitle: book.booTitle,
+            booPageCount: book.booPageCount,
+            booExtract: book.booExtract,
+            booSummary: book.booSummary,
+            booAvgRating: book.booAvgRating,
+            booCoverImage: book.booCoverImage,
+            booPushlishDate: book.booPushlishDate
         }).then((book) => console.log(book.toJSON()));
     });
 };
@@ -80,11 +80,11 @@ const importBooks = () => {
 const importReviews = () => {
     reviews.map((review) => {
         Review.create({
-            fkBook: review.fk_book,
-            fkUser: review.fk_user,
-            date: review.revDate,
-            comment: review.revComment,
-            rating: review.revRating,
+            fk_book: review.fk_book,
+            fk_user: review.fk_user,
+            revDate: review.revDate,
+            revComment: review.revComment,
+            revRating: review.revRating,
         }).then((review) => console.log(review.toJSON()));
     });
 };
@@ -97,8 +97,8 @@ const importReviews = () => {
 const importPublishers = () => {
     publishers.map((publisher) => {
         Publisher.create({
-            id: publisher.id_publisher,
-            name: publisher.pubName,
+            id_publisher: publisher.id_publisher,
+            pubName: publisher.pubName,
         }).then((publish) => console.log(publish.toJSON()));
     });
 };
@@ -111,8 +111,8 @@ const importPublishers = () => {
 const importCategories = () => {
     categories.map((category) => {
         Category.create({
-            id: category.id_publisher,
-            name: category.pubName,
+            id_category: category.id_category,
+            catName: category.catName,
         }).then((category) => console.log(category.toJSON()));
     });
 };
