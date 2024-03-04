@@ -93,7 +93,7 @@ const userModel = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(50),
             },
             usePassword: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.STRING(),
             },
             useJoinDate: {
                 type: DataTypes.DATE,
