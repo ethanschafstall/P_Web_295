@@ -24,8 +24,8 @@ import { loginRouter } from "./routes/login_routers/login.mjs";
 /**
  * Importing the categories router
  */
-import { getAllCategoriesRouter } from "./routes/book_routers/getAllCategories.mjs";
-import { getCategoryRouter } from "./routes/book_routers/getCategory.mjs";
+import { getAllCategoriesRouter } from "./routes/category_routers/getAllCategories.mjs";
+import { getCategoryRouter } from "./routes/category_routers/getCategory.mjs";
 
 const app = express();
 const port = 3000;
