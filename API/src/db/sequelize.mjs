@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
 import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel } from "../models/t_books.mjs";
-import { books, reviews, publishers, categories, users, wrotes } from "../db/mock-data.mjs";
+import { books, reviews, publishers, categories, users, wrotes, authors } from "../db/mock-data.mjs";
 import bcrypt from "bcrypt"
 
 /**
@@ -135,6 +135,7 @@ let initDb = () => {
             importCategories();
             importUsers();
             importWrote();
+            importAuthors();
             console.log("La base de données db_books a bien été synchronisée");
         });
 };
@@ -194,6 +195,22 @@ const importPublishers = () => {
 };
 
 /**
+ * Imports authors from a predefined array into the database.
+ * Maps over each author in the array and creates a new record in the Author table.
+ * @returns {void}
+ */
+const importAuthors = () => {
+    authors.map((author) => {
+        Author.create({
+            id_author: author.id_author,
+            autFirstName: author.autFirstName,
+            autLastName: author.autLastName
+        })
+        //.then((publish) => console.log(publish.toJSON()));
+    });
+};
+
+/**
  * Imports categories from a predefined array into the database.
  * Maps over each category in the array and creates a new record in the Category table.
  * @returns {void}
@@ -246,5 +263,7 @@ const importWrote = () => {
         //.then((wrote) => console.log(wrote.toJSON()));
     });
 };
+
+
 
 export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote };
