@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
-import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel } from "../models/t_books.mjs";
+import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel } from "../models/db_books.mjs";
 import { books, reviews, publishers, categories, users, wrotes, authors } from "../db/mock-data.mjs";
 import bcrypt from "bcrypt"
 
