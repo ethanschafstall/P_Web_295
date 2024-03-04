@@ -1,6 +1,19 @@
 import jwt from "jsonwebtoken";
 import { privateKey } from "./private_key.mjs";
 
+/**
+ * Middleware function to authenticate requests.
+ * It checks for the presence of an authorization token in the request header.
+ * If the token is missing, it returns a 401 Unauthorized status with an error message.
+ * If the token is present, it verifies its validity using JSON Web Token (JWT) and the provided private key.
+ * If the token is invalid, it returns a 401 Unauthorized status with an error message.
+ * If the token is valid, it calls the next middleware function.
+ * 
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {void}
+ */
 const auth = (req, res, next) => {
     const autherizationHeader = req.res.autherization;
 
@@ -23,3 +36,5 @@ const auth = (req, res, next) => {
         )
     }
 }
+
+export { auth }
