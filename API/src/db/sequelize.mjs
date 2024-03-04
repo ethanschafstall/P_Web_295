@@ -1,6 +1,7 @@
-import { Sequelize, DataTypes} from "sequelize";
+import { Sequelize, DataTypes } from "sequelize";
 import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel } from "../models/t_books.mjs";
 import { books, reviews, publishers, categories, users, wrote } from "../db/mock-data.mjs";
+import bcrypt from "bcrypt"
 
 /**
  * Establishes a connection to the MySQL database using Sequelize.
@@ -40,16 +41,16 @@ const Wrote = wroteModel(sequelize, DataTypes);
  */
 let initDb = () => {
     return sequelize
-    .sync({force: true})
-    .then((_) => {
-        importBooks();
-        importReviews();
-        importPublishers();
-        importCategories();
-        importUsers();
-        importWrote();
-        console.log("La base de données db_books a bien été synchronisée");
-    });
+        .sync({ force: true })
+        .then((_) => {
+            importBooks();
+            importReviews();
+            importPublishers();
+            importCategories();
+            importUsers();
+            importWrote();
+            console.log("La base de données db_books a bien été synchronisée");
+        });
 };
 
 /**
@@ -124,15 +125,19 @@ const importCategories = () => {
  */
 const importUsers = () => {
     users.map((user) => {
-        User.create({
-            id: user.id_user,
-            pseudo: user.usePseudo,
-            password: user.usePassword,
-            joinDate: user.useJoinDate,
-            bookCount: user.useBookCount,
-            reviewCount: user.useReviewCount
-        }).then((user) => console.log(user.toJSON()));
-    });
+        bcrypt
+            .hash(user.usePassword, 10)
+            .then((hash) => 
+                User.create({
+                    pseudo: user.usePseudo,
+                    password: hash,
+                    joinDate: user.useJoinDate,
+                    bookCount: user.useBookCount,
+                    reviewCount: user.useReviewCount
+                })
+            )
+            .then((user) => console.log(user.toJSON()))
+    })
 };
 
 /**
@@ -150,4 +155,4 @@ const importWrote = () => {
     });
 };
 
-export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote};
+export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote };
