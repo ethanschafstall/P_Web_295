@@ -129,6 +129,7 @@ const importUsers = () => {
             .hash(user.usePassword, 10)
             .then((hash) => 
                 User.create({
+                    id: user.id_user,
                     pseudo: user.usePseudo,
                     password: hash,
                     joinDate: user.useJoinDate,

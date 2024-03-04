@@ -16,6 +16,11 @@ import { getBookRouter } from "./routes/book_routers/getBook.mjs"
 import { deleteBookRouter } from "./routes/book_routers/deleteBook.mjs"
 import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
 
+/**
+ * Importing the login router
+ */
+import { loginRouter } from "./routes/login_routers/login.mjs";
+
 const app = express();
 const port = 3000;
 
@@ -75,3 +80,9 @@ app.use("/api/books", getAllBooksRouter)
 app.use("/api/books", getBookRouter)
 app.use("/api/books", deleteBookRouter)
 app.use("/api/books", updateBookRouter)
+
+
+/**
+ * Mounts routers for the login of the API 
+ */
+app.use("/api/login", loginRouter)
