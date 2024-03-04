@@ -96,7 +96,7 @@ const userModel = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(),
             },
             useJoinDate: {
-                type: DataTypes.DATE,
+                type: DataTypes.STRING,
             },
             useBookCount: {
                 type: DataTypes.INTEGER,
