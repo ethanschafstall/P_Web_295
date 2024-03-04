@@ -69,7 +69,8 @@ const importBooks = () => {
             booAvgRating: book.booAvgRating,
             booCoverImage: book.booCoverImage,
             booPushlishDate: book.booPushlishDate
-        }).then((book) => console.log(book.toJSON()));
+        })
+        //.then((book) => console.log(book.toJSON()));
     });
 };
 
@@ -86,7 +87,8 @@ const importReviews = () => {
             revDate: review.revDate,
             revComment: review.revComment,
             revRating: review.revRating,
-        }).then((review) => console.log(review.toJSON()));
+        })
+        //.then((review) => console.log(review.toJSON()));
     });
 };
 
@@ -100,7 +102,8 @@ const importPublishers = () => {
         Publisher.create({
             id_publisher: publisher.id_publisher,
             pubName: publisher.pubName,
-        }).then((publish) => console.log(publish.toJSON()));
+        })
+        //.then((publish) => console.log(publish.toJSON()));
     });
 };
 
@@ -114,7 +117,8 @@ const importCategories = () => {
         Category.create({
             id_category: category.id_category,
             catName: category.catName,
-        }).then((category) => console.log(category.toJSON()));
+        })
+        //.then((category) => console.log(category.toJSON()));
     });
 };
 
@@ -137,7 +141,7 @@ const importUsers = () => {
                     useReviewCount: user.useReviewCount
                 })
             )
-            .then((user) => console.log(user.toJSON()))
+            //.then((user) => console.log(user.toJSON()))
     })
 };
 
@@ -152,7 +156,8 @@ const importWrote = () => {
         Wrote.create({
             fk_book: wrote.fk_book,
             fk_author: wrote.fk_author
-        }).then((wrote) => console.log(wrote.toJSON()));
+        })
+        //.then((wrote) => console.log(wrote.toJSON()));
     });
 };
 
