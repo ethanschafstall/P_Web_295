@@ -15,7 +15,7 @@ import { success,failure } from "../helper.mjs";
  */
 const deleteBookRouter = express();
 
-deleteBookRouter.delete("/:id", auth, (req, res) => {
+deleteBookRouter.delete("/:id", /*auth, */(req, res) => {
     Book.findByPk(req.params.id)
     .then((deletedBook) => {
         if (deletedBook === null) {
