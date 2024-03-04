@@ -1,12 +1,19 @@
 import express from "express";
-import { books } from "../../db/mock-data.mjs";
+import { Book } from "../../db/sequelize.mjs";
 import { success } from "../helper.mjs";
 
 const getAllBooksRouter = express();
 
 getAllBooksRouter.get("/", (req, res) => {
-    const message = `La liste des produits a bien été récupéré`;
-    res.json(success(message, books))    
+    Book.findAll({})
+        .then((book) => {
+            const message = `La liste des produits a bien été récupéré`;
+            res.json(success(message, book))
+        })
+        .catch((error) => {
+            const message = `La liste de produits n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
+            res.status(500).json({message, data: error})
+        })
 })
 
 export { getAllBooksRouter }
