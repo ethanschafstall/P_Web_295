@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
-import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel } from "../models/t_books.mjs";
-import { books, reviews, publishers, categories, users, wrotes } from "../db/mock-data.mjs";
+import { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel } from "../models/db_books.mjs";
+import { books, reviews, publishers, categories, users, wrotes, authors } from "../db/mock-data.mjs";
 import bcrypt from "bcrypt"
 
 /**
@@ -32,6 +32,92 @@ const Publisher = publisherModel(sequelize, DataTypes);
 const Category = categoryModel(sequelize, DataTypes);
 const User = userModel(sequelize, DataTypes);
 const Wrote = wroteModel(sequelize, DataTypes);
+const Author = authorModel(sequelize, DataTypes);
+
+
+/**
+ * UNUSED
+ * Initializes associations between different tables/entities in the database schema.
+ * This function establishes relationships such as "belongsTo" and "hasMany" 
+ * among various entities, enabling efficient querying and data retrieval.
+ * 
+ * Associations defined:
+ * - Association between t_wrotes and t_books
+ * - Association between t_authors and t_wrotes
+ * - Association between t_books and t_users
+ * - Association between t_users and t_reviews
+ * - Association between t_books and t_reviews
+ * - Association between t_publishers and t_books
+ * - Association between t_books and t_categories
+ * 
+ * @returns {void}
+ */
+const initAssociations = () => {
+    // Association between t_wrotes and t_books
+    Wrote.belongsTo(Book, {
+        foreignKey: {
+            name: 'fk_book'}
+    });
+    Book.hasMany(Wrote,{
+        foreignKey: {
+            name: 'fk_book'}
+    });
+    // Association between t_authors and t_wrotes
+    Wrote.belongsTo(Author, {
+        foreignKey: {
+            name: 'fk_author'}
+    });
+    Author.hasMany(Wrote,{
+        foreignKey: {
+            name: 'fk_author'}
+    });
+    // Association between t_books and t_users
+    Book.belongsTo(User,{
+        foreignKey: {
+            name: 'fk_user'}
+    });
+    User.hasMany(Book,{
+        foreignKey: {
+            name: 'fk_user'}
+    });
+    // Association between t_users and t_reviews
+    Review.belongsTo(User,{
+        foreignKey: {
+            name: 'fk_user'}
+    });
+    User.hasMany(Review,{
+        foreignKey: {
+            name: 'fk_user'}
+    });
+    // Association between t_books and t_reviews
+    Review.belongsTo(Book,{
+        foreignKey: {
+            name: 'fk_book'}
+    });
+    Book.hasMany(Review,{
+        foreignKey: {
+            name: 'fk_book'}
+    }); 
+    // Association between t_publishers and t_books
+    Book.belongsTo(Publisher,{
+        foreignKey: {
+            name: 'fk_publisher'}
+    });
+    Publisher.hasMany(Book,{
+        foreignKey: {
+            name: 'fk_publisher'}
+    });
+    // Association between t_books and t_categories
+    Book.belongsTo(Category,{
+        foreignKey: {
+            name: 'fk_category'}
+    });
+    Category.hasMany(Book,{
+        foreignKey: {
+            name: 'fk_category'}
+    }); 
+}
+
 
 /**
  * Initializes the database by synchronizing Sequelize models with the database schema.
@@ -49,6 +135,7 @@ let initDb = () => {
             importCategories();
             importUsers();
             importWrote();
+            importAuthors();
             console.log("La base de données db_books a bien été synchronisée");
         });
 };
@@ -108,6 +195,22 @@ const importPublishers = () => {
 };
 
 /**
+ * Imports authors from a predefined array into the database.
+ * Maps over each author in the array and creates a new record in the Author table.
+ * @returns {void}
+ */
+const importAuthors = () => {
+    authors.map((author) => {
+        Author.create({
+            id_author: author.id_author,
+            autFirstName: author.autFirstName,
+            autLastName: author.autLastName
+        })
+        //.then((publish) => console.log(publish.toJSON()));
+    });
+};
+
+/**
  * Imports categories from a predefined array into the database.
  * Maps over each category in the array and creates a new record in the Category table.
  * @returns {void}
@@ -160,5 +263,7 @@ const importWrote = () => {
         //.then((wrote) => console.log(wrote.toJSON()));
     });
 };
+
+
 
 export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote };
