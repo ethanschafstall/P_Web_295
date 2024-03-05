@@ -15,7 +15,7 @@ getAllPublishersRouter.get("/", (req, res) => {
             res.json(success(message, publisher))
         })
     }
-    Publisher.findAll({})
+    Publisher.findAll()
         .then((publisher) => {
             const message = `La liste des éditeurs a bien été récupéré`;
             res.json(success(message, publisher))

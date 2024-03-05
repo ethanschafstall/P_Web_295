@@ -16,7 +16,7 @@ getAllCategoriesRouter.get("/", auth, (req, res) => {
             res.json(success(message, category))
         })
     }
-    Category.findAll({})
+    Category.findAll()
         .then((category) => {
             const message = `La liste des catégories a bien été récupéré`;
             res.json(success(message, category))
