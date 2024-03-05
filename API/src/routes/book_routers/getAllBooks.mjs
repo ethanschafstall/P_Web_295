@@ -1,10 +1,11 @@
 import express from "express";
 import { Book } from "../../db/sequelize.mjs";
-import { success } from "../helper.mjs";
+import { success,failure } from "../helper.mjs";
+import { auth } from "../../auth/auth.mjs";
 
 const getAllBooksRouter = express();
 
-getAllBooksRouter.get("/", (req, res) => {
+getAllBooksRouter.get("/", auth, (req, res) => {
     Book.findAll({})
         .then((book) => {
             const message = `La liste des livres a bien été récupéré`;
