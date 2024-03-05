@@ -1,10 +1,11 @@
 import express from "express";
 import { Book } from "../../db/sequelize.mjs";
-import { success } from "../helper.mjs";
+import { success,failure } from "../helper.mjs";
+import { auth } from "../../auth/auth.mjs";
 
 const getBookRouter = express();
 
-getBookRouter.get("/:id", (req, res) => {
+getBookRouter.get("/:id", auth, (req, res) => {
     Book.findByPk(req.params.id)
         .then((book) => {
             if(book === null){
