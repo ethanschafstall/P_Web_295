@@ -55,11 +55,11 @@ const reviewModel = (sequelize, DataTypes) => {
     return sequelize.define(
         "t_reviews",
         {
-            fk_book: {
+            fk_user: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            fk_user: {
+            fk_book: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
@@ -120,9 +120,11 @@ const wroteModel = (sequelize, DataTypes) => {
         {
             fk_author: {
                 type: DataTypes.INTEGER,
+                primaryKey: true,
             },
             fk_book: {
                 type: DataTypes.INTEGER,
+                primaryKey: true,
             }, 
         },
         {
@@ -198,9 +200,5 @@ const authorModel = (sequelize, DataTypes) => {
         }
     );
 };
-
-// TODO - TABLE ASSOCIATIONS
-// authorModel.hasOne(wroteModel);
-// wroteModel.belongsTo(authorModel);
 
 export { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel };
