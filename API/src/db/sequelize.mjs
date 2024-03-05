@@ -54,64 +54,41 @@ const Author = authorModel(sequelize, DataTypes);
  */
 const initAssociations = () => {
     // Association between t_publishers and t_books
-    Book.belongsTo(Publisher,{
-        foreignKey: {
-            name: 'fk_publisher'}
-    });
+
     Publisher.hasMany(Book,{
         foreignKey: {
             name: 'fk_publisher'}
     });  
     // Association between t_authors and t_wrotes
-    Wrote.belongsTo(Author, {
-        foreignKey: {
-            name: 'fk_author'}
-    });
+
     Author.hasMany(Wrote,{
         foreignKey: {
             name: 'fk_author'}
     });
     // Association between t_books and t_categories
-    Book.belongsTo(Category,{
-        foreignKey: {
-            name: 'fk_category'}
-    });
+
     Category.hasMany(Book,{
         foreignKey: {
             name: 'fk_category'}
     });   
     // Association between t_wrotes and t_books
-    Wrote.belongsTo(Book, {
-        foreignKey: {
-            name: 'fk_book'}
-    });
+
     Book.hasMany(Wrote,{
         foreignKey: {
             name: 'fk_book'}
     });
     // Association between t_books and t_users
-    Book.belongsTo(User,{
-        foreignKey: {
-            name: 'fk_user'}
-    });
+
     User.hasMany(Book,{
         foreignKey: {
             name: 'fk_user'}
     });
     // Association between t_users and t_reviews
-    Review.belongsTo(User,{
-        foreignKey: {
-            name: 'fk_user'}
-    });
+    
     User.hasMany(Review,{
-        foreignKey: {
-            name: 'fk_user'}
-    });
-    // // Association between t_books and t_reviews
-    Review.belongsTo(Book,{
-        foreignKey: {
-            name: 'fk_book'}
-    });
+    }); 
+    // // // Association between t_books and t_reviews
+
     Book.hasMany(Review,{
         foreignKey: {
             name: 'fk_book'}
@@ -176,7 +153,23 @@ const importReviews = () => {
             revComment: review.revComment,
             revRating: review.revRating,
         })
-        //.then((review) => console.log(review.toJSON()));
+        .then((review) => console.log(review.toJSON()));
+    });
+};
+
+/**
+ * Imports relationship data between users and reviews into the database.
+ * This function creates records in the "Wrote" table, which serves as an association table between users and reviews.
+ * It maps over each relationship data and creates a new record in the "Wrote" table.
+ * @returns {void}
+ */
+const importWrote = () => {
+    wrotes.map((wrote) => {
+        Wrote.create({
+            fk_book: wrote.fk_book,
+            fk_author: wrote.fk_author
+        })
+        //.then((wrote) => console.log(wrote.toJSON()));
     });
 };
 
@@ -245,26 +238,8 @@ const importUsers = () => {
                     useReviewCount: user.useReviewCount
                 })
             )
-            //.then((user) => console.log(user.toJSON()))
+            .then((user) => console.log(user.toJSON()))
     })
 };
-
-/**
- * Imports relationship data between users and reviews into the database.
- * This function creates records in the "Wrote" table, which serves as an association table between users and reviews.
- * It maps over each relationship data and creates a new record in the "Wrote" table.
- * @returns {void}
- */
-const importWrote = () => {
-    wrotes.map((wrote) => {
-        Wrote.create({
-            fk_book: wrote.fk_book,
-            fk_author: wrote.fk_author
-        })
-        //.then((wrote) => console.log(wrote.toJSON()));
-    });
-};
-
-
 
 export { sequelize, initDb, Book, Review, Publisher, Category, User, Wrote, Author };
