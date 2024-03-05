@@ -55,12 +55,13 @@ const reviewModel = (sequelize, DataTypes) => {
     return sequelize.define(
         "t_reviews",
         {
-            // Not sure if any additional info for foreign keys are needed
             fk_book: {
                 type: DataTypes.INTEGER,
+                primaryKey: true,
             },
             fk_user: {
                 type: DataTypes.INTEGER,
+                primaryKey: true,
             },
             revDate: {
                 type: DataTypes.DATE,
