@@ -1,10 +1,11 @@
 import express from "express";
 import { Category } from "../../db/sequelize.mjs";
-import { success } from "../helper.mjs";
+import { success,failure } from "../helper.mjs";
+import { auth } from "../../auth/auth.mjs";
 
 const getAllCategoriesRouter = express();
 
-getAllCategoriesRouter.get("/", (req, res) => {
+getAllCategoriesRouter.get("/", auth, (req, res) => {
     Category.findAll({})
         .then((category) => {
             const message = `La liste des catégories a bien été récupéré`;
