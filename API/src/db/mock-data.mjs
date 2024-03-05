@@ -133,25 +133,25 @@ let wrotes = [
 
 let reviews = [
   {
-    fk_book: 1,
     fk_user: 1,
+    fk_book: 1,
     revDate: "02/03/2024 09:13",
     revComment: "good.",
     revRating: 4.5
   },
   {
-    fk_book: 2,
     fk_user: 1,
+    fk_book: 2,
     revDate: "02/03/2024 09:13",
     revComment: "Yes.",
     revRating: 3
   },
   {
-    fk_book: 3,
     fk_user: 1,
+    fk_book: 3,
     revDate: "02/03/2024 09:13",
     revComment: "Perfect.",
-    revRating: 5
+    revRating: 5,
   }
 ]
 
