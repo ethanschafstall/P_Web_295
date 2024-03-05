@@ -5,7 +5,7 @@ import { auth } from "../../auth/auth.mjs";
 
 const createBookRouter = express() 
 
-createBookRouter.post("/:id", auth, (req, res) => {
+createBookRouter.post("/:id", (req, res) => {
     Book.create(req.body)
     .then((createdBook) => {
         // Définir un message pour le consommateur de l'API REST

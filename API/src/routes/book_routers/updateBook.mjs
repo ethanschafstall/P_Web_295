@@ -5,7 +5,7 @@ import { auth } from "../../auth/auth.mjs";
 
 const updateBookRouter = express() 
 
-updateBookRouter.post("/:id", auth, (req, res) => {
+updateBookRouter.post("/:id", (req, res) => {
     const bookId = req.params.id;
     Book.update(req.body, { where: { id: bookId } })
     .then((_) => {

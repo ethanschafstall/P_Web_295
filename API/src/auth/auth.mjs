@@ -15,13 +15,13 @@ import { privateKey } from "./private_key.mjs";
  * @returns {void}
  */
 const auth = (req, res, next) => {
-    const autherizationHeader = req.res.autherization;
+    const authorizationHeader = req.res.authorization;
 
-    if(!autherizationHeader){
+    if(!authorizationHeader){
         const message = `Vous n'avez pas fourni de jeton d'authentification`
         return res.status(401).json({ message })
     } else {
-        const token = autherizationHeader.split("")[1];
+        const token = authorizationHeader.split("")[1];
         const decodedToken = jwt.verify(
             token,
             privateKey,

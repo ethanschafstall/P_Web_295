@@ -6,16 +6,18 @@ import { User } from "../../db/sequelize.mjs";
 import { privateKey } from "../../auth/private_key.mjs"
 
 const loginRouter = express();
+const { usePseudo, password } = req.body;
 
 loginRouter.post("/", (req, res) => {
-    User.findOne({ where: {username: req.body.username}})
+
+    User.findOne({ where: {usePseudo: req.body.usePseudo}})
         .then((user) => {
             if(!user){
                 const message = `L'utilisateur demandé n'existe pas`;
                 return res.status(404).json({ message });
             }
             bcrypt
-                .compare(req.body.password, user.password)
+                .compare(req.body.password, user.usePassword)
                 .then((isPasswordValid) => {
                     if(!isPasswordValid){
                         const message = `Le mot de passe est incorrecte`

@@ -6,7 +6,7 @@ import { ValidationError, Op } from "sequelize";
 
 const getAllCategoriesRouter = express();
 
-getAllCategoriesRouter.get("/", auth, (req, res) => {
+getAllCategoriesRouter.get("/", (req, res) => {
     if(req.query.name) {
         return Category.findAll({
             where: { name: { [Op.like]: `%${req.query.name}&`}}

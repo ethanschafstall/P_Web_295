@@ -5,7 +5,7 @@ import { auth } from "../../auth/auth.mjs";
 
 const getBookRouter = express();
 
-getBookRouter.get("/:id", auth, (req, res) => {
+getBookRouter.get("/:id", (req, res) => {
     Book.findByPk(req.params.id)
         .then((book) => {
             if(book === null){

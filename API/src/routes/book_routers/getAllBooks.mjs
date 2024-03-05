@@ -6,7 +6,7 @@ import { ValidationError, Op } from "sequelize";
 
 const getAllBooksRouter = express();
 
-getAllBooksRouter.get("/", auth, (req, res) => {
+getAllBooksRouter.get("/", (req, res) => {
     if(req.query.name) {
         return Book.findAll({
             where: { name: { [Op.like]: `%${req.query.name}&`}}

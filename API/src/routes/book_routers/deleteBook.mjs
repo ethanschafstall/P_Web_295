@@ -15,7 +15,7 @@ import { auth } from "../../auth/auth.mjs";
  */
 const deleteBookRouter = express();
 
-deleteBookRouter.delete("/:id", auth, (req, res) => {
+deleteBookRouter.delete("/:id", (req, res) => {
     Book.findByPk(req.params.id)
     .then((deletedBook) => {
         if (deletedBook === null) {
