@@ -1,7 +1,7 @@
 import express from "express";
 import { Book } from "../../db/sequelize.mjs";
-import { success } from "../helper.mjs";
-// import { auth } from "../auth/auth.mjs";
+import { success,failure } from "../helper.mjs";
+import { auth } from "../../auth/auth.mjs";
 
 /**
  * Router for handling DELETE requests to delete a book by its ID.
@@ -15,7 +15,7 @@ import { success } from "../helper.mjs";
  */
 const deleteBookRouter = express();
 
-deleteBookRouter.delete("/:id", /*auth, */(req, res) => {
+deleteBookRouter.delete("/:id", auth, (req, res) => {
     Book.findByPk(req.params.id)
     .then((deletedBook) => {
         if (deletedBook === null) {
