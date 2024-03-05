@@ -26,9 +26,9 @@ const sequelize = new Sequelize(
     }
 );
 
+const Publisher = publisherModel(sequelize, DataTypes);
 const Book = bookModel(sequelize, DataTypes);
 const Review = reviewModel(sequelize, DataTypes);
-const Publisher = publisherModel(sequelize, DataTypes);
 const Category = categoryModel(sequelize, DataTypes);
 const User = userModel(sequelize, DataTypes);
 const Wrote = wroteModel(sequelize, DataTypes);
@@ -53,15 +53,15 @@ const Author = authorModel(sequelize, DataTypes);
  * @returns {void}
  */
 const initAssociations = () => {
-    // Association between t_wrotes and t_books
-    Wrote.belongsTo(Book, {
+    // Association between t_publishers and t_books
+    Book.belongsTo(Publisher,{
         foreignKey: {
-            name: 'fk_book'}
+            name: 'fk_publisher'}
     });
-    Book.hasMany(Wrote,{
+    Publisher.hasMany(Book,{
         foreignKey: {
-            name: 'fk_book'}
-    });
+            name: 'fk_publisher'}
+    });  
     // Association between t_authors and t_wrotes
     Wrote.belongsTo(Author, {
         foreignKey: {
@@ -70,6 +70,24 @@ const initAssociations = () => {
     Author.hasMany(Wrote,{
         foreignKey: {
             name: 'fk_author'}
+    });
+    // Association between t_books and t_categories
+    Book.belongsTo(Category,{
+        foreignKey: {
+            name: 'fk_category'}
+    });
+    Category.hasMany(Book,{
+        foreignKey: {
+            name: 'fk_category'}
+    });   
+    // Association between t_wrotes and t_books
+    Wrote.belongsTo(Book, {
+        foreignKey: {
+            name: 'fk_book'}
+    });
+    Book.hasMany(Wrote,{
+        foreignKey: {
+            name: 'fk_book'}
     });
     // Association between t_books and t_users
     Book.belongsTo(User,{
@@ -89,7 +107,7 @@ const initAssociations = () => {
         foreignKey: {
             name: 'fk_user'}
     });
-    // Association between t_books and t_reviews
+    // // Association between t_books and t_reviews
     Review.belongsTo(Book,{
         foreignKey: {
             name: 'fk_book'}
@@ -98,27 +116,10 @@ const initAssociations = () => {
         foreignKey: {
             name: 'fk_book'}
     }); 
-    // Association between t_publishers and t_books
-    Book.belongsTo(Publisher,{
-        foreignKey: {
-            name: 'fk_publisher'}
-    });
-    Publisher.hasMany(Book,{
-        foreignKey: {
-            name: 'fk_publisher'}
-    });
-    // Association between t_books and t_categories
-    Book.belongsTo(Category,{
-        foreignKey: {
-            name: 'fk_category'}
-    });
-    Category.hasMany(Book,{
-        foreignKey: {
-            name: 'fk_category'}
-    }); 
+
 }
 
-
+initAssociations();
 /**
  * Initializes the database by synchronizing Sequelize models with the database schema.
  * This function forces the synchronization by dropping existing tables.
@@ -129,13 +130,13 @@ let initDb = () => {
     return sequelize
         .sync({ force: true })
         .then((_) => {
-            importBooks();
-            importReviews();
             importPublishers();
+            importAuthors();
             importCategories();
             importUsers();
+            importBooks();
             importWrote();
-            importAuthors();
+            importReviews();
             console.log("La base de données db_books a bien été synchronisée");
         });
 };
