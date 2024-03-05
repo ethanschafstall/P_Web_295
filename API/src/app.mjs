@@ -3,7 +3,6 @@ import { success } from "./routes/helper.mjs";
 
 import { initDb } from "./db/sequelize.mjs";
 
-
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.mjs";
 
@@ -24,6 +23,20 @@ import { loginRouter } from "./routes/login_routers/login.mjs";
  * Importing the categories router
  */
 import { getAllCategoriesRouter } from "./routes/category_routers/getAllCategories.mjs";
+import { getCategoryRouter } from "./routes/category_routers/getCategory.mjs";
+
+/**
+ * Importing the authors router
+ */
+import { getAllAuthorsRouter } from "./routes/author_routers/getAllAuthors.mjs";
+import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
+
+/**
+ * Importing the publishers routes
+ */
+import { getAllPublishersRouter } from "./routes/publisher_routes/getAllPublishers.mjs";
+import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
+
 
 const app = express();
 const port = 3000;
@@ -37,7 +50,6 @@ initDb();
  * @param {object} res - The response object.
  */
 app.get("/", (req,res) => {
-    
     res.json(success())
 })
 
@@ -85,13 +97,32 @@ app.use("/api/books", getBookRouter)
 app.use("/api/books", deleteBookRouter)
 app.use("/api/books", createBookRouter)
 
+/**
+ * Mounts routers for the categories of the API 
+ */
+app.use("/api/categories", getAllCategoriesRouter)
+app.use("/api/categories", getCategoryRouter)
 
+/**
+ * Mounts routers for the authors of the API 
+ */
+app.use("/api/authors", getAllAuthorsRouter)
+app.use("/api/authors", getAuthorRouter)
+
+/**
+ *  Mounts routers for the publishers of the API
+ */
+app.use("/api/publishers", getAllPublishersRouter)
+app.use("/api/publishers", getPublisherRouter)
 /**
  * Mounts routers for the login of the API 
  */
 app.use("/api/login", loginRouter)
 
 /**
- * Mounts routers for the categories of the API 
+ * This route is for the unfindable routes that the user gives and it gives an 404 error
  */
-app.use("/api/categories", getAllCategoriesRouter)
+app.use(({ res }) => {
+    const message = "Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL."
+    res.status(404).json(message)
+})

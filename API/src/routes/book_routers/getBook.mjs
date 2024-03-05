@@ -1,22 +1,21 @@
 import express from "express";
 import { Book } from "../../db/sequelize.mjs";
-import { success,failure } from "../helper.mjs";
+import { success } from "../helper.mjs";
 
 const getBookRouter = express();
-
 
 getBookRouter.get("/:id", (req, res) => {
     Book.findByPk(req.params.id)
         .then((book) => {
             if(book === null){
-                const message = `Le produit demandé n'existe pas. Merci de réessayer avec un autre identifiant.`
+                const message = `Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.`
                 return res.status(404).json({ message })
             }
-            const message = `Le produit dont l'id vaut ${book.id_book} a bien été récupéré`
+            const message = `Le livre dont l'id vaut ${book.id_book} a bien été récupéré`
             res.json(success(message, book))
         })
         .catch((error) => {
-            const message = `Le produit n'a pas pu être récupéré. Merci de réessayer dans quelques instants`;
+            const message = `Le livre n'a pas pu être récupéré. Merci de réessayer dans quelques instants`;
             res.status(500).json({message, data: error})
         })
 })

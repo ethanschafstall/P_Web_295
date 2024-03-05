@@ -7,11 +7,11 @@ const getAllBooksRouter = express();
 getAllBooksRouter.get("/", (req, res) => {
     Book.findAll({})
         .then((book) => {
-            const message = `La liste des produits a bien été récupéré`;
+            const message = `La liste des livres a bien été récupéré`;
             res.json(success(message, book))
         })
         .catch((error) => {
-            const message = `La liste de produits n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
+            const message = `La liste de livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
             res.status(500).json({message, data: error})
         })
 })
