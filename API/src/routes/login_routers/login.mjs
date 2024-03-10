@@ -1,41 +1,45 @@
 import express from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt"; // Importing bcrypt for password hashing
+import jwt from "jsonwebtoken"; // Importing JWT for token generation
 
-import { User } from "../../db/sequelize.mjs";
-import { privateKey } from "../../auth/private_key.mjs"
+import { User } from "../../db/sequelize.mjs"; // Importing User model from sequelize
+import { privateKey } from "../../auth/private_key.mjs"; // Importing private key for JWT
 
-const loginRouter = express();
-const { usePseudo, password } = req.body;
+const loginRouter = express(); // Creating a new instance of express router
 
+// Endpoint for handling user login
 loginRouter.post("/", (req, res) => {
-
-    User.findOne({ where: {usePseudo: req.body.usePseudo}})
+    // Finding the user in the database by username
+    User.findOne({ where: { usePseudo: req.body.username } })
         .then((user) => {
-            if(!user){
+            // If user doesn't exist, return 404 error
+            if (!user) {
                 const message = `L'utilisateur demandé n'existe pas`;
                 return res.status(404).json({ message });
             }
-            bcrypt
-                .compare(req.body.password, user.usePassword)
+            // Comparing the provided password with the hashed password stored in the database
+            bcrypt.compare(req.body.password, user.usePassword)
                 .then((isPasswordValid) => {
-                    if(!isPasswordValid){
+                    // If password is invalid, return 401 error
+                    if (!isPasswordValid) {
                         const message = `Le mot de passe est incorrecte`
                         return res.status(401).json({ message });
                     } else {
-                        // JWT 
+                        // If password is valid, generate JWT token
                         const token = jwt.sign({ userId: user.id_user}, privateKey, {
-                            expiresIn: "1y"
+                            expiresIn: "1y" // Token expires in 1 year
                         });
                         const message = `L'utilisateur a été connecté avec succès`;
+                        // Return success message along with user data and token
                         return res.json({ message, data: user, token});
                     }
                 });
         })
         .catch((error) => {
+            // If an error occurs during the process, return a generic error message
             const message = `L'utilisateur n'a pas pu être connecté. Réesssayez dans quelques instants`;
-            return res.json({ message, data : error})
+            return res.json({ message, data: error });
         })
 })
 
-export { loginRouter };
+export { loginRouter }; // Exporting the router for use in other files
