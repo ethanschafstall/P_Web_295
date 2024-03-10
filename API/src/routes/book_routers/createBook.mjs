@@ -6,12 +6,12 @@ import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 const createBookRouter = express(); // Creating a new instance of express router
 
 // Endpoint for creating a new book
-createBookRouter.post("/:id", auth,(req, res) => {
+createBookRouter.post("/", auth,(req, res) => {
     // Creating a new book with the provided data
     Book.create(req.body)
         .then((createdBook) => {
             // Return success message upon successful creation
-            res.json(success(`Le produit ${createdBook.name} a bien été créé !`, createdBook));
+            res.json(success(`Le produit "${createdBook.booTitle}" a bien été créé !`, createdBook));
         })
         .catch((error) => {
             // If the error is a validation error, return a 400 status code with the error message
