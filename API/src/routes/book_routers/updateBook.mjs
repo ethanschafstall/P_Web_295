@@ -6,10 +6,10 @@ import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 const updateBookRouter = express(); // Creating a new instance of express router
 
 // Endpoint for updating a specific book by ID
-updateBookRouter.post("/:id", auth,(req, res) => {
+updateBookRouter.put("/:id", auth,(req, res) => {
     const bookId = req.params.id; // Extracting book ID from request parameters
     // Updating the book with the provided data
-    Book.update(req.body, { where: { id: bookId } })
+    Book.update(req.body, { where: { id_book: bookId } })
         .then((_) => {
             // Finding the updated book by its primary key (ID)
             return Book.findByPk(bookId)
