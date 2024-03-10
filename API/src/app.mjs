@@ -6,6 +6,11 @@ import { initDb } from "./db/sequelize.mjs";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.mjs";
 
+// Used to fix the request body not being parsed properly.
+import bodyParser from "body-parser";
+
+
+
 /**
  * Importing the book routers
  */
@@ -37,8 +42,8 @@ import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
 import { getAllPublishersRouter } from "./routes/publisher_routes/getAllPublishers.mjs";
 import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
 
-
 const app = express();
+app.use(bodyParser.json());
 const port = 3000;
 
 initDb();
