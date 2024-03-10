@@ -52,6 +52,10 @@ const Author = authorModel(sequelize, DataTypes);
  * 
  * @returns {void}
  */
+
+
+/**
+ * REMOVED FROM API UNTILL PROPER FIX IS FOUND
 const initAssociations = () => {
     // Association between t_publishers and t_books
 
@@ -97,6 +101,8 @@ const initAssociations = () => {
 }
 
 initAssociations();
+*/
+
 /**
  * Initializes the database by synchronizing Sequelize models with the database schema.
  * This function forces the synchronization by dropping existing tables.
@@ -133,9 +139,9 @@ const importBooks = () => {
             booSummary: book.booSummary,
             booAvgRating: book.booAvgRating,
             booCoverImage: book.booCoverImage,
-            booPushlishDate: book.booPushlishDate
+            booPushlishDate: book.booPushlishDate,
         })
-        //.then((book) => console.log(book.toJSON()));
+        .then((book) => console.log(book.toJSON()));
     });
 };
 
