@@ -1,26 +1,27 @@
-import express from "express";
-import { Book } from "../../db/sequelize.mjs";
-import { success } from "../helper.mjs";
-import { auth } from "../../auth/auth.mjs";
+import express from "express"; // Importing express for router creation
+import { Book } from "../../db/sequelize.mjs"; // Importing Book model from sequelize
+import { success } from "../helper.mjs"; // Importing success helper function
+import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
-const createBookRouter = express() 
+const createBookRouter = express(); // Creating a new instance of express router
 
-createBookRouter.post("/:id", (req, res) => {
+// Endpoint for creating a new book
+createBookRouter.post("/:id", auth,(req, res) => {
+    // Creating a new book with the provided data
     Book.create(req.body)
-    .then((createdBook) => {
-        // Définir un message pour le consommateur de l'API REST
-        // Retourner la réponse HTTP en json avec le msg et le produit créé
-        res.json(success(`Le produit ${createdBook.name} a bien été créé !`, createdBook));
-    })
-    .catch((error) => {
-        if (error instanceof ValidationError){
-            return res.status(400).json({message: error.message, data: error});
-        }
-        const message =
-        "Le produit n'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
-        res.status(500).json({ message, data: error });
-    });
-})
+        .then((createdBook) => {
+            // Return success message upon successful creation
+            res.json(success(`Le produit ${createdBook.name} a bien été créé !`, createdBook));
+        })
+        .catch((error) => {
+            // If the error is a validation error, return a 400 status code with the error message
+            if (error instanceof ValidationError) {
+                return res.status(400).json({ message: error.message, data: error });
+            }
+            // If any other error occurs during the process, return a generic error message
+            const message = "Le produit n'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
+            res.status(500).json({ message, data: error });
+        });
+});
 
-
-export { createBookRouter };
+export { createBookRouter }; // Exporting the router for use in other files

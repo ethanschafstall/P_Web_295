@@ -1,34 +1,34 @@
-import express from "express";
-import { Book } from "../../db/sequelize.mjs";
-import { success } from "../helper.mjs";
-import { auth } from "../../auth/auth.mjs";
+import express from "express"; // Importing express for router creation
+import { Book } from "../../db/sequelize.mjs"; // Importing Book model from sequelize
+import { success } from "../helper.mjs"; // Importing success helper function
+import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
-const updateBookRouter = express() 
+const updateBookRouter = express(); // Creating a new instance of express router
 
-updateBookRouter.post("/:id", (req, res) => {
-    const bookId = req.params.id;
+// Endpoint for updating a specific book by ID
+updateBookRouter.post("/:id", auth,(req, res) => {
+    const bookId = req.params.id; // Extracting book ID from request parameters
+    // Updating the book with the provided data
     Book.update(req.body, { where: { id: bookId } })
-    .then((_) => {
-        return Product.findByPk(bookId)
-        .then((updatedBook) => {
-            if (updatedBook === null) {
-                const message =
-                "Le produit demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
-                // A noter ici le return pour interrompre l'exécution du code
-                return res.status(404).json({ message });
-            }
-            // Définir un message pour l'utilisateur de l'API REST
-            const message = `Le produit ${updatedBook.booTitle} dont l'id vaut ${updatedProduct.id_book} a été mis à jour avec avec succès !`;
-            // Retourner la réponse HTTP en json avec le msg et le produit créé
-            res.json(success(message, updatedProduct));
+        .then((_) => {
+            // Finding the updated book by its primary key (ID)
+            return Book.findByPk(bookId)
+                .then((updatedBook) => {
+                    // If the updated book doesn't exist, return 404 error
+                    if (updatedBook === null) {
+                        const message = "Le produit demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
+                        return res.status(404).json({ message });
+                    }
+                    // If the book is updated successfully, return success message along with the updated book data
+                    const message = `Le produit ${updatedBook.booTitle} dont l'id vaut ${updatedBook.id_book} a été mis à jour avec succès !`;
+                    res.json(success(message, updatedBook));
+                });
+        })
+        .catch((error) => {
+            // If an error occurs during the process, return a generic error message
+            const message = "Le produit n'a pas pu être mis à jour. Merci de réessayer dans quelques instants.";
+            res.status(500).json({ message, data: error });
         });
-    })
-    .catch((error) => {
-        const message =
-        "Le produit n'a pas pu être mis à jour. Merci de réessayer dans quelques instants.";
-        res.status(500).json({ message, data: error });
-    });
 });
 
-
-export { updateBookRouter };
+export { updateBookRouter }; // Exporting the router for use in other files
