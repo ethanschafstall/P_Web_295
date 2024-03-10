@@ -108,8 +108,8 @@ let categories = [
 let users = [
   {
     id_user: 1,
-    usePseudo: "Lucas",
-    usePassword: "123",
+    usePseudo: "etml",
+    usePassword: "etml",
     useJoinDate: "2024-03-02 09:10:36",
     useBookCount: 3,
     useReviewCount: 3
