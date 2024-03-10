@@ -18,6 +18,7 @@ import { getAllBooksRouter } from "./routes/book_routers/getAllBooks.mjs"
 import { getBookRouter } from "./routes/book_routers/getBook.mjs"
 import { deleteBookRouter } from "./routes/book_routers/deleteBook.mjs"
 import { createBookRouter } from "./routes/book_routers/createBook.mjs"
+import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
 
 /**
  * Importing the login router
@@ -101,6 +102,7 @@ app.use("/api/books", getAllBooksRouter)
 app.use("/api/books", getBookRouter)
 app.use("/api/books", deleteBookRouter)
 app.use("/api/books", createBookRouter)
+app.use("/api/books", updateBookRouter)
 
 /**
  * Mounts routers for the categories of the API 
