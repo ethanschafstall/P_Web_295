@@ -1,5 +1,5 @@
 import express from "express";
-import { success } from "./routes/helper.mjs";
+import { success } from "./routers/helper.mjs";
 
 import { initDb } from "./db/sequelize.mjs";
 
@@ -10,45 +10,45 @@ import { swaggerSpec } from "./swagger.mjs";
 /**
  * Importing the book routers
  */
-import { getAllBooksRouter } from "./routes/book_routers/getAllBooks.mjs"
-import { getBookRouter } from "./routes/book_routers/getBook.mjs"
-import { deleteBookRouter } from "./routes/book_routers/deleteBook.mjs"
-import { createBookRouter } from "./routes/book_routers/createBook.mjs"
-import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
-import { getBooksByUserRouter } from "./routes/book_routers/getBooksByUser.mjs";
-import { getBooksByCategoryRouter } from "./routes/book_routers/getBooksByCategory.mjs";
-import { getBooksByAuthor } from "./routes/book_routers/getBooksByAuthor.mjs";
+import { getAllBooksRouter } from "./routers/book_routers/getAllBooks.mjs"
+import { getBookRouter } from "./routers/book_routers/getBook.mjs"
+import { deleteBookRouter } from "./routers/book_routers/deleteBook.mjs"
+import { createBookRouter } from "./routers/book_routers/createBook.mjs"
+import { updateBookRouter } from "./routers/book_routers/updateBook.mjs"
+import { getBooksByUserRouter } from "./routers/book_routers/getBooksByUser.mjs";
+import { getBooksByCategoryRouter } from "./routers/book_routers/getBooksByCategory.mjs";
+import { getBooksByAuthor } from "./routers/book_routers/getBooksByAuthor.mjs";
 
 /**
  * Importing the review routers
  */
-import { getReviewsByBookRouter} from "./routes/review_routers/getReviewsByBook.mjs"
-import { createReviewRouter } from "./routes/review_routers/createReview.mjs";
-import { getReviewsByUserRouter } from "./routes/review_routers/getReviewsByUser.mjs";
+import { getReviewsByBookRouter} from "./routers/review_routers/getReviewsByBook.mjs"
+import { createReviewRouter } from "./routers/review_routers/createReview.mjs";
+import { getReviewsByUserRouter } from "./routers/review_routers/getReviewsByUser.mjs";
 
 /**
  * Importing the categories router
  */
-import { getAllCategoriesRouter } from "./routes/category_routers/getAllCategories.mjs";
-import { getCategoryRouter } from "./routes/category_routers/getCategory.mjs";
+import { getAllCategoriesRouter } from "./routers/category_routers/getAllCategories.mjs";
+import { getCategoryRouter } from "./routers/category_routers/getCategory.mjs";
 
 /**
  * Importing the authors router
  */
-import { getAllAuthorsRouter } from "./routes/author_routers/getAllAuthors.mjs";
-import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
+import { getAllAuthorsRouter } from "./routers/author_routers/getAllAuthors.mjs";
+import { getAuthorRouter } from "./routers/author_routers/getAuthor.mjs";
 
 
 /**
  * Importing the publishers routes
  */
-import { getAllPublishersRouter } from "./routes/publisher_routes/getAllPublishers.mjs";
-import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
+import { getAllPublishersRouter } from "./routers/publisher_routers/getAllPublishers.mjs";
+import { getPublisherRouter } from "./routers/publisher_routers/getPublisher.mjs";
 
 /**
  * Importing the login router
  */
-import { loginRouter } from "./routes/login_routers/login.mjs";
+import { loginRouter } from "./routers/login_routers/login.mjs";
 
 const app = express();
 app.use(express.json());
