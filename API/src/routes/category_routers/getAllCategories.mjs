@@ -2,20 +2,12 @@ import express from "express"; // Importing express for router creation
 import { Category } from "../../db/sequelize.mjs"; // Importing Category model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
 import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
-import { Op } from "sequelize"; // Importing ValidationError and Op from sequelize
 
 const getAllCategoriesRouter = express(); // Creating a new instance of express router
 
 // Endpoint for getting all categories
 getAllCategoriesRouter.get("/", auth, (req, res) => {
-    // If a search query is provided
-    if(req.query.name) {
-        // Finding categories with names similar to the search query
-        return Category.findAll({
-            where: { name: { [Op.like]: `%${req.query.name}&`}}
-        })
-    }
-    // If no search query is provided, get all categories
+    // Get all categories
     Category.findAll()
         .then((category) => {
             // Returning success message along with all categories

@@ -1,18 +1,16 @@
 import express from "express"; // Importing express for router creation
 import { Book, Category } from "../../db/sequelize.mjs"; // Importing Book and Review models from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
-import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
-import { Op } from "sequelize"; // Importing ValidationError and Op from sequelize
 
 const getBooksByCategoryRouter = express(); // Creating a new instance of express router
 
 // Route to get books by category ID
-getBooksByCategoryRouter.get("/:id/books", auth, (req, res) => {
+getBooksByCategoryRouter.get("/:id/books", (req, res) => {
     // Check if the category ID parameter exists in the request
     if(req.params.id) {
         // Find a record in the "Category" table where the category ID matches
         return Category.findOne({
-            where: { id_category: { [Op.eq]: req.params.id } },
+            where: { id_category: req.params.id },
         }).then((category) => {
             // If no record is found for the category ID, return a 404 error
             if (category === null) {
@@ -21,7 +19,7 @@ getBooksByCategoryRouter.get("/:id/books", auth, (req, res) => {
             }
             // Find all books associated with the category ID
             Book.findAll({
-                where: { fk_category: { [Op.eq]: category.id_category } },
+                where: { fk_category: category.id_category },
             }).then((books) => {
                 // If books are found, return them along with a success message
                 if(books.length !=0){

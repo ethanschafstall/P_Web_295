@@ -15,31 +15,28 @@ import { getBookRouter } from "./routes/book_routers/getBook.mjs"
 import { deleteBookRouter } from "./routes/book_routers/deleteBook.mjs"
 import { createBookRouter } from "./routes/book_routers/createBook.mjs"
 import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
+import { getBooksByUserRouter } from "./routes/book_routers/getBooksByUser.mjs";
+import { getBooksByCategoryRouter } from "./routes/book_routers/getBooksByCategory.mjs";
+import { getBooksByAuthor } from "./routes/book_routers/getBooksByAuthor.mjs";
 
 /**
  * Importing the review routers
  */
-import { getAllReviewsRouter } from "./routes/review_routers/getAllReviews.mjs";
 import { getReviewsByBookRouter} from "./routes/review_routers/getReviewsByBook.mjs"
 import { createReviewRouter } from "./routes/review_routers/createReview.mjs";
-/**
- * Importing the login router
- */
-import { loginRouter } from "./routes/login_routers/login.mjs";
+import { getReviewsByUserRouter } from "./routes/review_routers/getReviewsByUser.mjs";
 
 /**
  * Importing the categories router
  */
 import { getAllCategoriesRouter } from "./routes/category_routers/getAllCategories.mjs";
 import { getCategoryRouter } from "./routes/category_routers/getCategory.mjs";
-import { getBooksByCategoryRouter } from "./routes/book_routers/getBooksByCategory.mjs";
 
 /**
  * Importing the authors router
  */
 import { getAllAuthorsRouter } from "./routes/author_routers/getAllAuthors.mjs";
 import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
-import { getBooksByAuthor } from "./routes/book_routers/getBooksByAuthor.mjs";
 
 
 /**
@@ -49,10 +46,9 @@ import { getAllPublishersRouter } from "./routes/publisher_routes/getAllPublishe
 import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
 
 /**
- * Importing the users routes
+ * Importing the login router
  */
-import { getBooksByUserRouter } from "./routes/book_routers/getBooksByUser.mjs";
-import { getReviewsByUserRouter } from "./routes/review_routers/getReviewsByUser.mjs";
+import { loginRouter } from "./routes/login_routers/login.mjs";
 
 const app = express();
 app.use(express.json());
@@ -119,7 +115,6 @@ app.use("/api/categories", getBooksByCategoryRouter)
 /**
  * Mounts routers for the reviews of the API 
  */
-app.use("/api/reviews", getAllReviewsRouter)
 app.use("/api/books", getReviewsByBookRouter)
 app.use("/api/review", createReviewRouter)
 app.use("/api/users", getReviewsByUserRouter)

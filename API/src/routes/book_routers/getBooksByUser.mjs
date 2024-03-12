@@ -2,7 +2,6 @@ import express from "express"; // Importing express for router creation
 import { Book, User } from "../../db/sequelize.mjs"; // Importing Book and Review models from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
 import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
-import { Op } from "sequelize"; // Importing ValidationError and Op from sequelize
 
 const getBooksByUserRouter = express(); // Creating a new instance of express router
 
@@ -12,7 +11,7 @@ getBooksByUserRouter.get("/:id/books", auth, (req, res) => {
     if(req.params.id) {
         // Find a record in the "User" table where the user ID matches
         return User.findOne({
-            where: { id_user: { [Op.eq]: req.params.id } },
+            where: { id_user: req.params.id },
         }).then((user) => {
             // If no record is found for the user ID, return a 404 error
             if (user === null) {
@@ -21,7 +20,7 @@ getBooksByUserRouter.get("/:id/books", auth, (req, res) => {
             }
             // Find all books associated with the user ID
             Book.findAll({
-                where: { fk_user: { [Op.eq]: user.id_user } },
+                where: { fk_user: user.id_user },
             }).then((books) => {
                 // If books are found, return them along with a success message
                 if(books.length !=0){

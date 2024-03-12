@@ -12,7 +12,7 @@ createBookRouter.post("/", auth,(req, res) => {
     Book.create(req.body)
         .then((createdBook) => {
             // Return success message upon successful creation
-            res.json(success(`Le produit "${createdBook.booTitle}" a bien été créé !`, createdBook));
+            res.json(success(`Le livre "${createdBook.booTitle}" a bien été créé !`, createdBook));
         })
         .catch((error) => {
             // If the error is a validation error, return a 400 status code with the error message
@@ -20,7 +20,7 @@ createBookRouter.post("/", auth,(req, res) => {
                 return res.status(400).json({ message: error.message, data: error });
             }
             // If any other error occurs during the process, return a generic error message
-            const message = "Le produit n'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
+            const message = "Le livren'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
             res.status(500).json({ message, data: error });
         });
 });

@@ -6,7 +6,7 @@ import { ValidationError } from "sequelize"; // Importing ValidationError from s
 
 const createReviewRouter = express(); // Creating a new instance of express router
 
-// Endpoint for creating a new book
+// Endpoint for creating a new review
 createReviewRouter.post("/:id/reviews", auth,(req, res) => {
     // Finding the book by its primary key (ID)
     Book.findByPk(req.params.id)

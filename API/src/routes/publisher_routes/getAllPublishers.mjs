@@ -1,26 +1,13 @@
 import express from "express"; // Importing express for router creation
 import { Publisher } from "../../db/sequelize.mjs"; // Importing Publisher model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
-import { Op } from "sequelize"; // Importing ValidationError and Op from sequelize
-import { auth } from "../../auth/auth.mjs";
+import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getAllPublishersRouter = express(); // Creating a new instance of express router
 
 // Endpoint for getting all publishers
 getAllPublishersRouter.get("/", auth,(req, res) => {
-    // If a search query is provided
-    if(req.query.name) {
-        // Finding publishers with names similar to the search query
-        return Publisher.findAll({
-            where: { name: { [Op.like]: `%${req.query.name}&`}}
-        })
-        .then((publisher) => {
-            // Returning success message along with the found publishers
-            const message = `Il y a ${publisher.length} livres qui correspondent au terme de la recherche`;
-            res.json(success(message, publisher))
-        })
-    }
-    // If no search query is provided, get all publishers
+    // Get all publishers
     Publisher.findAll()
         .then((publisher) => {
             // Returning success message along with all publishers
