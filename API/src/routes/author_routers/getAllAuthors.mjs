@@ -2,11 +2,12 @@ import express from "express"; // Importing express for router creation
 import { Author } from "../../db/sequelize.mjs"; // Importing Author model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
 import { Op } from "sequelize"; // Importing ValidationError and Op from sequelize
+import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getAllAuthorsRouter = express(); // Creating a new instance of express router
 
 // Endpoint for getting all authors
-getAllAuthorsRouter.get("/", (req, res) => {
+getAllAuthorsRouter.get("/", auth,(req, res) => {
     // If a search query is provided
     if(req.query.name) {
         // Finding authors with names similar to the search query

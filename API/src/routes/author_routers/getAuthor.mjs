@@ -1,11 +1,12 @@
 import express from "express"; // Importing express for router creation
 import { Author } from "../../db/sequelize.mjs"; // Importing Author model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
+import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getAuthorRouter = express();
 
 // Route to get author by ID
-getAuthorRouter.get("/:id", (req, res) => {
+getAuthorRouter.get("/:id", auth, (req, res) => {
     // Find an author by primary key (ID)
     Author.findByPk(req.params.id)
         .then((author) => {
