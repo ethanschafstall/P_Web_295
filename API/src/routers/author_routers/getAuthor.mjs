@@ -5,6 +5,86 @@ import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getAuthorRouter = express();
 
+/**
+ * @swagger
+ * /api/authors/{id}:
+ *   get:
+ *     tags: [Author]
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Rechercher un auteur par son ID.
+ *     description: Rechercher un auteur par son ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID de l'auteur à rechercher
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Récupérer un auteur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id_author:
+ *                       type: integer
+ *                       description: L'ID de l'auteur.
+ *                       example: 1
+ *                     autFirstName:
+ *                       type: string
+ *                       description: Le prénom de l'auteur.
+ *                       example: Sun 
+ *                     autLastName:
+ *                       type: string
+ *                       description: Le nom de l'auteur.
+ *                       example: Tzu
+ *       404:
+ *         description: Aucun auteur trouvé avec l'ID spécifié.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: L'auteur demandé n'existe pas. Merci de réessayer avec un autre identifiant.
+ *       401:
+ *         description: Pas de jeton d'authentification.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
+ *       500:
+ *         description: erreur du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  L'auteur n'a pas pu être récupéré. Merci de réessayer dans quelques instants
+ */
+
 // Route to get author by ID
 getAuthorRouter.get("/:id", auth, (req, res) => {
     // Find an author by primary key (ID)
