@@ -13,9 +13,15 @@ const loginRouter = express(); // Creating a new instance of express router
  *     tags: [Login]
  *     security:
  *       - bearerAuth: []
- *     summary: Rechercher toutes les catégories.
- *     description: Rechercher toutes les catégories.
+ *     summary: Se login dans l'API.
+ *     description: Se login dans l'API.
  *     parameters:
+ *       username:
+ *          type: string
+ *          description: Nom de l'utilisateur
+ *       password:
+ *          type: string
+ *          description: Mot de passe de l'utilisateur
  *     responses:
  *       200:
  *         description: Connection réussie.
