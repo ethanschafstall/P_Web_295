@@ -5,6 +5,90 @@ import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getReviewsByBookRouter = express(); // Creating a new instance of express router
 
+/**
+ * @swagger
+ * /api/books/{id}/reviews:
+ *   get:
+ *     tags: [Review]
+ *     security:
+ *       - bearerAuth: []
+ *     summary: rechercher un avis.
+ *     description: rechercher un avis.
+ *     responses:
+ *       200:
+ *         description: rechercher un avis.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Voici tout les reviews du livre "l'art de la guerre"
+ *                     fk_user:
+ *                       type: integer
+ *                       description: La FK du user.
+ *                       example: 1
+ *                     fk_book:
+ *                       type: integer
+ *                       description: La FK du livre.
+ *                       example: 1
+ *                     revDate:
+ *                       type: date
+ *                       description: Date de l'avis.
+ *                       example: 22/11/2023 11:33
+ *                     revComment:
+ *                       type: string
+ *                       description: Commentaire de l'avis.
+ *                       example: Tres bon livre
+ *                     revRating:
+ *                       type: integer
+ *                       description: Note de l'avis.
+ *                       example: 4
+ *       401:
+ *         description: Pas de jeton d'authentification.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
+ *       404:
+ *         description: Aucun livre trouvé avec l'ID spécifié.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.
+ *       500:
+ *         description: erreur du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  La liste des reviews n'a pas pu être récupérée. Merci de réessayer dans quelques instants.
+ */
+
 // Route to get reviews by book ID
 getReviewsByBookRouter.get("/:id/reviews", auth, (req, res) => {
     // Check if the book ID parameter exists in the request
