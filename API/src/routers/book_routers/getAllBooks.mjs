@@ -27,19 +27,51 @@ const getAllBooksRouter = express(); // Creating a new instance of express route
  *                   properties:
  *                     message:
  *                       type: string
- *                       example: La liste des livres a bien été récupéré
- *                     id_author:
+ *                       example: La liste des livres a bien été récupéré  
+ *                     id_book:
  *                       type: integer
- *                       description: L'ID de l'auteur.
+ *                       description: L'ID du livre.
  *                       example: 1
- *                     autFirstName:
+ *                     booTitle :
  *                       type: string
- *                       description: Le prénom de l'auteur.
- *                       example: Sun 
- *                     autLastName:
- *                       type: string
+ *                       description: Le titre du livre.
+ *                       example: L'art de la guerre 
+ *                     booPageCount:
+ *                       type: integer
  *                       description: Le nom de l'auteur.
- *                       example: Tzu
+ *                       example: 600
+ *                     booExtract:
+ *                       type: string
+ *                       description: Un extrait du livre.
+ *                       example: Il était une fois un informaticien qui vivait sous un bureau.
+ *                     booSummary:
+ *                       type: string
+ *                       description: Un résumé du livre.
+ *                       example: C'est l'histoire d'un informaticien.
+ *                     booAvgRating:
+ *                       type: float
+ *                       description: La note moyenne du livre.
+ *                       example: 4.5
+ *                     booCoverImage:
+ *                       type: string
+ *                       description: Un lien pour l'image de couverture du livre.
+ *                       example: https://th.bing.com/th/id/R.f999471f51eab473baa6fe5cf40a7f32?rik=CACwXQt6ldAzHQ&pid=ImgRaw&r=0
+ *                     booPublishDate:
+ *                       type: date
+ *                       description: La date de publication du livre.
+ *                       example: 11/11/2023
+ *                     fk_user:
+ *                       type: integer
+ *                       description: id de l'user qui a publié.
+ *                       example: 1
+ *                     fk_publisher:
+ *                       type: integer
+ *                       description: id de l'éditeur qui a publié.
+ *                       example: 1
+ *                     fk_category:
+ *                       type: integer
+ *                       description: id de l'categorie à qui il appartient.
+ *                       example: 1
  *       401:
  *         description: Pas de jeton d'authentification.
  *         content:
