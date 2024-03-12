@@ -1,7 +1,7 @@
 import express from "express"; // Importing express for router creation
 import { Author } from "../../db/sequelize.mjs"; // Importing Author model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
-import { ValidationError, Op } from "sequelize"; // Importing ValidationError and Op from sequelize
+import { Op } from "sequelize"; // Importing ValidationError and Op from sequelize
 
 const getAllAuthorsRouter = express(); // Creating a new instance of express router
 
