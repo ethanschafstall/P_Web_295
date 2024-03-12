@@ -15,6 +15,12 @@ const getCategoryRouter = express(); // Creating a new instance of express route
  *     summary: Rechercher toutes les catégories.
  *     description: Rechercher toutes les catégories.
  *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID de la catégorie
+ *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Rechercher les catégories.
@@ -78,6 +84,7 @@ const getCategoryRouter = express(); // Creating a new instance of express route
  *                       type: string
  *                       example:  La catégorie n'a pas pu être récupérée. Merci de réessayer dans quelques instants
  */
+
 
 // Endpoint for getting a specific category by ID
 getCategoryRouter.get("/:id", auth, (req, res) => {
