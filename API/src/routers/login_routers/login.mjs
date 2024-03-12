@@ -6,6 +6,58 @@ import { privateKey } from "../../auth/private_key.mjs"; // Importing private ke
 
 const loginRouter = express(); // Creating a new instance of express router
 
+/**
+ * @swagger
+ * /api/login:
+ *   put:
+ *     tags: [Login]
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Rechercher toutes les catégories.
+ *     description: Rechercher toutes les catégories.
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Connection réussie.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: L'utilisateur a été connecté avec succès
+ *       404:
+ *         description: Utilisateur incunnu.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: L'utilisateur demandé n'existe pas
+ *       401:
+ *         description: Mot de passe invalide.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le mot de passe est incorrecte
+ */
+
 // Endpoint for handling user login
 loginRouter.post("/", (req, res) => {
     // Finding the user in the database by username
