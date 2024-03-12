@@ -57,11 +57,9 @@ const reviewModel = (sequelize, DataTypes) => {
         {
             fk_user: {
                 type: DataTypes.INTEGER,
-                primaryKey: true,
             },
             fk_book: {
                 type: DataTypes.INTEGER,
-                primaryKey: true,
             },
             revDate: {
                 type: DataTypes.DATE,
