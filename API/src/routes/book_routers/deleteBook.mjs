@@ -9,20 +9,20 @@ const deleteBookRouter = express(); // Creating a new instance of express router
 deleteBookRouter.delete("/:id", auth,(req, res) => {
     // Finding the book by its primary key (ID)
     Book.findByPk(req.params.id)
-        .then((deletedBook) => {
+        .then((book) => {
             // If the book doesn't exist, return 404 error
-            if (deletedBook === null) {
+            if (book === null) {
                 const message = "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
                 return res.status(404).json({ message });
             }
             // If the book exists, delete it
             return Book.destroy({
-                where: { id: deletedBook.id },
+                where: { id_book: book.id_book },
             })
             .then((_) => {
                 // Return success message upon successful deletion
-                const message = `Le livre ${deletedBook.name} a bien été supprimé !`;
-                res.json(success(message, deletedBook));
+                const message = `Le livre ${book.name} a bien été supprimé !`;
+                res.json(success(message, book));
             });
         })
         .catch((error) => {
