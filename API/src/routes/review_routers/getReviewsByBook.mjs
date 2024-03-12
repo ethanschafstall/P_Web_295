@@ -10,7 +10,12 @@ getReviewsByBookRouter.get("/:id/reviews", auth, (req, res) => {
     if(req.params.id) {
         return Book.findOne({
             where: { id_book: { [Op.eq]: req.params.id } },
+            
         }).then((book) => {
+            if (book === null) {
+                const message = "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
+                return res.status(404).json({ message });
+            }
             Review.findAll({
                 where: { fk_book: { [Op.eq]: book.id_book } },
             }).then((reviews) => {

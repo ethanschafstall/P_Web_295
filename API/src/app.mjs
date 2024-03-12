@@ -24,7 +24,7 @@ import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
  * Importing the review routers
  */
 import { getAllReviewsRouter } from "./routes/review_routers/getAllReviews.mjs";
-import { getReviewsByBookRouter} from "./routes/review_routers/getReviews.mjs"
+import { getReviewsByBookRouter} from "./routes/review_routers/getReviewsByBook.mjs"
 
 /**
  * Importing the login router
