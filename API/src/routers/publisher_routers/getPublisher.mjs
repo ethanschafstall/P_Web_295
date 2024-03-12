@@ -5,6 +5,70 @@ import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getPublisherRouter = express(); // Creating a new instance of express router
 
+/**
+ * @swagger
+ * /api/publishers/{id}:
+ *   put:
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Rechercher toutes les catégories.
+ *     description: Rechercher toutes les catégories.
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Rechercher les catégories.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: La liste des éditeurs a bien été récupéré
+ *                     fk_user:
+ *                       type: integer
+ *                       description: La FK de l'user.
+ *                       example: 1
+ *                     fk_book:
+ *                       type: string
+ *                       description: La FK du livre.
+ *                       example: 1
+ *                     revDate:
+ *                       type: string
+ *                       description: Date de l'avis.
+ *                       example: 22/11/2023
+ *       401:
+ *         description: Pas de jeton d'authentification.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
+ *       500:
+ *         description: erreur du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  La liste des éditeurs n'a pas pu être récupérée. Merci de réessayer dans quelques instants.
+ */
+
 // Endpoint for getting a specific publisher by ID
 getPublisherRouter.get("/:id", auth,(req, res) => {
     // Finding the publisher by its primary key (ID)

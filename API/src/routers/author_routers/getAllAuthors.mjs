@@ -12,11 +12,11 @@ const getAllAuthorsRouter = express(); // Creating a new instance of express rou
  *     tags: [Author]
  *     security:
  *       - bearerAuth: []
- *     summary: Search for all the authors.
- *     description: Search for all the authors.
+ *     summary: Rechercher tous les auteurs.
+ *     description: Rechercher tous les auteurs.
  *     responses:
  *       200:
- *         description: Gives all the authors.
+ *         description: Donne les auteurs.
  *         content:
  *           application/json:
  *             schema:

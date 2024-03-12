@@ -6,6 +6,90 @@ import { ValidationError } from "sequelize"; // Importing ValidationError from s
 
 const createReviewRouter = express(); // Creating a new instance of express router
 
+/**
+ * @swagger
+ * /api/books/{id}/reviews:
+ *   post:
+ *     tags: [Review]
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Créer un avis.
+ *     description: Créer un avis.
+ *     responses:
+ *       200:
+ *         description: Créer un avis.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le review a bien été créé !
+ *                     fk_user:
+ *                       type: integer
+ *                       description: La FK du user.
+ *                       example: 1
+ *                     fk_book:
+ *                       type: integer
+ *                       description: La FK du livre.
+ *                       example: 1
+ *                     revDate:
+ *                       type: date
+ *                       description: Date de l'avis.
+ *                       example: 22/11/2023 11:33
+ *                     revComment:
+ *                       type: string
+ *                       description: Commentaire de l'avis.
+ *                       example: Tres bon livre
+ *                     revRating:
+ *                       type: integer
+ *                       description: Note de l'avis.
+ *                       example: 4
+ *       401:
+ *         description: Pas de jeton d'authentification.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
+ *       404:
+ *         description: Aucun livre trouvé avec l'ID spécifié.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.
+ *       500:
+ *         description: erreur du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  Le review n'a pas pu être ajouté. Merci de réessayer dans quelques instants.
+ */
+
 // Endpoint for creating a new review
 createReviewRouter.post("/:id/reviews", auth,(req, res) => {
     // Finding the book by its primary key (ID)

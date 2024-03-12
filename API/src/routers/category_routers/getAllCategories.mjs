@@ -29,14 +29,26 @@ const getAllCategoriesRouter = express(); // Creating a new instance of express 
  *                     message:
  *                       type: string
  *                       example: Le livre l'art de la guerre dont l'id vaut 1 a été mis à jour avec succès !
- *                     id_category:
+ *                     fk_user:
  *                       type: integer
- *                       description: L'ID de la catégorie.
+ *                       description: La FK du user.
  *                       example: 1
- *                     catName:
+ *                     fk_book:
+ *                       type: integer
+ *                       description: La FK du livre.
+ *                       example: 1
+ *                     revDate:
+ *                       type: date
+ *                       description: Date de l'avis.
+ *                       example: 22/11/2023
+ *                     revComment:
  *                       type: string
- *                       description: Le nom de la catégorie.
- *                       example: horreur
+ *                       description: Commentaire de l'avis.
+ *                       example: Tres bon livre
+ *                     revRating:
+ *                       type: integer
+ *                       description: Note de l'avis.
+ *                       example: 4
  *       401:
  *         description: Pas de jeton d'authentification.
  *         content:

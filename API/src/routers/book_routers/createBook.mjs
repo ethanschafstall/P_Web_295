@@ -15,6 +15,13 @@ const createBookRouter = express(); // Creating a new instance of express router
  *       - bearerAuth: []
  *     summary: Créer un livre.
  *     description: Créer un livre.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID du livre à rechercher
+ *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Créer un livre.
@@ -113,6 +120,7 @@ const createBookRouter = express(); // Creating a new instance of express router
  *                       type: string
  *                       example:  L'auteur n'a pas pu être récupéré. Merci de réessayer dans quelques instants
  */
+
 // Endpoint for creating a new book
 createBookRouter.post("/", auth,(req, res) => {
     // Creating a new book with the provided data
