@@ -13,11 +13,6 @@ getAllAuthorsRouter.get("/", (req, res) => {
         return Author.findAll({
             where: { name: { [Op.like]: `%${req.query.name}&`}}
         })
-        .then((author) => {
-            // Returning success message along with the found authors
-            const message = `Il y a ${author.length} livres qui correspondent au terme de la recherche`;
-            res.json(success(message, author))
-        })
     }
     // If no search query is provided, get all authors
     Author.findAll({})

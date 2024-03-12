@@ -14,11 +14,6 @@ getAllCategoriesRouter.get("/", auth, (req, res) => {
         return Category.findAll({
             where: { name: { [Op.like]: `%${req.query.name}&`}}
         })
-        .then((category) => {
-            // Returning success message along with the found categories
-            const message = `Il y a ${category.length} livres qui correspondent au terme de la recherche`;
-            res.json(success(message, category))
-        })
     }
     // If no search query is provided, get all categories
     Category.findAll()
