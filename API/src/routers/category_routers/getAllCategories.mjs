@@ -5,6 +5,66 @@ import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getAllCategoriesRouter = express(); // Creating a new instance of express router
 
+/**
+ * @swagger
+ * /api/categories:
+ *   put:
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Rechercher toutes les catégories.
+ *     description: Rechercher toutes les catégories.
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Rechercher les catégories.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le livre l'art de la guerre dont l'id vaut 1 a été mis à jour avec succès !
+ *                     id_category:
+ *                       type: integer
+ *                       description: L'ID de la catégorie.
+ *                       example: 1
+ *                     catName:
+ *                       type: string
+ *                       description: Le nom de la catégorie.
+ *                       example: horreur
+ *       401:
+ *         description: Pas de jeton d'authentification.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
+ *       500:
+ *         description: erreur du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  La liste de catégories n'a pas pu être récupérée. Merci de réessayer dans quelques instants.
+ */
+
 // Endpoint for getting all categories
 getAllCategoriesRouter.get("/", auth, (req, res) => {
     // Get all categories
