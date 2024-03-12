@@ -14,11 +14,6 @@ getAllReviewsRouter.get("/", auth,(req, res) => {
         return Review.findAll({
             where: { name: { [Op.eq]: req.params.name }}
         })
-        .then((reviews) => {
-            // Returning success message along with the found authors
-            const message = `Il y a ${reviews.length} livres qui correspondent au terme de la recherche`;
-            res.json(success(message, reviews))
-        })
     }
     // If no search query is provided, get all authors
     Review.findAll({})
