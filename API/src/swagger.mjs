@@ -187,7 +187,7 @@ const options = {
             },
         ],
     },
-    apis: ["./src/routes/*.mjs"], // Chemins vers vos fichiers de route
+    apis: ["./src/routers/author_routers/*.mjs", "./src/routers/book_routers/*.mjs", "./src/routers/category_routers/*.mjs", "./src/routers/login_routers/*.mjs",  "./src/routers/publisher_routers/*.mjs", "./src/routers/review_routers/*.mjs" ], // Chemins vers vos fichiers de route
 };
 const swaggerSpec = swaggerJSDoc(options);
 export { swaggerSpec };
