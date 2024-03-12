@@ -6,10 +6,6 @@ import { initDb } from "./db/sequelize.mjs";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.mjs";
 
-// Used to fix the request body not being parsed properly.
-import bodyParser from "body-parser";
-
-
 
 /**
  * Importing the book routers
@@ -43,6 +39,7 @@ import { getBooksByCategoryRouter } from "./routes/category_routers/getBooksByCa
  */
 import { getAllAuthorsRouter } from "./routes/author_routers/getAllAuthors.mjs";
 import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
+import { getBooksByAuthor } from "./routes/author_routers/getBooksByAuthor.mjs";
 
 
 /**
@@ -55,9 +52,10 @@ import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
  * Importing the users routes
  */
 import { getBooksByUserRouter } from "./routes/user_routers/getBooksByUser.mjs";
+import { getReviewsByUserRouter } from "./routes/user_routers/getReviewsByUser.mjs";
 
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 const port = 3000;
 
 initDb();
@@ -118,8 +116,8 @@ app.use("/api/books", updateBookRouter)
 /**
  * Mounts routers for the reviews of the API 
  */
-app.use("/api/books", getReviewsByBookRouter)
 app.use("/api/reviews", getAllReviewsRouter)
+app.use("/api/books", getReviewsByBookRouter)
 app.use("/api/books", createReviewRouter)
 
 /**
@@ -133,6 +131,7 @@ app.use("/api/categories", getBooksByCategoryRouter)
  */
 app.use("/api/authors", getAllAuthorsRouter)
 app.use("/api/authors", getAuthorRouter)
+app.use("/api/authors", getBooksByAuthor)
 
 /**
  *  Mounts routers for the publishers of the API
@@ -148,7 +147,7 @@ app.use("/api/login", loginRouter)
  * Mounts routers for the reviews of the API 
  */
 app.use("/api/users", getBooksByUserRouter)
-
+app.use("/api/users", getReviewsByUserRouter)
 
 /**
  * This route is for the unfindable routes that the user gives and it gives an 404 error
