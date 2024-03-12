@@ -14,6 +14,13 @@ const deleteBookRouter = express(); // Creating a new instance of express router
  *       - bearerAuth: []
  *     summary: Delete un livre.
  *     description: Delete un livre.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID du livre à rechercher
+ *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Delete un livre.
