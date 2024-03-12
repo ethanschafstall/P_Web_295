@@ -7,7 +7,7 @@ let books = [
     booSummary: "A man become crazy and his family want to help him.",
     booAvgRating: 4.0,
     booCoverImage: "https://2.bp.blogspot.com/-PXvELHryl4s/V7NmWWOG_DI/AAAAAAAAAzA/u-W2uKmHXVwMVZ_F6eYufsSdr361q06zQCLcB/s1600/AffaireCharlesDexterWard.jpg",
-    booPublishDate: 1941,
+    booPublishDate: new Date(),
     fk_user: 1,
     fk_publisher: 1,
     fk_category: 1,
@@ -20,7 +20,7 @@ let books = [
     booSummary: "Sherlock Holmes is investing",
     booAvgRating: 2.5,
     booCoverImage: "https://th.bing.com/th/id/R.f999471f51eab473baa6fe5cf40a7f32?rik=CACwXQt6ldAzHQ&pid=ImgRaw&r=0",
-    booPublishDate: 1980,
+    booPublishDate: "2023-05-15",
     fk_user: 1,
     fk_publisher: 2,
     fk_category: 2
