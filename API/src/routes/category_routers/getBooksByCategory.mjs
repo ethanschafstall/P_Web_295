@@ -11,6 +11,10 @@ getBooksByCategoryRouter.get("/:id/books", auth, (req, res) => {
         return Category.findOne({
             where: { id_category: { [Op.eq]: req.params.id } },
         }).then((category) => {
+            if (cateogry === null) {
+                const message = "Le categorie demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
+                return res.status(404).json({ message });
+            }
             Book.findAll({
                 where: { fk_category: { [Op.eq]: category.id_category } },
             }).then((books) => {
