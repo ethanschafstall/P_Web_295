@@ -25,6 +25,9 @@ const getAllAuthorsRouter = express(); // Creating a new instance of express rou
  *                 data:
  *                   type: object
  *                   properties:
+ *                     message: 
+ *                       type: string
+ *                       example: La liste des auteurs a bien été récupéré
  *                     id_author:
  *                       type: integer
  *                       description: L'ID de l'auteur.
@@ -62,7 +65,7 @@ const getAllAuthorsRouter = express(); // Creating a new instance of express rou
  *                   properties:
  *                     message:
  *                       type: string
- *                       example:  L'auteur n'a pas pu être récupéré. Merci de réessayer dans quelques instants
+ *                       example:  La liste des auteurs n'a pas pu être récupérée. Merci de réessayer dans quelques instants.
  */
  
 
@@ -77,7 +80,7 @@ getAllAuthorsRouter.get("/", auth,(req, res) => {
         })
         .catch((error) => {
             // If an error occurs during the process, return a generic error message
-            const message = `La liste de auteurs n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
+            const message = `La liste des auteurs n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
             res.status(500).json({message, data: error})
         })
 })
