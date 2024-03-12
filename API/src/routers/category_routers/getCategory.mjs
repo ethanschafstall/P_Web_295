@@ -5,6 +5,80 @@ import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getCategoryRouter = express(); // Creating a new instance of express router
 
+/**
+ * @swagger
+ * /api/categories/{id}:
+ *   put:
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Rechercher toutes les catégories.
+ *     description: Rechercher toutes les catégories.
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Rechercher les catégories.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: La catégorie dont l'id vaut 1 a bien été récupérée
+ *                     id_category:
+ *                       type: integer
+ *                       description: L'ID de la catégorie.
+ *                       example: 1
+ *                     catName:
+ *                       type: string
+ *                       description: Le nom de la catégorie.
+ *                       example: horreur
+ *       404:
+ *         description: Aucune catégorie trouvé avec l'ID spécifié.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.
+ * 
+ *       401:
+ *         description: Pas de jeton d'authentification.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  La catégorie demandée n'existe pas. Merci de réessayer avec un autre identifiant.
+ *       500:
+ *         description: erreur du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example:  La catégorie n'a pas pu être récupérée. Merci de réessayer dans quelques instants
+ */
+
 // Endpoint for getting a specific category by ID
 getCategoryRouter.get("/:id", auth, (req, res) => {
     // Finding the category by its primary key (ID)
