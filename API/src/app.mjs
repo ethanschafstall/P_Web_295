@@ -32,14 +32,14 @@ import { loginRouter } from "./routes/login_routers/login.mjs";
  */
 import { getAllCategoriesRouter } from "./routes/category_routers/getAllCategories.mjs";
 import { getCategoryRouter } from "./routes/category_routers/getCategory.mjs";
-import { getBooksByCategoryRouter } from "./routes/category_routers/getBooksByCategory.mjs";
+import { getBooksByCategoryRouter } from "./routes/book_routers/getBooksByCategory.mjs";
 
 /**
  * Importing the authors router
  */
 import { getAllAuthorsRouter } from "./routes/author_routers/getAllAuthors.mjs";
 import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
-import { getBooksByAuthor } from "./routes/author_routers/getBooksByAuthor.mjs";
+import { getBooksByAuthor } from "./routes/book_routers/getBooksByAuthor.mjs";
 
 
 /**
@@ -51,8 +51,8 @@ import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
 /**
  * Importing the users routes
  */
-import { getBooksByUserRouter } from "./routes/user_routers/getBooksByUser.mjs";
-import { getReviewsByUserRouter } from "./routes/user_routers/getReviewsByUser.mjs";
+import { getBooksByUserRouter } from "./routes/book_routers/getBooksByUser.mjs";
+import { getReviewsByUserRouter } from "./routes/review_routers/getReviewsByUser.mjs";
 
 const app = express();
 app.use(express.json());
@@ -112,42 +112,41 @@ app.use("/api/books", getBookRouter)
 app.use("/api/books", deleteBookRouter)
 app.use("/api/books", createBookRouter)
 app.use("/api/books", updateBookRouter)
+app.use("/api/users", getBooksByUserRouter)
+app.use("/api/authors", getBooksByAuthor)
+app.use("/api/categories", getBooksByCategoryRouter)
 
 /**
  * Mounts routers for the reviews of the API 
  */
 app.use("/api/reviews", getAllReviewsRouter)
 app.use("/api/books", getReviewsByBookRouter)
-app.use("/api/books", createReviewRouter)
+app.use("/api/review", createReviewRouter)
+app.use("/api/users", getReviewsByUserRouter)
 
 /**
  * Mounts routers for the categories of the API 
  */
 app.use("/api/categories", getAllCategoriesRouter)
 app.use("/api/categories", getCategoryRouter)
-app.use("/api/categories", getBooksByCategoryRouter)
+
 /**
  * Mounts routers for the authors of the API 
  */
 app.use("/api/authors", getAllAuthorsRouter)
 app.use("/api/authors", getAuthorRouter)
-app.use("/api/authors", getBooksByAuthor)
 
 /**
  *  Mounts routers for the publishers of the API
  */
 app.use("/api/publishers", getAllPublishersRouter)
 app.use("/api/publishers", getPublisherRouter)
+
 /**
  * Mounts routers for the login of the API 
  */
 app.use("/api/login", loginRouter)
 
-/**
- * Mounts routers for the reviews of the API 
- */
-app.use("/api/users", getBooksByUserRouter)
-app.use("/api/users", getReviewsByUserRouter)
 
 /**
  * This route is for the unfindable routes that the user gives and it gives an 404 error
