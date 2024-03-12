@@ -19,7 +19,12 @@ import { getBookRouter } from "./routes/book_routers/getBook.mjs"
 import { deleteBookRouter } from "./routes/book_routers/deleteBook.mjs"
 import { createBookRouter } from "./routes/book_routers/createBook.mjs"
 import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
-import { getBookReviewsRouter } from "./routes/review_routers/getReviews.mjs"
+
+/**
+ * Importing the review routers
+ */
+import { getAllReviewsRouter } from "./routes/review_routers/getAllReviews.mjs";
+import { getReviewsByBookRouter} from "./routes/review_routers/getReviews.mjs"
 
 /**
  * Importing the login router
@@ -31,12 +36,14 @@ import { loginRouter } from "./routes/login_routers/login.mjs";
  */
 import { getAllCategoriesRouter } from "./routes/category_routers/getAllCategories.mjs";
 import { getCategoryRouter } from "./routes/category_routers/getCategory.mjs";
+import { getBooksByCategoryRouter } from "./routes/category_routers/getBooksByCategory.mjs";
 
 /**
  * Importing the authors router
  */
 import { getAllAuthorsRouter } from "./routes/author_routers/getAllAuthors.mjs";
 import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
+
 
 /**
  * Importing the publishers routes
@@ -95,23 +102,26 @@ app.use(
 );
 
 /**
- * Mounts routers for handling book-related API endpoints under the "/api/books" route.
- * Two different routers are mounted under the same route: `getAllBooksRouter` and `getBookRouter`.
- * Requests to "/api/books" will be processed by these routers based on their defined routes.
+ * Mounts routers for the books of the API 
  */
 app.use("/api/books", getAllBooksRouter)
 app.use("/api/books", getBookRouter)
 app.use("/api/books", deleteBookRouter)
 app.use("/api/books", createBookRouter)
 app.use("/api/books", updateBookRouter)
-app.use("/api/books", getBookReviewsRouter)
+
+/**
+ * Mounts routers for the reviews of the API 
+ */
+app.use("/api/books", getReviewsByBookRouter)
+app.use("/api/reviews", getAllReviewsRouter)
 
 /**
  * Mounts routers for the categories of the API 
  */
 app.use("/api/categories", getAllCategoriesRouter)
 app.use("/api/categories", getCategoryRouter)
-
+app.use("/api/categories", getBooksByCategoryRouter)
 /**
  * Mounts routers for the authors of the API 
  */
