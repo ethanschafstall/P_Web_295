@@ -2,7 +2,7 @@ import express from "express"; // Importing express for router creation
 import { Book, Review } from "../../db/sequelize.mjs"; // Importing Book model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
 import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
-import { ValidationError } from "sequelize";
+import { ValidationError } from "sequelize"; // Importing ValidationError from sequelize
 
 const createReviewRouter = express(); // Creating a new instance of express router
 

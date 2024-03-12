@@ -1,7 +1,7 @@
 import express from "express"; // Importing express for router creation
 import { Publisher } from "../../db/sequelize.mjs"; // Importing Publisher model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
-import { auth } from "../../auth/auth.mjs";
+import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getPublisherRouter = express(); // Creating a new instance of express router
 

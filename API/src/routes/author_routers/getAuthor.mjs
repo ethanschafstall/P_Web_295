@@ -1,6 +1,6 @@
-import express from "express";
-import { Author } from "../../db/sequelize.mjs";
-import { success } from "../helper.mjs";
+import express from "express"; // Importing express for router creation
+import { Author } from "../../db/sequelize.mjs"; // Importing Author model from sequelize
+import { success } from "../helper.mjs"; // Importing success helper function
 
 const getAuthorRouter = express();
 

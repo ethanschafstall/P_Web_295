@@ -16,17 +16,17 @@ updateBookRouter.put("/:id", auth,(req, res) => {
                 .then((updatedBook) => {
                     // If the updated book doesn't exist, return 404 error
                     if (updatedBook === null) {
-                        const message = "Le produit demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
+                        const message = "Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
                         return res.status(404).json({ message });
                     }
                     // If the book is updated successfully, return success message along with the updated book data
-                    const message = `Le produit ${updatedBook.booTitle} dont l'id vaut ${updatedBook.id_book} a été mis à jour avec succès !`;
+                    const message = `Le livre ${updatedBook.booTitle} dont l'id vaut ${updatedBook.id_book} a été mis à jour avec succès !`;
                     res.json(success(message, updatedBook));
                 });
         })
         .catch((error) => {
             // If an error occurs during the process, return a generic error message
-            const message = "Le produit n'a pas pu être mis à jour. Merci de réessayer dans quelques instants.";
+            const message = "Le livre n'a pas pu être mis à jour. Merci de réessayer dans quelques instants.";
             res.status(500).json({ message, data: error });
         });
 });

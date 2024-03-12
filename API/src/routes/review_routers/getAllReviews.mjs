@@ -19,12 +19,12 @@ getAllReviewsRouter.get("/", auth,(req, res) => {
     Review.findAll({})
         .then((reviews) => {
             // Returning success message along with all authors
-            const message = `La liste des auteurs a bien été récupéré`;
+            const message = `La liste des reviews a bien été récupéré`;
             res.json(success(message, reviews))
         })
         .catch((error) => {
             // If an error occurs during the process, return a generic error message
-            const message = `La liste de auteurs n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
+            const message = `La liste de reviews n'a pas pu être récupérée. Merci de réessayer dans quelques instants.`
             res.status(500).json({message, data: error})
         })
 })

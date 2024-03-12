@@ -1,7 +1,6 @@
-import express from "express";
+import express from "express"; // Importing express for router creation
 import bcrypt from "bcrypt"; // Importing bcrypt for password hashing
 import jwt from "jsonwebtoken"; // Importing JWT for token generation
-
 import { User } from "../../db/sequelize.mjs"; // Importing User model from sequelize
 import { privateKey } from "../../auth/private_key.mjs"; // Importing private key for JWT
 
