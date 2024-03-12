@@ -32,6 +32,9 @@ const getAuthorRouter = express();
  *                 data:
  *                   type: object
  *                   properties:
+ *                     message: 
+ *                       type: string
+ *                       example: L'auteur dont l'id vaut 1 a bien été récupéré
  *                     id_author:
  *                       type: integer
  *                       description: L'ID de l'auteur.
