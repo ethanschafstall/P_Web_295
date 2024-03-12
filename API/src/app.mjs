@@ -116,7 +116,7 @@ app.use("/api/categories", getBooksByCategoryRouter)
  * Mounts routers for the reviews of the API 
  */
 app.use("/api/books", getReviewsByBookRouter)
-app.use("/api/review", createReviewRouter)
+app.use("/api/books", createReviewRouter)
 app.use("/api/users", getReviewsByUserRouter)
 
 /**
