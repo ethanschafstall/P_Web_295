@@ -4,7 +4,7 @@ import { success } from "../helper.mjs"; // Importing success helper function
 import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 
 const getAllBooksRouter = express(); // Creating a new instance of express router
-
+                
 /**
  * @swagger
  * /api/authors:
@@ -12,8 +12,8 @@ const getAllBooksRouter = express(); // Creating a new instance of express route
  *     tags: [Author]
  *     security:
  *       - bearerAuth: []
- *     summary: Search for all the authors.
- *     description: Search for all the authors.
+ *     summary: Search for all the books.
+ *     description: Search for all the books.
  *     responses:
  *       200:
  *         description: Gives all the authors.
@@ -84,7 +84,7 @@ const getAllBooksRouter = express(); // Creating a new instance of express route
  *                   properties:
  *                     message:
  *                       type: string
- *                       example: Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
+ *                       example:  Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
  *       500:
  *         description: erreur du serveur.
  *         content:
@@ -97,8 +97,9 @@ const getAllBooksRouter = express(); // Creating a new instance of express route
  *                   properties:
  *                     message:
  *                       type: string
- *                       example: La liste de livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants.
+ *                       example:  La liste des auteurs n'a pas pu être récupérée. Merci de réessayer dans quelques instants.
  */
+ 
 // Endpoint for getting all books
 getAllBooksRouter.get("/", (req, res) => {
     // Get all books
