@@ -25,7 +25,7 @@ import { updateBookRouter } from "./routes/book_routers/updateBook.mjs"
  */
 import { getAllReviewsRouter } from "./routes/review_routers/getAllReviews.mjs";
 import { getReviewsByBookRouter} from "./routes/review_routers/getReviewsByBook.mjs"
-
+import { createReviewRouter } from "./routes/review_routers/createReview.mjs";
 /**
  * Importing the login router
  */
@@ -50,6 +50,11 @@ import { getAuthorRouter } from "./routes/author_routers/getAuthor.mjs";
  */
 import { getAllPublishersRouter } from "./routes/publisher_routes/getAllPublishers.mjs";
 import { getPublisherRouter } from "./routes/publisher_routes/getPublisher.mjs";
+
+/**
+ * Importing the users routes
+ */
+import { getBooksByUserRouter } from "./routes/user_routers/getBooksByUser.mjs";
 
 const app = express();
 app.use(bodyParser.json());
@@ -115,6 +120,7 @@ app.use("/api/books", updateBookRouter)
  */
 app.use("/api/books", getReviewsByBookRouter)
 app.use("/api/reviews", getAllReviewsRouter)
+app.use("/api/books", createReviewRouter)
 
 /**
  * Mounts routers for the categories of the API 
@@ -137,6 +143,12 @@ app.use("/api/publishers", getPublisherRouter)
  * Mounts routers for the login of the API 
  */
 app.use("/api/login", loginRouter)
+
+/**
+ * Mounts routers for the reviews of the API 
+ */
+app.use("/api/users", getBooksByUserRouter)
+
 
 /**
  * This route is for the unfindable routes that the user gives and it gives an 404 error
