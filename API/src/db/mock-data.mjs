@@ -33,7 +33,7 @@ let books = [
     booSummary: "How to defeat his enemy",
     booAvgRating: 5,
     booCoverImage: "https://th.bing.com/th/id/R.47f2f234b979e69ae71cefb32c768bc2?rik=sURF7fkPdAtjdw&pid=ImgRaw&r=0",
-    booPublishDate: 890,
+    booPublishDate: 1890,
     fk_user: 1,
     fk_publisher: 3,
     fk_category: 3
