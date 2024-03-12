@@ -21,7 +21,7 @@ deleteBookRouter.delete("/:id", auth,(req, res) => {
             })
             .then((_) => {
                 // Return success message upon successful deletion
-                const message = `Le livre ${book.name} a bien été supprimé !`;
+                const message = `Le livre ${book.booTitle} a bien été supprimé !`;
                 res.json(success(message, book));
             });
         })
