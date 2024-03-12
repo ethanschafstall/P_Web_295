@@ -26,6 +26,9 @@ const createBookRouter = express(); // Creating a new instance of express router
  *                 data:
  *                   type: object
  *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le livre l'art de la guerre a bien été créé !  
  *                     id_book:
  *                       type: integer
  *                       description: L'ID du livre.
@@ -33,7 +36,7 @@ const createBookRouter = express(); // Creating a new instance of express router
  *                     booTitle :
  *                       type: string
  *                       description: Le titre du livre.
- *                       example: Sun 
+ *                       example: l'art de la guerre 
  *                     booPageCount:
  *                       type: integer
  *                       description: Le nom de l'auteur.
@@ -83,6 +86,19 @@ const createBookRouter = express(); // Creating a new instance of express router
  *                     message:
  *                       type: string
  *                       example:  Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.
+ *       404:
+ *         description: Aucun livre trouvé avec l'ID spécifié.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ *                       example: Le livre demandé n'existe pas. Merci de réessayer avec un autre identifiant.
  *       500:
  *         description: erreur du serveur.
  *         content:
