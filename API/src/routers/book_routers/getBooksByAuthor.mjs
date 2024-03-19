@@ -120,40 +120,48 @@ const getBooksByAuthor = express(); // Creating a new instance of express router
  */
 
 // Route to get books by author ID
-getBooksByAuthor.get("/:id/books", (req, res) => {
-    // Check if the author ID parameter exists in the request
-    if(req.params.id) {
-        // Find a record in the "Wrote" table where the author ID matches
-        return Wrote.findOne({
+getBooksByAuthor.get("/:id/books", async (req, res) => {
+    try {
+        // Find records in the "Wrote" table where the author ID matches
+        const wrote = await Wrote.findAll({
             where: { fk_author: req.params.id  }
-        }).then((wrote) => {
-            // If no record is found for the author ID, return a 404 error
-            if (wrote === null) {
-                const message = "L'auteur demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
-                return res.status(404).json({ message });
-            }
-            // Find all books associated with the author ID
-            Book.findAll({
-                where: { id_book: wrote.fk_book },
-            }).then((books) => {
-                // Find the author record based on the author ID
-                Author.findOne({
-                    where: { id_author: req.params.id }
-                }).then((author) => {
-                    // If books are found, return them along with a success message
-                    if(books.length !=0){
-                        const message = `Voici tout les livres de l'auteur "${author.autFirstName}"`;
-                        res.json(success(message, books));
-                    }
-                });
-            });
-        }).catch((error) => {
-            // If there's an error in fetching data, return a 500 error
-            const message = "La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants.";
-            res.status(500).json({ message, data: error });
-        })        
+        });
+
+        // If no record is found for the author ID, return a 404 error
+        if (wrote.length === 0) {
+            const message = "L'auteur demandé n'existe pas. Merci de réessayer avec un autre identifiant.";
+            return res.status(404).json({ message });
+        }
+
+        // Extract book IDs associated with the author
+        const bookIds = wrote.map(entry => entry.fk_book);
+
+        // Find all books associated with the author ID
+        const books = await Book.findAll({
+            where: { id_book: bookIds },
+        });
+
+        // Find the author record based on the author ID
+        const author = await Author.findOne({
+            where: { id_author: req.params.id }
+        });
+
+        // If books are found, return them along with a success message
+        if(books.length > 0) {
+            const message = `Voici tous les livres de l'auteur "${author.autFirstName} "`;
+            return res.json(success(message, books));
+        }
+
+        // If no books are found, return a message
+        const message = `L'auteur "${author.autFirstName}" n'a pas encore écrit de livre.`;
+        return res.json({ message });
+    } catch (error) {
+        // If there's an error in fetching data, return a 500 error
+        const message = "La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants.";
+        return res.status(500).json({ message, error });
     }
 });
+
 
 
 export { getBooksByAuthor }; // Exporting the router for use in other files
