@@ -70,7 +70,7 @@ const getAllAuthorsRouter = express(); // Creating a new instance of express rou
  
 
 // Endpoint for getting all authors
-getAllAuthorsRouter.get("/", auth,(req, res) => {
+getAllAuthorsRouter.get("/", (req, res) => {
     // Get all authors
     Author.findAll({})
         .then((author) => {

@@ -87,7 +87,7 @@ const getCategoryRouter = express(); // Creating a new instance of express route
 
 
 // Endpoint for getting a specific category by ID
-getCategoryRouter.get("/:id", auth, (req, res) => {
+getCategoryRouter.get("/:id", (req, res) => {
     // Finding the category by its primary key (ID)
     Category.findByPk(req.params.id)
         .then((category) => {
