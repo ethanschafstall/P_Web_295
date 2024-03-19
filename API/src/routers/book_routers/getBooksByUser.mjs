@@ -25,7 +25,7 @@ getBooksByUserRouter.get("/:id/books", auth, (req, res) => {
                 // If books are found, return them along with a success message
                 if(books.length !=0){
                     const message = `Voici tout les livres de l'utilisateur "${user.usePseudo}"`;
-                    res.json(success(message, books));
+                    return res.json(success(message, books));
                 }
             });
         }).catch((error) => {
