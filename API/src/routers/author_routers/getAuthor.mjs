@@ -89,7 +89,7 @@ const getAuthorRouter = express();
  */
 
 // Route to get author by ID
-getAuthorRouter.get("/:id", auth, (req, res) => {
+getAuthorRouter.get("/:id", (req, res) => {
     // Find an author by primary key (ID)
     Author.findByPk(req.params.id)
         .then((author) => {
