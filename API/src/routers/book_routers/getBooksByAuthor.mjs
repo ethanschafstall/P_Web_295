@@ -150,7 +150,7 @@ getBooksByAuthor.get("/:id/books", auth, async (req, res) => {
 
         // If books are found, return them along with a success message
         if(books.length > 0) {
-            const message = `Voici tous les livres de l'auteur "${author.autFirstName} "`;
+            const message = `Voici tous les livres écrit/écrite ${author.autFirstName } ${author.autLastName }`;
             return res.json(success(message, books));
         }
 
