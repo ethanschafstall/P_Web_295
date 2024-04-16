@@ -13,7 +13,7 @@ const login = async () => {
     nickname: 'toto',
     password: 'titi'
   }).then((answer) => {
-    console.log(answer)
+    console.log(answer.data)
   })
 }
 </script>
