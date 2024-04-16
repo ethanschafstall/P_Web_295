@@ -42,16 +42,16 @@ const bookModel = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(300),
                 validate: {
                     len: {
-                        args: [0, 300],
+                        args: [0, 500],
                         msg: "L'extrait doit comporter au plus 300 caractères",
                     },
                 },
             },
             booSummary: {
-                type: DataTypes.STRING(100),
+                type: DataTypes.STRING(900),
                 validate: {
                     len: {
-                        args: [0, 100],
+                        args: [0, 900],
                         msg: "Le résumé doit comporter au plus 100 caractères",
                     },
                 },
@@ -110,20 +110,6 @@ const bookModel = (sequelize, DataTypes) => {
                     },
                 },
             },
-            fk_category: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                validate: {
-                    notNull: {
-                        msg: "L'identifiant de la catégorie est requis",
-                    },
-                },
-            },
-        },
-        {
-            timestamps: true,
-            createdAt: "created",
-            updatedAt: false,
         }
     );
 };
@@ -185,11 +171,6 @@ const reviewModel = (sequelize, DataTypes) => {
                     },
                 },
             },
-        },
-        {
-            timestamps: true,
-            createdAt: "created",
-            updatedAt: false,
         }
     );
 };
@@ -255,11 +236,6 @@ const userModel = (sequelize, DataTypes) => {
                     },
                 },
             },
-        },
-        {
-            timestamps: true,
-            createdAt: "created",
-            updatedAt: false,
         }
     );
 };
@@ -290,9 +266,38 @@ const wroteModel = (sequelize, DataTypes) => {
             }, 
         },
         {
-            timestamps: true,
-            createdAt: "created",
-            updatedAt: false,
+            freezeTableName: true
+        }
+    );
+};
+
+const categorizeModel = (sequelize, DataTypes) => {
+    return sequelize.define(
+        "t_categorize",
+        {
+            fk_category: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                allowNull: false,
+                validate: {
+                    notNull: {
+                        msg: "L'ID du categorie est requis",
+                    },
+                },
+            },
+            fk_book: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                allowNull: false,
+                validate: {
+                    notNull: {
+                        msg: "L'ID du livre est requis",
+                    },
+                },
+            }, 
+        },
+        {
+            freezeTableName: true
         }
     );
 };
@@ -319,11 +324,6 @@ const publisherModel = (sequelize, DataTypes) => {
                     },
                 },
             },
-        },
-        {
-            timestamps: true,
-            createdAt: "created",
-            updatedAt: false,
         }
     );
 };
@@ -350,11 +350,6 @@ const categoryModel = (sequelize, DataTypes) => {
                     },
                 },
             },
-        },
-        {
-            timestamps: true,
-            createdAt: "created",
-            updatedAt: false,
         }
     );
 };
@@ -395,13 +390,8 @@ const authorModel = (sequelize, DataTypes) => {
                     },
                 },
             },
-        },
-        {
-            timestamps: true,
-            createdAt: "created",
-            updatedAt: false,
         }
     );
 };
 
-export { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel };
+export { bookModel, reviewModel, userModel, wroteModel, publisherModel, categoryModel, authorModel, categorizeModel };
