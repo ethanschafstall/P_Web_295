@@ -78,7 +78,7 @@ const getAllCategoriesRouter = express(); // Creating a new instance of express 
  */
 
 // Endpoint for getting all categories
-getAllCategoriesRouter.get("/", auth, (req, res) => {
+getAllCategoriesRouter.get("/", (req, res) => {
     // Get all categories
     Category.findAll()
         .then((category) => {

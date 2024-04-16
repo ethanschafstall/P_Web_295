@@ -121,6 +121,7 @@ const getBooksByAuthor = express(); // Creating a new instance of express router
  */
 
 // Route to get books by author ID
+
 getBooksByAuthor.get("/:id/books", auth, async (req, res) => {
     try {
         // Find records in the "Wrote" table where the author ID matches
