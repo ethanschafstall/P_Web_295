@@ -23,7 +23,7 @@ export default {
             let password = document.getElementsByClassName('password')[0].value
 
             // Variable that contains the api call
-            let APICall = 'http://localhost:3000/login'
+            let APICall = 'http://localhost:3000/api/login'
 
             // POST with axios with the username and the password
             await axios.post(APICall, {
