@@ -133,8 +133,9 @@ export default {
 }
 
 .error {
+    padding-left: 20px;
     color: red;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .wrapper .btn {
