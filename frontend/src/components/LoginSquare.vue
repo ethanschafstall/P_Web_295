@@ -39,8 +39,7 @@ export default {
                     this.errorMessage = error.data.message
                 } else {
                     this.errorMessage = 'The username or the password is incorrect'
-                }
-                
+                }                
             })
         }
     }
@@ -64,7 +63,7 @@ export default {
                     <input :type="isShowed ? 'text' : 'password'" placeholder="Password" class="password" required>
                     <i :class="isShowed ? 'bx bx-show' : 'bx bxs-hide'" @mousedown="showPassword()"
                         @mouseup="hidePassword()"></i>
-                    <p>{{ errorMessage }}</p>
+                    <p class="error">{{ errorMessage }}</p>
                 </div>
                 <button type="submit" class="btn">Login</button>
             </form>
@@ -133,29 +132,9 @@ export default {
     font-size: 20px;
 }
 
-.wrapper .remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14.5px;
-    margin: -5px 0 15px
-}
-
-.remember-forgot label input {
-    accent-color: #fff;
-    margin-right: 3px;
-}
-
-.remember-forgot .link {
-    color: #fff;
-    text-decoration: none;
-}
-
-#forgot {
-    margin: 5px;
-}
-
-.remember-forgot .link:hover {
-    text-decoration: underline;
+.error {
+    color: red;
+    font-size: 8px;
 }
 
 .wrapper .btn {
@@ -170,21 +149,7 @@ export default {
     font-size: 16px;
     color: #333;
     font-weight: 600;
+    margin-top: 20px
 }
 
-.wrapper .register-link {
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px 0 15px;
-}
-
-.register-link p .link {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.register-link p .link:hover {
-    text-decoration: underline;
-}
 </style>
