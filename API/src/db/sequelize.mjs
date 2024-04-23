@@ -146,7 +146,6 @@ const importBooks = () => {
             fk_publisher: book.fk_publisher,
             fk_category: book.fk_category,
         })
-        .then((book) => console.log(book.toJSON()));
     });
 };
 
@@ -164,7 +163,6 @@ const importReviews = () => {
             revComment: review.revComment,
             revRating: review.revRating,
         })
-        .then((review) => console.log(review.toJSON()));
     });
 };
 
@@ -180,7 +178,6 @@ const importWrote = () => {
             fk_book: wrote.fk_book,
             fk_author: wrote.fk_author
         })
-        //.then((wrote) => console.log(wrote.toJSON()));
     });
 };
 
@@ -195,7 +192,6 @@ const importPublishers = () => {
             id_publisher: publisher.id_publisher,
             pubName: publisher.pubName,
         })
-        //.then((publish) => console.log(publish.toJSON()));
     });
 };
 
@@ -211,7 +207,6 @@ const importAuthors = () => {
             autFirstName: author.autFirstName,
             autLastName: author.autLastName
         })
-        //.then((publish) => console.log(publish.toJSON()));
     });
 };
 
@@ -226,7 +221,6 @@ const importCategories = () => {
             id_category: category.id_category,
             catName: category.catName,
         })
-        //.then((category) => console.log(category.toJSON()));
     });
 };
 
@@ -249,7 +243,6 @@ const importUsers = () => {
                     useReviewCount: user.useReviewCount
                 })
             )
-            .then((user) => console.log(user.toJSON()))
     })
 };
 
