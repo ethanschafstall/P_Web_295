@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"; // Importing bcrypt for password hashing
 import jwt from "jsonwebtoken"; // Importing JWT for token generation
 import { User } from "../../db/sequelize.mjs"; // Importing User model from sequelize
 import { privateKey } from "../../auth/private_key.mjs"; // Importing private key for JWT
+import CookieParser from "cookieparser";
 
 const loginRouter = express(); // Creating a new instance of express router
 
@@ -84,11 +85,18 @@ loginRouter.post("/", (req, res) => {
                     } else {
                         // If password is valid, generate JWT token
                         const token = jwt.sign({ userId: user.id_user}, privateKey, {
-                            expiresIn: "1y" // Token expires in 1 year
+                            expiresIn: "1h" // Token expires in 1 year
                         });
                         const message = `L'utilisateur a été connecté avec succès`;
                         // Return success message along with user data and token
-                        return res.json({ message, data: user, token});
+                        res.status(202).cookie('jwt', token, { 
+                            httpOnly: true, 
+                            secure: true, 
+                            sameSite: 'strict', 
+                            maxAge: 3600000, 
+                            path: '/' 
+                        })
+                        .json({ message, data: user, token});
                     }
                 });
         })
