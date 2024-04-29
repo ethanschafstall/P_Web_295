@@ -23,17 +23,19 @@ export default {
             await axios.post(APICall, {
                 username: username,
                 password: password
+            }, {withCredentials: true
             }).then((result) => {
                 this.usernameError = ''
                 this.passwordError = ''
-                location.href = '/'
-                
+                console.log(result.headers['set-cookie'])
+                // location.href = '/'
             }).catch((error) => {
-                if(error.status == 500){
+                if (error.status == 500) {
                     this.errorMessage = error.data.message
                 } else {
                     this.errorMessage = 'The username or the password is incorrect'
-                }                
+                    console.log(error)
+                }
             })
         }
     }
@@ -44,13 +46,13 @@ export default {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
     <div class="global">
         <div class="wrapper">
-            <form  @submit.prevent="login()" action="">
+            <form @submit.prevent="login()" action="">
                 <h1>Login</h1>
                 <div class="input-box">
 
                     <input type="text" placeholder="Username" class="username" required>
                     <i class='bx bxs-user'></i>
-                </div>  
+                </div>
 
                 <div class="input-box">
 
@@ -146,5 +148,4 @@ export default {
     font-weight: 600;
     margin-top: 20px
 }
-
 </style>

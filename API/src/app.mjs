@@ -53,7 +53,11 @@ import { loginRouter } from "./routers/login_routers/login.mjs";
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+    exposedHeaders: 'Authorization'
+}));
 const port = 3000;
 
 initDb();
