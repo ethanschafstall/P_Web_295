@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import SearchBar from '@/components/SearchBar.vue'
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink :to="{ name: 'home' }">Accueil</RouterLink> |
           <RouterLink :to="{ name: 'books' }">Livres</RouterLink> |
           <RouterLink :to="{ name: 'login' }">Compte</RouterLink>
+          <SearchBar></SearchBar>
         </nav>
       </div>
     </header>
