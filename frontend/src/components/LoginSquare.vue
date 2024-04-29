@@ -9,12 +9,6 @@ export default {
         }
     },
     methods: {
-        showPassword() {
-            this.isShowed = true
-        },
-        hidePassword() {
-            this.isShowed = false
-        },
         async login() {
             // Getting the username input value
             let username = document.getElementsByClassName('username')[0].value
@@ -61,8 +55,8 @@ export default {
                 <div class="input-box">
 
                     <input :type="isShowed ? 'text' : 'password'" placeholder="Password" class="password" required>
-                    <i :class="isShowed ? 'bx bx-show' : 'bx bxs-hide'" @mousedown="showPassword()"
-                        @mouseup="hidePassword()"></i>
+                    <i :class="isShowed ? 'bx bx-show' : 'bx bxs-hide'" @mousedown="isShowed = !isShowed"
+                        @mouseup="isShowed = !isShowed"></i>
                     <p class="error">{{ errorMessage }}</p>
                 </div>
                 <button type="submit" class="btn">Login</button>
@@ -128,14 +122,14 @@ export default {
     position: absolute;
     right: 20px;
     top: 50%;
-    transform: translateY(-35%);
+    transform: translateY(-50%);
     font-size: 20px;
 }
 
 .error {
     padding-left: 20px;
     color: red;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .wrapper .btn {
