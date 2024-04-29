@@ -1,3 +1,4 @@
+<!-- Vue for the home page -->
 <script setup>
 import axios from 'redaxios';
 
@@ -5,6 +6,8 @@ import axios from 'redaxios';
 
 <template>
   <main>
-
   </main>
 </template>
+
+<style>
+</style>
