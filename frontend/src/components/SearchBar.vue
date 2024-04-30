@@ -25,9 +25,12 @@ const setActive = (option) => {
 
 <template>
     <div id="search">
-        <div class="selection" @click="toggleOptions">
-            <p>{{ activeFilter.name }}</p><span></span>
-        </div>
+        <select name="filters" id="filters">
+          <option  value="Tout">Tout</option>
+          <option  value="Livres" >Livres</option>
+          <option value="Auteurs">Auteurs</option>
+          <option  value="Catégories">Catégories</option>
+        </select>
         <input type="text" placeholder="Rechercher... ">
     </div>
     <!-- <div id="searchbar">
@@ -52,18 +55,10 @@ const setActive = (option) => {
         display: flex;
         border: 1.5px solid #87772F;
         border-radius: 5px;
-        width: 250px;
-        height: 38px;
+        width: 300px;
+        height: 44px;
     }
-.selection{
-        border: 0cm;
-        border-top-left-radius: 3.5px;
-        border-bottom-left-radius: 3.5px;
-        width: 30%;
-        border-right: #87772F 1.5px solid;
-        background-color: #FFFBE7;
-    }
-.selection p{
+#search select{
         border: 0cm;
         border-top-left-radius: 3.5px;
         border-bottom-left-radius: 3.5px;
@@ -90,9 +85,10 @@ const setActive = (option) => {
         font-size: 15px;
         color: #B4A665;
     }
-#search input:focus{   
+#search select:focus{   
         outline: none;
     }
+
 
 /* #searchbar{
     width: 600px;
