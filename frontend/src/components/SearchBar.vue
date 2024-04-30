@@ -24,7 +24,13 @@ const setActive = (option) => {
 </script>
 
 <template>
-    <div id="searchbar">
+    <div id="search">
+        <div class="selection" @click="toggleOptions">
+            <p>{{ activeFilter.name }}</p><span></span>
+        </div>
+        <input type="text" placeholder="Rechercher... ">
+    </div>
+    <!-- <div id="searchbar">
       <form action="#">
         <div class="input_box">
           <input type="text" placeholder="Search">
@@ -38,11 +44,57 @@ const setActive = (option) => {
           </div>
         </div>
       </form>
-    </div>
+    </div> -->
   </template>
 
 <style scoped>
-#searchbar{
+#search{
+        display: flex;
+        border: 1.5px solid #87772F;
+        border-radius: 5px;
+        width: 250px;
+        height: 38px;
+    }
+.selection{
+        border: 0cm;
+        border-top-left-radius: 3.5px;
+        border-bottom-left-radius: 3.5px;
+        width: 30%;
+        border-right: #87772F 1.5px solid;
+        background-color: #FFFBE7;
+    }
+.selection p{
+        border: 0cm;
+        border-top-left-radius: 3.5px;
+        border-bottom-left-radius: 3.5px;
+        width: 30%;
+        border-right: #87772F 1.5px solid;
+        background-color: #FFFBE7;
+    }
+#search input{
+        border: 0cm;
+        border-top-right-radius: 3.5px;
+        border-bottom-right-radius: 3.5px;
+        width: 70%;
+        padding-left: 5%;
+    }
+::placeholder {
+        font-size: 16px;
+        color: #B4A665;
+        }
+#search input {
+        font-size: 15px;
+        color: #B4A665;
+    }
+#search input text{
+        font-size: 15px;
+        color: #B4A665;
+    }
+#search input:focus{   
+        outline: none;
+    }
+
+/* #searchbar{
     width: 600px;
     background-color: #fff;
     border-radius: 10px;
@@ -108,7 +160,7 @@ const setActive = (option) => {
 }
 #searchbar form .filters p:hover{
     background-color: #1e1e1e;
-}
+} */
 
 
 </style>
