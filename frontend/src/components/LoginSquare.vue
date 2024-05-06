@@ -22,12 +22,15 @@ export default {
             // POST with axios with the username and the password
             await axios.post(APICall, {
                 username: username,
-                password: password
-            }, {withCredentials: true
+                password: password,
+            }, {
+                withCredentials: true
             }).then((result) => {
                 this.usernameError = ''
                 this.passwordError = ''
-                console.log(result.headers['set-cookie'])
+                
+                console.log(result)
+                
                 // location.href = '/'
             }).catch((error) => {
                 if (error.status == 500) {
