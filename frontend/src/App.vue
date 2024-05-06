@@ -8,9 +8,12 @@ import SearchBar from '@/components/SearchBar.vue'
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink :to="{ name: 'home' }">Accueil</RouterLink> |
-          <RouterLink :to="{ name: 'books' }">Livres</RouterLink> |
-          <RouterLink :to="{ name: 'login' }">Compte</RouterLink>
+          <RouterLink :to="{ name: 'home' }"><img src="./assets/placeholder-logo.png" alt=""></RouterLink>
+          <div>
+            <RouterLink :to="{ name: 'home' }">Accueil</RouterLink> |
+            <RouterLink :to="{ name: 'books' }">Livres</RouterLink> |
+            <RouterLink :to="{ name: 'login' }">Compte</RouterLink>
+          </div>
           <SearchBar></SearchBar>
         </nav>
       </div>
@@ -19,7 +22,6 @@ import SearchBar from '@/components/SearchBar.vue'
       <RouterView />
     </div>
     <footer>
-
     </footer>
   </div>
 </template>
@@ -34,7 +36,10 @@ import SearchBar from '@/components/SearchBar.vue'
   color: #2c3e50;
 }
 nav {
-  padding: 30px;
+  padding: 30px 100px 30px 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 nav a {
   font-weight: bold;
@@ -43,11 +48,9 @@ nav a {
 nav a.router-link-exact-active {
   color: #447866;
 }
-nav text{
-  color: #7D7757;
-}
 nav{
-  font-size: 25px;
+  color: #7D7757;
+  font-size: 20px;
 }
 #content-zone{
   border: #87772F solid 3px;
