@@ -3,7 +3,6 @@ import bcrypt from "bcrypt"; // Importing bcrypt for password hashing
 import jwt from "jsonwebtoken"; // Importing JWT for token generation
 import { User } from "../../db/sequelize.mjs"; // Importing User model from sequelize
 import { privateKey } from "../../auth/private_key.mjs"; // Importing private key for JWT
-import CookieParser from "cookieparser";
 import cookie from 'cookie'
 
 const loginRouter = express(); // Creating a new instance of express router
@@ -90,20 +89,12 @@ loginRouter.post("/", (req, res) => {
                         });
                         const message = `L'utilisateur a été connecté avec succès`;
                         // Return success message along with user data and token
-                        res.setHeader(
-                            "Set-Cookie",
-                            cookie.serialize(
-                                "token",
-                                token,
-                                {
-                                    httpOnly: true,
-                                    secure: false,
-                                    maxAge: 60 * 60,
-                                    sameSite: "strict",
-                                    path: '/'   
-                                }
-                            )
-                        )
+                        res.cookie('jwt', token, {
+                            httpOnly: true,
+                            secure: false,
+                            sameSite: 'strict',
+                            path: '/'
+                        })
 
                         res.status(202).json({ message, data: user, token});
                     }
