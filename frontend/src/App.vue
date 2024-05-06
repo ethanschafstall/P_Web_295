@@ -18,6 +18,7 @@ import SearchBar from '@/components/SearchBar.vue'
         </nav>
       </div>
     </header>
+    <div id="content-zone">
       <RouterView />
     </div>
     <footer>
