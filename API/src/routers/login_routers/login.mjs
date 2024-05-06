@@ -95,6 +95,7 @@ loginRouter.post("/", (req, res) => {
                             sameSite: 'strict',
                             path: '/'
                         })
+                        res.setHeader("Access-Control-Allow-Credentials", "true"); 
 
                         res.status(202).json({ message, data: user, token});
                     }
