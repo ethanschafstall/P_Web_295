@@ -28,10 +28,9 @@ export default {
             }).then((result) => {
                 this.usernameError = ''
                 this.passwordError = ''
+                location.href = '/'
                 
                 console.log(result)
-                
-                // location.href = '/'
             }).catch((error) => {
                 if (error.status == 500) {
                     this.errorMessage = error.data.message
