@@ -1,8 +1,9 @@
 <script setup>
 import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const options = reactive([
-  { name: "Tout", type: "all" },
+  { name: "Tout", type: "" },
   { name: "Livres", type: "books" },
   { name: "Auteurs", type: "authors" },
   { name: "Catégories", type: "categories" }
@@ -11,70 +12,61 @@ const options = reactive([
 const activeFilterName = ref("Tout");
 const searchQuery = ref("");
 
-const updateSearchQuery = () => {
-  // Find the active filter
-  const activeFilter = options.find(option => option.name === activeFilterName.value);
-  // Modify the search query based on the active filter
-  switch (activeFilter.type) {
-    case "books":
-      
-      break;
-    case "authors":
-      break;
-    case "categories":
-      break;
-    default:
-
-  }
-};
-
+const router = useRouter();
 
 const search = () => {
-  // Define your authorization token
-  const authToken = 'Bearer YOUR_AUTH_TOKEN';
+  // Checks if user has input query
+  if (searchQuery.value === "") {
+    return;
+  }
 
-  // Define your request headers
-  const headers = {
-    'Authorization': authToken,
-    'Content-Type': 'application/json' // You can add more headers as needed
+  // Saves user input value
+  const userInputValue = searchQuery.value;
+
+  // Find the active filter
+  const activeFilter = options.find(option => option.name === activeFilterName.value);
+  let filter = ""; // Initialize filter as empty string
+  if (activeFilter) {
+    filter = activeFilter.type;
+  }
+
+  // Construct the URL with the filter as a query parameter
+  const routeParams = {
+    name: 'search',
+    params: { filter },
+    query: { q: userInputValue }
   };
 
-  // Define your request options
-  const requestOptions = {
-    method: 'GET', // Or 'POST', 'PUT', 'DELETE', etc.
-    headers: headers
-    // You can add more options like body for POST requests
-  };
-
-  // Navigate to a different page using Vue Router
-  router.push(`/search?query=${searchQuery.value}&filter=${activeFilterName.value}`);
-  
-  // Send a fetch request to your API
-  fetch(`YOUR_API_URL/search?query=${searchQuery.value}&filter=${activeFilterName.value}`, requestOptions)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Handle the data from the API response
-    })
-    .catch(error => {
-      console.error('There was a problem with your fetch operation:', error);
-    });
+  // Navigate to the URL
+  router.push(routeParams);
 };
 
+// Reset the input and filter values when navigating.
+router.beforeEach((to, from, next) => {
+  // Check if the destination is a search route
+  if (to.name === 'search') {
+    // If it is a search route, keep previous values.
+    next();
+  } else {
+    // If it's not a search route, reset values
+    searchQuery.value = "";
+    activeFilterName.value = "Tout";
+    next();
+  }
+});
 </script>
 
 <template>
   <div id="search">
-    <select name="filters" id="filters" v-model="activeFilterName" @change="updateSearchQuery">
+    <select name="filters" id="filters" v-model="activeFilterName">
       <option v-for="option in options" :value="option.name" :key="option.name">{{ option.name }}</option>
     </select>
     <input type="text" placeholder="Rechercher..." v-model="searchQuery" @keyup.enter="search">
   </div>
 </template>
+
+
+
 
 <style scoped>
 
