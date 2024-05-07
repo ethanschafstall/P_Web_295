@@ -15,6 +15,7 @@ const auth = (req, res, next) => {
     } else {
         // Extracting token from authorization header
         const token = tokenWithoutOptions[0].split('=')[1]
+
         // Verifying the token with the private key
         jwt.verify(token, privateKey, (error, decodedToken) => {
             if (error) {
