@@ -1,4 +1,8 @@
 <script>
+import { onMounted, ref } from 'vue';
+import FetchService from '@/services/FetchService';
+import BookItem from '@/components/BookItem.vue';
+
 export default {
   props: {
     filter: {
@@ -10,36 +14,39 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      items: []
-    };
+  components: {
+    BookItem
   },
-  methods: {
-    async fetchData() {
-  try {
-    const response = await fetch(`https://cors-anywhere.herokuapp.com/http://localhost:3000/api/${this.filter}`);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    this.items = data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-}
+  setup(props) {
+    const books = ref([]);
 
+    onMounted(() => {
+      FetchService.getBooks()
+        .then((booksArray) => {
+          books.value = booksArray;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+
+    return {
+      books
+    };
   }
 };
 </script>
 
 <template>
-  <div>
-    <ul>
-      <li v-for="item in items" :key="item.id">{{ item.name }}</li>
-    </ul>
+  <div class="searchView">
+    <BookItem v-for="(book, index) in books" :key="index" :book="book"></BookItem>
   </div>
 </template>
 
-<style>
+<style scoped>
+.searchView{
+  display: flex;
+  justify-content: space-around;
+  padding-top: 70px;
+}
 </style>

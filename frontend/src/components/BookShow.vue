@@ -40,4 +40,5 @@ export default {
 .bookDisplay img {
   width: 100px;
 }
+
 </style>
