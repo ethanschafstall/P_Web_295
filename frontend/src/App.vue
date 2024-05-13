@@ -1,6 +1,15 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 import SearchBar from '@/components/SearchBar.vue'
+import axios from 'redaxios'
+
+export default {
+  methods: {
+    isConnected(){
+      const APICall = 'http'
+    }
+  }
+}
 </script>
 
 <template>
@@ -8,7 +17,7 @@ import SearchBar from '@/components/SearchBar.vue'
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink :to="{ name: 'home' }"><img src="./assets/placeholder-logo.png" alt=""></RouterLink>
+          <RouterLink :to="{ name: 'home' }"><img src="./assets/placeholder-logo.png" alt="logo"></RouterLink>
           <div>
             <RouterLink :to="{ name: 'home' }">Accueil</RouterLink> |
             <RouterLink :to="{ name: 'books' }">Livres</RouterLink> |
