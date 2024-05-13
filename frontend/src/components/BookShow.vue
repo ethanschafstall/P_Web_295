@@ -52,11 +52,11 @@ export default {
         console.error(error)
       })
     },
-    // redirectToBook(book){
-    //   let bookId = book.id_book
+    redirectToBook(book){
+      let bookId = book.id_book
       
-    //   location.href = "/book/" + bookId
-    // }
+      location.href = "/book/" + bookId
+    }
   }
 }
 </script>
@@ -85,7 +85,8 @@ img {
   border-color: rgb(65, 58, 58);
   border-width: 1px;
   border-style: groove;
-  margin-bottom: 50px
+  margin-bottom: 50px;
+  cursor: pointer;
 }
 
 .bookSquare p {

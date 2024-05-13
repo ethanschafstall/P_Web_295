@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import BooksView from '@/views/BooksView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SearchView from '@/views/SearchView.vue'
+import BookDetails from '@/views/BookDetailsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,11 @@ const router = createRouter({
         q: route.query.q // Access name query parameter
       }),
       component: SearchView
+    },
+    {
+      path: '/book/:id',
+      name: 'book',
+      component: BookDetails
     }
   ]
 })
