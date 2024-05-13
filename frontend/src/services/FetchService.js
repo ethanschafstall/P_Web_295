@@ -10,10 +10,10 @@ const apiClient = axios.create({
 })
 
 export default {
-  getBook(id) {
+  async getBook(id) {
     return apiClient.get('/books/' + id)
   },
-  getBooks() {
+  async getBooks() {
     return apiClient.get('/books/')
       .then((result) => {
         const books = []
