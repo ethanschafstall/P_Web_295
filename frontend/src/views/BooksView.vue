@@ -18,11 +18,14 @@ onMounted(() => {
 </script>
 
 <template>
+  <h1>This is the book page</h1>
   <div class="books">
-    <h1>This is the book page</h1>
     <BookItem v-for="(book, index) in books" :key="index" :book="book"></BookItem>
   </div>
 </template>
 
 <style>
+.books{
+  display: flex;
+}
 </style>

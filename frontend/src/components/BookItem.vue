@@ -1,14 +1,25 @@
 <script>
+import router from '@/router';
+
 export default {
-  props: ['book'],
-  setup(props) {
-    // No need to define anything here if you're just displaying the item
+  props: {
+    book: {
+          type: Object,
+          required: true
+        }
+      },
+  setup() {
+  },
+  methods:{
+    navigateToPage(){
+      router.push({ name: 'bookItem', params: { id: this.book.id_book}})
+    }
   }
 }
 </script>
 
 <template>
-  <div class="bookItem">
+  <div class="bookItem" @click="navigateToPage()" >
     <img :src="book.booCoverImage" alt="Book Cover" class="bookImage">
     <div class="bookDetails">
       <h4 class="bookTitle">{{ book.booTitle }}</h4>
