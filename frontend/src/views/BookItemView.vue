@@ -67,8 +67,8 @@ export default {
 </template>
 
 <style scoped>
-img {
-    width: 300px
+#book img {
+    width: 400px
 }
 
 #book {

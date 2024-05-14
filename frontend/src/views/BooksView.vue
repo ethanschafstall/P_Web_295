@@ -26,9 +26,7 @@ onMounted(() => {
 </template>
 
 <style>
-.books {
+.books{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
 }
 </style>
