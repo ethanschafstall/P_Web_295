@@ -22,6 +22,7 @@ export default {
                 withCredentials: true
             }).then((result) => {
                 this.book = result.data.data
+                console.log(this.book)
             }).catch((error) => {
                 console.error(error)
             })
@@ -57,7 +58,8 @@ export default {
         <img :src="this.book.booCoverImage">
         <h1 class="title">{{ this.book.booTitle }}</h1>
         <h2 class="author">{{ this.book.author }}</h2>
-        <p>Rating: {{ this.book.booAvgRating }}</p>
+        <p>Évaluation: {{ this.book.booAvgRating }}</p>
+        <p>Pages: {{ this.book.booPageCount }}</p>
         <div class="details">
             <h3>Summary :</h3>
             <p>{{ this.book.booSummary }}</p>

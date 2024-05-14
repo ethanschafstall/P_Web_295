@@ -27,8 +27,6 @@ export default {
           let title = document.getElementsByClassName('TitlePage')
           console.log(title)
           title[0].innerHTML = 'Une erreur est arrivé, veuillez vérifier que vous êtes connecté'
-
-
         })
       }
     },
@@ -54,8 +52,7 @@ export default {
 
       }).catch((error) => {
         let title = document.getElementsByClassName('TitlePage')
-
-        title.innerHTML = 'Une erreur est arrivé, veuillez vérifier que vous êtes connecté'
+        title.innerHTML = 'Une erreur est survenue, veuillez vérifier que vous êtes connecté'
       })
     },
     redirectToBook(book) {

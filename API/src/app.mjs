@@ -52,6 +52,7 @@ import { getPublisherRouter } from "./routers/publisher_routers/getPublisher.mjs
 import { loginRouter } from "./routers/login_routers/login.mjs";
 
 import { getUserRouter } from "./routers/user_routers/getUser.mjs";
+import { getUserIdRouter } from "./routers/user_routers/getUserId.mjs";
 
 const app = express();
 app.use(express.json());
@@ -152,6 +153,7 @@ app.use("/api/publishers", getPublisherRouter)
 app.use("/api/login", loginRouter)
 
 app.use("/api/users", getUserRouter)
+app.use("/api/users", getUserIdRouter)
 
 /**
  * This route is for the unfindable routes that the user gives and it gives an 404 error
