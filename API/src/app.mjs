@@ -156,7 +156,7 @@ app.use("/api/users", getUserRouter)
 /**
  * This route is for the unfindable routes that the user gives and it gives an 404 error
  */
-app.use(({ res }) => {
-    const message = "Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL."
-    res.status(404).json(message)
-})
+// app.use(({ res }) => {
+//     const message = "Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL."
+//     res.status(404).json(message)
+// })

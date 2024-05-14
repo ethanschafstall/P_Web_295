@@ -8,7 +8,7 @@ import { privateKey } from "../../auth/private_key.mjs";
 
 const getUserRouter = express(); // Creating a new instance of express router
 
-getUserRouter.get("/:id", auth, (req, res) => {
+getUserRouter.get("/:id", auth, (req, res, next) => {
     const authorizationHeader = String(req.headers['cookie'])
     let tokenCookie = ''
 
@@ -28,7 +28,6 @@ getUserRouter.get("/:id", auth, (req, res) => {
                 const message = `L'utilisateur demandé n'existe pas. Merci de réessayer avec un autre identifiant.`
                 return res.status(404).json({ message })
             }
-            console.log(token)
             jwt.verify(token, privateKey, (error, decodedToken) => {
                 if (error) {
                     // If token verification fails, return 401 Unauthorized status
@@ -36,11 +35,10 @@ getUserRouter.get("/:id", auth, (req, res) => {
                     return res.status(401).json({ message });
                 }
                 // Extracting user ID from the decoded token
-                const userId = decodedToken.userId;
-                console.log(userId)
-                console.log(req.params.id)
+                const userId = String(decodedToken.userId);
+
                 // Checking if the user ID in the request body matches the one in the token
-                if (req.params.id && req.params.id !== userId) {
+                if (req.params.id !== userId) {
                     // If user ID in the request body doesn't match the one in the token, return 401 Unauthorized status
                     const message = `L'identifiant de l'utilisateur est invalide`;
                     res.status(401).json({ message });
