@@ -4,7 +4,6 @@ import BookShow from '@/components/BookShow.vue';
 </script>
 
 <template>
-  <h1>This is the book page</h1>
   <div class="books">
     <BookShow />
   </div>
