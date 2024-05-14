@@ -89,7 +89,7 @@ loginRouter.post("/", (req, res) => {
                         });
                         const message = `L'utilisateur a été connecté avec succès`;
                         // Return success message along with user data and token
-                        res.cookie('tokenCookie', token, {
+                        res.cookie('jwt', token, {
                             httpOnly: true,
                             secure: false,
                             sameSite: 'strict',

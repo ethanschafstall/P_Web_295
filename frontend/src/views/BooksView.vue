@@ -20,23 +20,12 @@ onMounted(() => {
 <template>
   <h1>This is the book page</h1>
   <div class="books">
-
     <BookItem v-for="(book, index) in books" :key="index" :book="book"></BookItem>
-
-    <BookShow />
-
   </div>
 </template>
 
 <style>
-
 .books{
   display: flex;
-
-.books {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-
 }
 </style>
