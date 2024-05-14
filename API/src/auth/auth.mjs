@@ -4,8 +4,15 @@ import { privateKey } from "./private_key.mjs"; // Importing private key for tok
 // Middleware function for authentication
 const auth = (req, res, next) => {
     const authorizationHeader = String(req.headers['cookie'])
+    let tokenCookie = ''
 
-    const tokenWithoutOptions = authorizationHeader.split(';');
+    const allCookies = authorizationHeader.split(';')
+
+    allCookies.forEach((cookie) => {
+      if(cookie.startsWith(' token')){
+        tokenCookie = cookie
+      }
+    })
     
     // Checking if authorization header exists
     if (!authorizationHeader) {
@@ -14,7 +21,8 @@ const auth = (req, res, next) => {
         return res.status(401).json({ message });
     } else {
         // Extracting token from authorization header
-        const token = tokenWithoutOptions[0].split('=')[1]
+        const token = tokenCookie.split('=')[1]
+
         // Verifying the token with the private key
         jwt.verify(token, privateKey, (error, decodedToken) => {
             if (error) {
