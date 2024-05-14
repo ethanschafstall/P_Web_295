@@ -3,11 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import BooksView from '@/views/BooksView.vue'
 import LoginView from '@/views/AccountView.vue'
 import SearchView from '@/views/SearchView.vue'
-
-import BookItemView from '@/views/BookItemView.vue'
-
 import BookDetails from '@/views/BookDetailsView.vue'
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,24 +24,18 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/search/:filter?',
+      path: '/search/:filter?', // Remove "name" parameter
       name: 'search',
       props: route => ({
-        filter: route.params.filter || "",
-        q: route.query.q
+        filter: route.params.filter || "", // Access filter parameter
+        q: route.query.q // Access name query parameter
       }),
       component: SearchView
     },
     {
       path: '/book/:id',
-
-      name: 'bookItem',
-      props: true,
-      component: BookItemView
-
       name: 'book',
       component: BookDetails
-
     }
   ]
 })

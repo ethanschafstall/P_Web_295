@@ -42,7 +42,7 @@ const search = () => {
 };
 
 // Reset the input and filter values when navigating.
-router.beforeEach( (to, from, next) => {
+router.beforeEach((to, from, next) => {
   // Check if the destination is a search route
   if (to.name === 'search') {
     // If it is a search route, keep previous values.
@@ -64,6 +64,9 @@ router.beforeEach( (to, from, next) => {
     <input type="text" placeholder="Rechercher..." v-model="searchQuery" @keyup.enter="search">
   </div>
 </template>
+
+
+
 
 <style scoped>
 

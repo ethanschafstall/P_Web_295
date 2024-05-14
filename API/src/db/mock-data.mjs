@@ -37,19 +37,6 @@ let books = [
     fk_user: 1,
     fk_publisher: 3,
     fk_category: 3
-  },
-  {
-    id_book: 4,
-    booTitle: "test",
-    booPageCount: 170,
-    booExcerpt : "https://www.penguinrandomhouse.ca/books/175362/the-art-of-war-by-sun-tzu-translated-by-the-denma-translation-group/9781590307281/excerpt",
-    booSummary: "How to defeat his enemy",
-    booAvgRating: 5,
-    booCoverImage: "https://th.bing.com/th/id/R.47f2f234b979e69ae71cefb32c768bc2?rik=sURF7fkPdAtjdw&pid=ImgRaw&r=0",
-    booPublishDate: 1890,
-    fk_user: 1,
-    fk_publisher: 3,
-    fk_category: 3
   }
 ];
 
