@@ -24,7 +24,11 @@ export default {
             }
           }
         }).catch((error) => {
-          console.error(error)
+          let title = document.getElementsByClassName('TitlePage')
+          console.log(title)
+          title[0].innerHTML = 'Une erreur est arrivé, veuillez vérifier que vous êtes connecté'
+
+
         })
       }
     },
@@ -49,12 +53,13 @@ export default {
         })
 
       }).catch((error) => {
-        console.error(error)
+        let title = document.getElementsByClassName('TitlePage')
+
+        title.innerHTML = 'Une erreur est arrivé, veuillez vérifier que vous êtes connecté'
       })
     },
-    redirectToBook(book){
+    redirectToBook(book) {
       let bookId = book.id_book
-      
       location.href = "/book/" + bookId
     }
   }
@@ -62,6 +67,7 @@ export default {
 </script>
 
 <template>
+  <h1 class="TitlePage"></h1>
   <div v-for="book in books" class="bookSquare">
     <div @click="redirectToBook(book)">
       <img :src="book.booCoverImage">
