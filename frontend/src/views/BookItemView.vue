@@ -1,77 +1,55 @@
+
 <script>
-import { useRoute } from 'vue-router';
-import axios from 'redaxios'
+import FetchService from '@/services/FetchService';
+import { ref, onMounted } from 'vue';
+import { RouterLink } from 'vue-router';
+
 export default {
-    data() {
-        return {
-            book: {},
-            authors: []
-        }
-    },
-    mounted() {
-        this.getBookInfo()
-        this.getAuthorOfBook()
-    },
-    methods: {
-        async getBookInfo() {
-            const route = useRoute()
-
-            const APICall = 'http://localhost:3000/api/books/' + route.params.id
-
-            await axios.get(APICall, {
-                withCredentials: true
-            }).then((result) => {
-                this.book = result.data.data
-            }).catch((error) => {
-                console.error(error)
-            })
-        },
-        async getAuthorOfBook() {
-            const APICall = "http://localhost:3000/api/authors"
-
-            await axios.get(APICall, {
-                withCredentials: true
-            }).then((result) => {
-                for (let i = 0; i < result.data.data.length; i++) {
-                    if (result.data.data[i] !== null) {
-                        this.authors.push(result.data.data[i])
-                    }
-                }
-
-                this.authors.forEach((author) => {
-                    if (author.id_author == this.book.fk_publisher) {
-                        this.book.author = `${author.autFirstName} ${author.autLastName}`
-                    }
-                });
-                console.log(this.book)
-            }).catch((error) => {
-                console.error(error)
-            })
-        },
-    }
+  props: ['id'],
+  setup(props) {
+    const book = ref({});
+    onMounted(() => {
+      FetchService.getBook(props.id)
+        .then((response) => {
+          book.value = response.data.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+      });
+    return {
+      book
+    };
 }
+};
+
 </script>
 
 <template>
-    <div id="book">
-        <img :src="this.book.booCoverImage">
-        <h1 class="title">{{ this.book.booTitle }}</h1>
-        <h2 class="author">{{ this.book.author }}</h2>
-        <p>Rating: {{ this.book.booAvgRating }}</p>
-        <div class="details">
-            <h3>Summary :</h3>
-            <p>{{ this.book.booSummary }}</p>
-        </div>
-    </div>
-
+  <h1>{{ book.booTitle }}</h1>
+  <div>
+    <img :src="book.booCoverImage" alt="Cover Image" class="cover">
+    <ul>
+      <h3>Détails</h3>
+      <li>Nombre de pages : {{ book.booPageCount }}</li>
+      <li>Extrait : {{ book.booExcerpt }}</li>
+      <li>Résumé : {{ book.booSummary }}</li>
+      <li>Note moyenne : {{ book.booAvgRating }}</li>
+      <li>Date de publication : {{ book.booPublishDate }}</li>
+    </ul>
+  </div>
+  <button :to="{ name: 'bookItem', params: { id: this.book.id_book+1} }">Previous</button>
 </template>
-
 <style scoped>
-#book img {
-    width: 400px
+  div{
+    display: flex;
+  }
+.cover{
+  width: 35%;
+}
+ul{
+  list-style-type: none;
+  width: max-content;
 }
 
-#book {
-    margin-top: 20px;
-}
 </style>

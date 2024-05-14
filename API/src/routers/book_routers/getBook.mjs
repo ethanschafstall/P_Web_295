@@ -121,7 +121,7 @@ const getBookRouter = express(); // Creating a new instance of express router
  */
 
 // Endpoint for getting a specific book by ID
-getBookRouter.get("/:id", auth,(req, res) => {
+getBookRouter.get("/:id", (req, res) => {
     // Finding the book by its primary key (ID)
     Book.findByPk(req.params.id)
         .then((book) => {
