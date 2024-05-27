@@ -19,6 +19,7 @@ import { updateBookRouter } from "./routers/book_routers/updateBook.mjs"
 import { getBooksByUserRouter } from "./routers/book_routers/getBooksByUser.mjs";
 import { getBooksByCategoryRouter } from "./routers/book_routers/getBooksByCategory.mjs";
 import { getBooksByAuthor } from "./routers/book_routers/getBooksByAuthor.mjs";
+import { getAllBooksByDateRouter } from "./routers/book_routers/getAllBooksByDate.mjs";
 
 /**
  * Importing the review routers
@@ -121,6 +122,7 @@ app.use("/api/books", updateBookRouter)
 app.use("/api/users", getBooksByUserRouter)
 app.use("/api/authors", getBooksByAuthor)
 app.use("/api/categories", getBooksByCategoryRouter)
+app.use("/api/books/bydate", getAllBooksByDateRouter)
 
 /**
  * Mounts routers for the reviews of the API 
