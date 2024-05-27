@@ -1,10 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import BooksView from '@/views/BooksView.vue'
-import LoginView from '@/views/AccountView.vue'
-import SearchView from '@/views/SearchView.vue'
-import BookDetails from '@/views/BookDetailsView.vue'
-import AccountDetails from '@/components/AccountDetails.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,17 +6,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: () => import('@/views/HomeView.vue')
     },
     {
       path: '/books',
       name: 'books',
-      component: BooksView
+      component: () => import('@/views/BooksView.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView
+      component: () => import('@/views/LoginView.vue')
     },
     {
       path: '/search/:filter?', // Remove "name" parameter
@@ -31,17 +25,17 @@ const router = createRouter({
         filter: route.params.filter || "", // Access filter parameter
         q: route.query.q // Access name query parameter
       }),
-      component: SearchView
+      component: () => import('@/views/SearchView.vue')
     },
     {
       path: '/book/:id',
       name: 'book',
-      component: BookDetails
+      component: () => import('@/views/BookDetails.vue')
     },
     {
       path: '/user/:id',
       name: 'user',
-      component: AccountDetails
+      component: () => import('@/views/AccountDetails.vue')
     }
   ]
 })
