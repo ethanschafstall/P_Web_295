@@ -145,7 +145,6 @@ getBookRouter.get("/:id", auth, (req, res) => {
         }
         // Extracting user ID from the decoded token
         const userId = decodedToken.userId;
-        console.log(userId + " " + book.fk_user);
         // Checking if the user ID in the request body matches the one in the token
         if (book.fk_user != userId) {
           // If user ID in the request body doesn't match the one in the token, return 401 Unauthorized status

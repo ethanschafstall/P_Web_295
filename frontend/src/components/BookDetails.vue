@@ -22,7 +22,6 @@ export default {
                 withCredentials: true
             }).then((result) => {
                 this.book = result.data.data
-                console.log(this.book)
             }).catch((error) => {
                 console.error(error)
             })
@@ -44,7 +43,6 @@ export default {
                         this.book.author = `${author.autFirstName} ${author.autLastName}`
                     }
                 });
-                console.log(this.book)
             }).catch((error) => {
                 console.error(error)
             })
