@@ -1,18 +1,11 @@
 import jwt from "jsonwebtoken"; // Importing jwt for token verification
 import { privateKey } from "./private_key.mjs"; // Importing private key for token verification
+import checkToken from "../util/checkToken.mjs";
 
 // Middleware function for authentication
 const auth = (req, res, next) => {
     const authorizationHeader = String(req.headers['cookie'])
-    let tokenCookie = ''
-
-    const allCookies = authorizationHeader.split(';')
-
-    allCookies.forEach((cookie) => {
-      if(cookie.startsWith(' token')){
-        tokenCookie = cookie
-      }
-    })
+    const token = checkToken(authorizationHeader)
     
     // Checking if authorization header exists
     if (!authorizationHeader) {
@@ -20,9 +13,6 @@ const auth = (req, res, next) => {
         const message = `Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.`;
         return res.status(401).json({ message });
     } else {
-        // Extracting token from authorization header
-        const token = tokenCookie.split('=')[1]
-
         // Verifying the token with the private key
         jwt.verify(token, privateKey, (error, decodedToken) => {
             if (error) {
