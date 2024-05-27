@@ -1,6 +1,6 @@
 <!-- Vue for the home page -->
 <script setup>
-import lastBooks from '@components/LastBooks.vue'
+import LastBooks from '@/components/LastBooks.vue'
 </script>
 
 <template>
@@ -15,7 +15,8 @@ import lastBooks from '@components/LastBooks.vue'
         supplémentaires.
       </p>
     </div id="lastBooks">
-      
+    <h1>Dernières sorties</h1>
+      <LastBooks/>
     <div>
 
     </div>

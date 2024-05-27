@@ -16,7 +16,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue')
+      component: () => import('@/views/AccountView.vue')
     },
     {
       path: '/search/:filter?', // Remove "name" parameter
@@ -30,12 +30,7 @@ const router = createRouter({
     {
       path: '/book/:id',
       name: 'book',
-      component: () => import('@/views/BookDetails.vue')
-    },
-    {
-      path: '/user/:id',
-      name: 'user',
-      component: () => import('@/views/AccountDetails.vue')
+      component: () => import('@/views/BookDetailsView.vue')
     }
   ]
 })
