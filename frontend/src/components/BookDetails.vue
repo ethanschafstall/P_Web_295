@@ -15,13 +15,14 @@ export default {
     methods: {
         async getBookInfo() {
             const route = useRoute()
-
             const APICall = 'http://localhost:3000/api/books/' + route.params.id
 
             await axios.get(APICall, {
                 withCredentials: true
             }).then((result) => {
                 this.book = result.data.data
+                this.book.booPublishDate = String(this.book.booPublishDate).split('T')[0]
+                console.log(this.book)
             }).catch((error) => {
                 console.error(error)
             })
@@ -46,12 +47,6 @@ export default {
             }).catch((error) => {
                 console.error(error)
             })
-        },
-        async addComment() {
-            const rating = document.getElementById('rating');
-            const comment = document.getElementById('comment');
-
-            
         }
     }
 }
@@ -64,21 +59,12 @@ export default {
         <h2 class="author">{{ this.book.author }}</h2>
         <p>Évaluation: {{ this.book.booAvgRating }}</p>
         <p>Pages: {{ this.book.booPageCount }}</p>
+        <p>Date de publication: {{ this.book.booPublishDate }}</p>
         <div class="details">
             <h3>Summary :</h3>
             <p>     {{ this.book.booSummary }}</p>
         </div>
     </div>
-    <form action="#" class="commentary" @submit.prevent="addComment()">
-        <div>
-            <textarea name="Comment" id="comment" placeholder="Commentaire"></textarea>
-        </div>
-        <div id="right">
-            <input id="rating" type="number" step="0.1" min="1" max="5" placeholder="5" >
-            <button type="submit" class="btn">Envoyer</button>
-        </div>
-    </form>
-
 </template>
 
 <style scoped>
