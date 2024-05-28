@@ -101,9 +101,24 @@ const getAllBooksRouter = express(); // Creating a new instance of express route
  */
  
 // Endpoint for getting all books
-getAllBooksRouter.get("/", auth, (req, res) => {
+getAllBooksRouter.get("/", (req, res) => {
+    // if there are request queries
+    const { limit, orderby, order } = req.query;
+
+    // create options
+    let options = {};
+
+    // if query limit then add to options
+    if (limit) {
+        options.limit = parseInt(limit, 10);
+    }
+    // if order by parameter is added, check if upper case, add to options
+    if (orderby) {
+        const direction = order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
+        options.order = [[orderby, direction]];
+    }
     // Get all books
-    Book.findAll()
+    Book.findAll(options)
         .then((book) => {
             // Returning success message along with all books
             const message = `La liste des livres a bien été récupéré`;
