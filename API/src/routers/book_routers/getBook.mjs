@@ -143,14 +143,7 @@ getBookRouter.get("/:id", auth, (req, res) => {
           const message = `L'utilisateur n'est pas autorisé à accéder à cette ressource`;
           return res.status(401).json({ message });
         }
-        // Extracting user ID from the decoded token
-        const userId = decodedToken.userId;
-        // Checking if the user ID in the request body matches the one in the token
-        if (book.fk_user != userId) {
-          // If user ID in the request body doesn't match the one in the token, return 401 Unauthorized status
-          const message = `L'identifiant de l'utilisateur est invalide`;
-          return res.status(401).json({ message });
-        }
+        
       });
       // If the book exists, return success message along with the book data
       const message = `Le livre dont l'id vaut ${book.id_book} a bien été récupéré`;
