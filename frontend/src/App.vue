@@ -90,9 +90,11 @@ nav {
   border: #87772F solid 3px;
   border-radius: 10px;
   width: 1200px;
-  height: 1200px;
   margin: auto;
   background-color: white;
+  overflow-y: auto;
+  max-height: calc(100vh - 50px); /* Adjust based on your layout */
+  padding: 20px;
 }
 
 footer {
