@@ -13,7 +13,7 @@ export default {
     },
     methods: {
         async getBooks() {
-            const APICall = 'http://localhost:3000/api/books'
+            const APICall = 'http://localhost:3000/api/books?limit=5&orderby=id_book&order=desc'
             for (let i = 0; i < 2; i++) {
                 await axios.get(APICall, {
                     withCredentials: true
