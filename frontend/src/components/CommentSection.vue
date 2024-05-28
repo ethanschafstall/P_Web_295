@@ -46,7 +46,10 @@ export default {
                 withCredentials: true
             }).then((result) => {
                 this.comments = result.data.data
-                console.log(this.comments)
+
+                this.comments.forEach((comment) => {
+                    comment.revDate = String(comment.revDate).split('T')[0]
+                })
             })
         }
     }
@@ -65,7 +68,8 @@ export default {
     </form>
     <div id="comments">
         <div class="actualComment" v-for="comment in comments">
-            <p>{{ comment.revComment }}</p>
+            <p>{{ comment.revComment }} {{ comment.revRating }}*</p>
+            <p>Date: {{ comment.revDate }}</p>
         </div>
     </div>
 </template>
@@ -104,14 +108,20 @@ export default {
     margin-top: 20px
 }
 
-#comments
+#comments {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
 
 .actualComment {
-    width: 200px;
+    width: 800px;
     border-radius: 10px;
     border-color: rgb(65, 58, 58);
     border-width: 1px;
     border-style: groove;
     margin-bottom: 50px;
+    margin-bottom: 5px;
 }
 </style>
