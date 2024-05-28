@@ -25,7 +25,6 @@ export default {
           }
         }).catch((error) => {
           let title = document.getElementsByClassName('TitlePage')
-          console.log(title)
           title[0].innerHTML = 'Une erreur est arrivé, veuillez vérifier que vous êtes connecté'
         })
       }

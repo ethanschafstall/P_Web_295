@@ -21,6 +21,8 @@ export default {
                 withCredentials: true
             }).then((result) => {
                 this.book = result.data.data
+                this.book.booPublishDate = String(this.book.booPublishDate).split('T')[0]
+                console.log(this.book)
             }).catch((error) => {
                 console.error(error)
             })
@@ -57,6 +59,7 @@ export default {
         <h2 class="author">{{ this.book.author }}</h2>
         <p>Évaluation: {{ this.book.booAvgRating }}</p>
         <p>Pages: {{ this.book.booPageCount }}</p>
+        <p>Date de publication: {{ this.book.booPublishDate }}</p>
         <div class="details">
             <h3>Summary :</h3>
             <p>     {{ this.book.booSummary }}</p>
