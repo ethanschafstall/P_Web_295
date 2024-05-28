@@ -5,7 +5,6 @@ import BookDetails from '@/components/BookDetails.vue';
 
 <template>
   <BookDetails />
-
 </template>
 
 <style>
