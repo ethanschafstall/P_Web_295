@@ -51,6 +51,7 @@ export default {
       <RouterView />
     </div>
     <footer>
+      Lucas Simoes Polvora et Ethan Schafstall - lucas.simoes@eduvaud.ch / ethan-schafstall@eduvaud.ch
     </footer>
   </div>
 </template>
