@@ -5,7 +5,8 @@ export default {
     data() {
         return {
             book: {},
-            authors: []
+            authors: [],
+            isASuccess: true
         }
     },
     mounted() {
@@ -45,6 +46,9 @@ export default {
                 });
             }).catch((error) => {
                 console.error(error)
+                let title = document.getElementsByClassName('TitlePage')
+                title[0].innerHTML = 'Une erreur est survenue, veuillez vérifier que vous êtes connecté'
+                this.isASuccess = false
             })
         }
     }
@@ -52,7 +56,8 @@ export default {
 </script>
 
 <template>
-    <div id="book">
+    <h1 class="TitlePage"></h1>
+    <div id="book" v-if="this.isASuccess">
         <img :src="this.book.booCoverImage">
         <h1 class="title">{{ this.book.booTitle }}</h1>
         <h2 class="author">{{ this.book.author }}</h2>
