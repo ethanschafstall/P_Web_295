@@ -1,66 +1,51 @@
 <script>
 import axios from 'redaxios'
 export default {
-    data() {
-        return {
-            books: [],
-            authors: []
-        }
-    },
-    mounted() {
-        this.getBooks()
-        this.getAuthorOfBook()
-    },
-    methods: {
+  data() {
+    return {
+      books: [],
+      authors: []
+    }
+  },
+  mounted() {
+    this.getBooks()
+    this.getAuthorOfBook()
+  },
+  methods: {
         async getBooks() {
-            const APICall = 'http://localhost:3000/api/books?limit=5&orderby=id_book&order=desc'
-            for (let i = 0; i < 2; i++) {
-                await axios.get(APICall, {
+            const APICall = 'http://localhost:3000/api/books?limit=5&orderby=id_book&order=desc';
+            try {
+                const result = await axios.get(APICall, {
                     withCredentials: true
-                }).then((result) => {
-                    for (let i = 0; i < result.data.data.length; i++) {
-                        if (result.data.data[i] !== null) {
-                            this.books.push(result.data.data[i])
-                            if(this.books.length == 5){
-                                break;
-                            }
-                        }
-                    }
-                }).catch((error) => {
-                    let title = document.getElementsByClassName('TitlePage')
-                    console.log(title)
-                    title[0].innerHTML = 'Une erreur est arrivé, veuillez vérifier que vous êtes connecté'
-                })
+                });
+                this.books = result.data.data.slice(0, 10);
+                await this.getAuthorOfBook();
+            } catch (error) {
+                let title = document.getElementsByClassName('TitlePage')
+                console.log(title)
+                title[0].innerHTML = 'Une erreur est arrivé, veuillez vérifier que vous êtes connecté'
             }
         },
         async getAuthorOfBook() {
             const APICall = "http://localhost:3000/api/authors"
 
-            await axios.get(APICall, {
-                withCredentials: true
-            }).then((result) => {
-                for (let i = 0; i < result.data.data.length; i++) {
-                    if (result.data.data[i] !== null) {
-                        this.authors.push(result.data.data[i])
-                    }
-                }
+            try {
+                const result = await axios.get(APICall, {
+                    withCredentials: true
+                });
+                this.authors = result.data.data;
 
                 this.books.forEach((book) => {
-                    this.authors.forEach((author) => {
-                        if (author.id_author == book.fk_publisher) {
-                            book.author = `${author.autFirstName} ${author.autLastName}`
-                        }
-                    });
-                })
+                    const author = this.authors.find(author => author.id_author === book.fk_publisher);
+                    if (author) {
+                        book.author = `${author.autFirstName} ${author.autLastName}`;
+                    }
+                });
 
-            }).catch((error) => {
+            } catch (error) {
                 let title = document.getElementsByClassName('TitlePage')
-                title.innerHTML = 'Une erreur est survenue, veuillez vérifier que vous êtes connecté'
-            })
-        },
-        redirectToBook(book) {
-            let bookId = book.id_book
-            location.href = "/book/" + bookId
+                title[0].innerHTML = 'Une erreur est survenue, veuillez vérifier que vous êtes connecté'
+            }
         }
     }
 }
@@ -69,16 +54,17 @@ export default {
 <template>
     <div id="bookDisplay">
         <h1 class="TitlePage"></h1>
-        <div v-for="book in books" class="bookSquare">
-            <div @click="redirectToBook(book)">
-                <img :src="book.booCoverImage">
+        <div v-for="book in books" :key="book.id_book" class="bookSquare">
+            <router-link :to="{ name: 'book', params: { id: book.id_book }}">
+            <div>
+                <img :src="book.booCoverImage" alt="Book Cover">
                 <p class="title">{{ book.booTitle }}</p>
                 <p class="author">{{ book.author }}</p>
                 <p>Rating: {{ book.booAvgRating }}</p>
             </div>
+        </router-link>
         </div>
     </div>
-
 </template>
 
 <style scoped>
@@ -93,7 +79,6 @@ img {
   justify-content: space-evenly;
 }
 
-
 .bookSquare {
     width: 200px;
     border-radius: 10px;
@@ -106,5 +91,12 @@ img {
 
 .bookSquare p {
     margin-bottom: 5px;
+}
+a:link{
+  text-decoration:none;
+  color: black;
+}
+a:visited{
+    color: black;
 }
 </style>

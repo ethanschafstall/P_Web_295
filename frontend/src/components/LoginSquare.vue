@@ -28,8 +28,7 @@ export default {
             }).then((result) => {
                 this.usernameError = ''
                 this.passwordError = ''
-                location.href = '/books'
-                
+                location.href = '/'
                 console.log(result)
             }).catch((error) => {
                 if (error.status == 500) {

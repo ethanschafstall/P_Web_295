@@ -14,11 +14,10 @@ import LastBooks from '@/components/LastBooks.vue'
         codé en vue3. Ce site permet aux utilisateurs de publiés leurs livres et de mettres des informations
         supplémentaires.
       </p>
-    </div id="lastBooks">
+    </div>
+    <div id="lastBooks">
     <h1>Dernières sorties</h1>
       <LastBooks/>
-    <div>
-
     </div>
   </main>
 </template>
