@@ -33,7 +33,7 @@ export default {
             }, {
                 withCredentials: true
             }).then((result) => {
-                console.log(result)
+                location.reload()
             })
         }
     }
