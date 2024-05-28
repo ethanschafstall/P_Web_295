@@ -41,8 +41,9 @@ export default {
           <div>
             <RouterLink :to="{ name: 'home' }">Accueil</RouterLink> |
             <RouterLink :to="{ name: 'books' }">Livres</RouterLink> |
+            <RouterLink :to="{ name: 'add' }">Ajouter</RouterLink> |
             <RouterLink v-if="!isConnected" :to="{ name: 'login' }">Login</RouterLink>
-            <RouterLink v-if="isConnected" to="/users">Compte</RouterLink>
+            <RouterLink v-if="isConnected" to="/user">Compte</RouterLink>
           </div>
           <SearchBar></SearchBar>
         </nav>
