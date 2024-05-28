@@ -24,8 +24,8 @@ export default {
 
             const comment = document.getElementById('comment').value
 
-            if (!comment) {
-                alert(`Veuillez remplir l'espace commentaire`)
+            if (!comment || !rating) {
+                alert(`Veuillez remplir l'espace commentaire si vous voulez publier un commentaire`)
                 return
             }
 
