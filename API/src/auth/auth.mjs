@@ -13,6 +13,7 @@ const auth = (req, res, next) => {
         const message = `Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.`;
         return res.status(401).json({ message });
     } else {
+        
         // Verifying the token with the private key
         jwt.verify(token, privateKey, (error, decodedToken) => {
             if (error) {

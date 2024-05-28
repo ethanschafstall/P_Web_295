@@ -22,7 +22,6 @@ export default {
             }).then((result) => {
                 this.book = result.data.data
                 this.book.booPublishDate = String(this.book.booPublishDate).split('T')[0]
-                console.log(this.book)
             }).catch((error) => {
                 console.error(error)
             })

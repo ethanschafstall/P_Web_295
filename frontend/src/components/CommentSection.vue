@@ -4,11 +4,13 @@ import axios from 'redaxios'
 export default {
     data() {
         return {
-            bookId: 0
+            bookId: 0,
+            comments: []
         }
     },
     mounted() {
-        this.getIdOfBook()
+        this.getIdOfBook(),
+            this.getComments()
     },
     methods: {
         getIdOfBook() {
@@ -22,7 +24,8 @@ export default {
 
             const comment = document.getElementById('comment').value
 
-            if(!comment){
+            if (!comment) {
+                alert(`Veuillez remplir l'espace commentaire`)
                 return
             }
 
@@ -35,6 +38,16 @@ export default {
             }).then((result) => {
                 location.reload()
             })
+        },
+        async getComments() {
+            const APICall = `http://localhost:3000/api/books/${this.bookId}/reviews`
+
+            await axios.get(APICall, {
+                withCredentials: true
+            }).then((result) => {
+                this.comments = result.data.data
+                console.log(this.comments)
+            })
         }
     }
 }
@@ -46,16 +59,21 @@ export default {
             <textarea name="Comment" id="comment" placeholder="Commentaire"></textarea>
         </div>
         <div id="right">
-            <input id="rating" type="number" step="0.1" min="1" max="5" placeholder="5" >
+            <input id="rating" type="number" step="0.1" min="1" max="5" placeholder="5">
             <button type="submit" class="btn">Envoyer</button>
         </div>
     </form>
+    <div id="comments">
+        <div class="actualComment" v-for="comment in comments">
+            <p>{{ comment.revComment }}</p>
+        </div>
+    </div>
 </template>
 
 <style scoped>
 .commentary {
     margin-top: 50px;
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -84,5 +102,16 @@ export default {
     color: #333;
     font-weight: 600;
     margin-top: 20px
+}
+
+#comments
+
+.actualComment {
+    width: 200px;
+    border-radius: 10px;
+    border-color: rgb(65, 58, 58);
+    border-width: 1px;
+    border-style: groove;
+    margin-bottom: 50px;
 }
 </style>

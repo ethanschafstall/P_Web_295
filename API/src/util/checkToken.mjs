@@ -4,7 +4,7 @@ const checkToken = (authorizationHeader) => {
     const allCookies = authorizationHeader.split(';')
 
     allCookies.forEach((cookie) => {
-      if(cookie.startsWith(' token')){
+      if(cookie.startsWith(' token') || cookie.startsWith('token')){
         tokenCookie = cookie
       }
     })
