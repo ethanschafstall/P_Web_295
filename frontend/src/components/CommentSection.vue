@@ -67,7 +67,7 @@ export default {
         </div>
     </form>
     <div id="comments">
-        <div class="actualComment" v-for="comment in comments">
+        <div class="actualComment" :key="comment" v-for="comment in comments">
             <p>{{ comment.revComment }} {{ comment.revRating }}*</p>
             <p>Date: {{ comment.revDate }}</p>
         </div>
