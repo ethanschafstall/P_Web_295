@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import SearchBar from '@/components/SearchBar.vue'
 import axios from 'redaxios'
+import Footer from './components/Footer.vue';
 </script>
 
 <script>
@@ -50,9 +51,7 @@ export default {
     <div id="content-zone">
       <RouterView />
     </div>
-    <footer>
-      Lucas Simoes Polvora et Ethan Schafstall - lucas.simoes@eduvaud.ch / ethan-schafstall@eduvaud.ch
-    </footer>
+      <Footer />
   </div>
 </template>
 
