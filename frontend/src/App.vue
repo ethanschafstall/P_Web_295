@@ -51,9 +51,7 @@ export default {
     <div id="content-zone">
       <RouterView />
     </div>
-    <footer>
       <Footer />
-    </footer>
   </div>
 </template>
 
