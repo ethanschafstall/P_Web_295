@@ -6,8 +6,7 @@ import checkToken from "../util/checkToken.mjs";
 const auth = (req, res, next) => {
     const authorizationHeader = String(req.headers['cookie'])
     const token = checkToken(authorizationHeader)
-    
-    console.log(token)
+
     // Checking if authorization header exists
     if (!authorizationHeader) {
         // If authorization header is missing, return 401 Unauthorized status
