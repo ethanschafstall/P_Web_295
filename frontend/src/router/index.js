@@ -19,6 +19,11 @@ const router = createRouter({
       component: () => import('@/views/AccountView.vue')
     },
     {
+      path: '/books/add',
+      name: 'add',
+      component: () => import('@/views/AddBookView.vue')
+    },
+    {
       path: '/search/:filter?', // Remove "name" parameter
       name: 'search',
       props: route => ({
