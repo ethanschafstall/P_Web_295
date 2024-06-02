@@ -16,15 +16,12 @@ export default {
     const booPublishDate = ref('')
 
     const book = computed(() => ({
-      booTitle: booTitle.value,
-      booPageCount: booPageCount.value,
-      booExcerpt: booExcerpt.value,
-      booSummary: booSummary.value,
-      booAvgRating: null,
-      booCoverImage: booCoverImage.value,
-      booPublishDate: booPublishDate.value,
-      fk_user: 1,
-      fk_publisher: 1,
+      title: booTitle.value,
+      pageCount: booPageCount.value,
+      excerpt: booExcerpt.value,
+      summary: booSummary.value,
+      coverImage: booCoverImage.value,
+      publishDate: booPublishDate.value,
     }))
 
     const startOver = () => {
@@ -52,6 +49,7 @@ export default {
     }
 
     const putBook = async () => {
+      console.log(booPublishDate.value)
       const APICall = `http://localhost:3000/api/books/`
       try {
         await axios.post(APICall, book.value, {
@@ -82,7 +80,7 @@ export default {
 <template>
   <main class="container">
     <div class="user-body">
-      <form id="form">
+      <form id="form" @submit.prevent="addBook()">
         <h3>Ajout d'un nouveau livre</h3>
         <p>
           <label for="booTitle">Titre :</label>
@@ -109,7 +107,7 @@ export default {
           <input type="date" id="booPublishDate" v-model="booPublishDate" />
         </p>
         <p>
-          <input class="button" type="submit" value="Submit" @click="addBook()" />
+          <input class="button" type="submit" value="Submit" />
           <button type="button" @click="startOver()">Effacer</button>
         </p>
       </form>

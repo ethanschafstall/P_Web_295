@@ -1,8 +1,11 @@
 import express from "express"; // Importing express for router creation
-import { Book } from "../../db/sequelize.mjs"; // Importing Book model from sequelize
+import { Book, Category } from "../../db/sequelize.mjs"; // Importing Book model from sequelize
 import { success } from "../helper.mjs"; // Importing success helper function
 import { auth } from "../../auth/auth.mjs"; // Importing auth middleware
 import { ValidationError } from "sequelize"; // Importing ValidationError from sequelize
+import checkToken from "../../util/checkToken.mjs";
+import jwt from "jsonwebtoken";
+import { privateKey } from "../../auth/private_key.mjs";
 
 const createBookRouter = express(); // Creating a new instance of express router
 
@@ -124,7 +127,6 @@ const createBookRouter = express(); // Creating a new instance of express router
 // Endpoint for creating a new book
 createBookRouter.post("/", auth, (req, res) => {
     const authorizationHeader = String(req.headers["cookie"]);
-
     const token = checkToken(authorizationHeader);
     jwt.verify(token, privateKey, (error, decodedToken) => {
         if (error) {
@@ -143,8 +145,9 @@ createBookRouter.post("/", auth, (req, res) => {
             booSummary: req.body.summary,
             booAvgRating: 0,
             booCoverImage: req.body.coverImage,
-            booPublishDate: new Date(),
+            booPublishDate: req.body.publishDate,
             fk_user: userId,
+            fk_publisher: 1
         }).then((createdBook) => {
             // Return success message upon successful creation
             res.json(success(`Le livre "${createdBook.booTitle}" a bien été créé !`, createdBook));
@@ -156,31 +159,7 @@ createBookRouter.post("/", auth, (req, res) => {
             // If any other error occurs during the process, return a generic error message
             const message = "Le livre n'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
             res.status(500).json({ message, data: error });
-        }); a
-        // Creating a new Review with the provided data
-        Review.create({
-            fk_book: req.body.bookId,
-            fk_user: userId,
-            revDate: new Date(),
-            revComment: req.body.comment,
-            revRating: req.body.rating,
-        })
-            .then((createdReview) => {
-                // Return success message upon successful creation
-                res.json(success(`Le review a bien été créé !`, createdReview));
-            })
-            .catch((error) => {
-                // If the error is a validation error, return a 400 status code with the error message
-                if (error instanceof ValidationError) {
-                    return res
-                        .status(400)
-                        .json({ message: error.message, data: error });
-                }
-                // If any other error occurs during the process, return a generic error message
-                const message =
-                    "Le review n'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
-                res.status(500).json({ message, data: error });
-            });
+        });
     });
 });
 
