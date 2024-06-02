@@ -112,6 +112,7 @@ export default {
         </p>
       </form>
     </div>
+    <p>Veuillez vous assurer que vous êtes connecté</p>
     <div class="user-footer">
       <RouterLink :to="{ name: 'home' }">Retour à la page d'accueil</RouterLink>
     </div>
