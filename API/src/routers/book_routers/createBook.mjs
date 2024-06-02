@@ -122,14 +122,33 @@ const createBookRouter = express(); // Creating a new instance of express router
  */
 
 // Endpoint for creating a new book
-createBookRouter.post("/", auth,(req, res) => {
-    // Creating a new book with the provided data
-    Book.create(req.body)
-        .then((createdBook) => {
+createBookRouter.post("/", auth, (req, res) => {
+    const authorizationHeader = String(req.headers["cookie"]);
+
+    const token = checkToken(authorizationHeader);
+    jwt.verify(token, privateKey, (error, decodedToken) => {
+        if (error) {
+            // If token verification fails, return 401 Unauthorized status
+            const message = `L'utilisateur n'est pas autorisé à accéder à cette ressource`;
+            return res.status(401).json({ error });
+        }
+        // Extracting user ID from the decoded token
+        let userId = decodedToken.userId;
+
+        // Creating a new book with the provided data
+        Book.create({
+            booTitle: req.body.title,
+            booPageCount: req.body.pageCount,
+            booExcerpt: req.body.excerpt,
+            booSummary: req.body.summary,
+            booAvgRating: 0,
+            booCoverImage: req.body.coverImage,
+            booPublishDate: new Date(),
+            fk_user: userId,
+        }).then((createdBook) => {
             // Return success message upon successful creation
             res.json(success(`Le livre "${createdBook.booTitle}" a bien été créé !`, createdBook));
-        })
-        .catch((error) => {
+        }).catch((error) => {
             // If the error is a validation error, return a 400 status code with the error message
             if (error instanceof ValidationError) {
                 return res.status(400).json({ message: error.message, data: error });
@@ -137,7 +156,32 @@ createBookRouter.post("/", auth,(req, res) => {
             // If any other error occurs during the process, return a generic error message
             const message = "Le livre n'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
             res.status(500).json({ message, data: error });
-        });
+        }); a
+        // Creating a new Review with the provided data
+        Review.create({
+            fk_book: req.body.bookId,
+            fk_user: userId,
+            revDate: new Date(),
+            revComment: req.body.comment,
+            revRating: req.body.rating,
+        })
+            .then((createdReview) => {
+                // Return success message upon successful creation
+                res.json(success(`Le review a bien été créé !`, createdReview));
+            })
+            .catch((error) => {
+                // If the error is a validation error, return a 400 status code with the error message
+                if (error instanceof ValidationError) {
+                    return res
+                        .status(400)
+                        .json({ message: error.message, data: error });
+                }
+                // If any other error occurs during the process, return a generic error message
+                const message =
+                    "Le review n'a pas pu être ajouté. Merci de réessayer dans quelques instants.";
+                res.status(500).json({ message, data: error });
+            });
+    });
 });
 
 export { createBookRouter }; // Exporting the router for use in other files
